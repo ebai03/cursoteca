@@ -1,0 +1,21 @@
+# Replace :80 with your domain (e.g., cursoteca.ucr.ac.cr) for automatic HTTPS
+:80 {
+    # 1. Serve static files from the frontend folder
+    root * /var/www/frontend
+    file_server
+
+    # 2. Intercept requests to /cursos and show the file browser
+    handle_path /cursos/* {
+        root * /var/www/cursos
+
+        # Enable the directory browser and hide hidden files
+        file_server browse {
+            hide .*
+        }
+    }
+
+    # Optional: Customize error pages or add logging
+    log {
+        output file /var/log/caddy/access.log
+    }
+}

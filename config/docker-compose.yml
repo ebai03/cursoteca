@@ -1,0 +1,28 @@
+services:
+  # 1. THE FRONTEND: CADDY
+  caddy:
+    image: caddy:2-alpine
+    container_name: cursoteca_caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./frontend:/var/www/frontend:ro        # Static HTML pages (read-only)
+      - ./shared_cursos:/var/www/cursos:ro     # Course files (read-only for Caddy)
+  # 2. THE BACKEND: FILEBROWSER (For Admins/Professors)
+  filebrowser:
+    image: filebrowser/filebrowser:s6 # See why: https://github.com/filebrowser/filebrowser/issues/5256
+    container_name: cursoteca_admin
+    restart: unless-stopped
+    ports:
+      - "8080:80" # Access the admin panel at port 8080
+    volumes:
+      - ./shared_cursos:/srv # FileBrowser manages the EXACT same folder
+      - ./filebrowser.db:/database/filebrowser.db
+      - ./filebrowse_config:/config
+
+    #environment:
+    #  - PUID:$(id -u)
+    #  - GUID:$(id -g)
