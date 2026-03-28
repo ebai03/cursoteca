@@ -1,20 +1,962 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cursoteca - Archivo Histórico</title>
-    <style>
-        body { font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto; padding: 2rem; line-height: 1.6; }
-        .btn { display: inline-block; padding: 10px 20px; background: #0056b3; color: white; text-decoration: none; border-radius: 5px; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cursoteca — Archivo Histórico de Material Académico</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    :root {
+      /* Light theme (default) */
+      --ink:          #2c2c2c;
+      --paper:        #f8f9fa;
+      --warm:         #f0f3f5;
+      --accent:       #0066cc;
+      --accent-dark:  #004fa3;
+      --accent-light: #3d8fe6;
+      --muted:        #666666;
+      --rule:         #dfe5e9;
+      --card-bg:      #ffffff;
+      --nav-height:   68px;
+      --font-serif:   'DM Serif Display', Georgia, serif;
+      --font-sans:    'DM Sans', system-ui, sans-serif;
+      --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+    }
+
+    /* Dark theme */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ink:          #ccc;
+        --paper:        #0f1419;
+        --warm:         #1a2332;
+        --accent:       #abc8e3;
+        --accent-dark:  #8fb3d9;
+        --accent-light: #d4e4f7;
+        --muted:        #999999;
+        --rule:         #2a3544;
+        --card-bg:      #151d27;
+      }
+
+      body::before {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      }
+    }
+
+    /* Dark theme class (manual toggle) */
+    html.dark-theme {
+      --ink:          #ccc;
+      --paper:        #0f1419;
+      --warm:         #1a2332;
+      --accent:       #abc8e3;
+      --accent-dark:  #8fb3d9;
+      --accent-light: #d4e4f7;
+      --muted:        #999999;
+      --rule:         #2a3544;
+      --card-bg:      #151d27;
+    }
+
+    html.dark-theme body::before {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    }
+
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ── Noise texture ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.015'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Typography helpers ── */
+    .display        { font-family: var(--font-serif); font-style: normal; }
+    .display-italic { font-family: var(--font-serif); font-style: italic; }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 1024px;
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 5vw, 3rem);
+      position: relative;
+      z-index: 1;
+    }
+
+    hr.rule {
+      border: none;
+      border-top: 1px solid var(--rule);
+    }
+
+    /* ── Section label ── */
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+    }
+
+    /* ── Decorative divider line ── */
+    .deco-line {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .deco-line::before,
+    .deco-line::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    /* ────────────────────────────────
+       NAV — solid background, no transparency
+    ──────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-height);
+      background-color: var(--paper);
+      border-bottom: 1px solid var(--rule);
+      box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+    }
+
+    .nav-inner {
+      max-width: 1024px;
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 5vw, 3rem);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: var(--ink);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    @media (max-width: 640px) {
+      .nav-text-link { display: none; }
+    }
+
+    /* Theme toggle button */
+    .theme-toggle {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 2px;
+      color: var(--muted);
+      transition: color 0.15s, background-color 0.15s;
+    }
+    
+    .theme-toggle:hover {
+      color: var(--accent);
+      background-color: var(--warm);
+    }
+
+    .theme-toggle svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ────────────────────────────────
+       BUTTONS
+    ──────────────────────────────── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--accent);
+      color: var(--paper);
+      font-family: var(--font-sans);
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 0.65rem 1.4rem;
+      border-radius: 2px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: transparent;
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 0.65rem 1.4rem;
+      border-radius: 2px;
+      border: 1.5px solid var(--ink);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+    .btn-ghost:hover { background: var(--ink); color: var(--paper); transform: translateY(-1px); }
+
+    /* ────────────────────────────────
+       HERO
+    ──────────────────────────────── */
+    .hero {
+      padding-top: 5rem;
+      padding-bottom: 5.5rem;
+    }
+
+    /* Staggered entrance */
+    .stagger > * {
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+    }
+    .stagger > *:nth-child(1) { animation-delay: 0.08s; }
+    .stagger > *:nth-child(2) { animation-delay: 0.20s; }
+    .stagger > *:nth-child(3) { animation-delay: 0.32s; }
+    .stagger > *:nth-child(4) { animation-delay: 0.44s; }
+    .stagger > *:nth-child(5) { animation-delay: 0.56s; }
+    .stagger > *:nth-child(6) { animation-delay: 0.68s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.67rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.4rem;
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      line-height: 1.06;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero h2 {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(1.7rem, 4.5vw, 2.8rem);
+      line-height: 1.2;
+      color: var(--muted);
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 600px;
+      line-height: 1.7;
+      margin-bottom: 2.4rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--rule);
+    }
+
+    .hero-stat-num {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: var(--ink);
+      display: block;
+    }
+
+    .hero-stat-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 0.1rem;
+    }
+
+    /* ────────────────────────────────
+       SECTIONS
+    ──────────────────────────────── */
+    section { padding-block: 5rem; }
+
+    .section-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      color: var(--ink);
+      line-height: 1.15;
+      margin-top: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.65;
+      margin-bottom: 3rem;
+    }
+
+    /* ────────────────────────────────
+       PRINCIPLES GRID
+    ──────────────────────────────── */
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.1rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      padding: 1.5rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .card:hover {
+      box-shadow: 0 8px 28px rgba(0,102,204,0.1);
+      transform: translateY(-2px);
+    }
+
+    html.dark-theme .card:hover {
+      box-shadow: 0 8px 28px rgba(171,200,227,0.15);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .badge-num {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 600;
+      background: var(--accent);
+      color: var(--paper);
+      width: 1.55rem;
+      height: 1.55rem;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .card h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+
+    .card p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+      padding-left: 2.3rem;
+    }
+
+    .card p strong { color: var(--ink); font-weight: 500; }
+
+    /* ────────────────────────────────
+       CONTRIBUTE
+    ──────────────────────────────── */
+    .contrib-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .contrib-card {
+      background: var(--card-bg);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      padding: 1.6rem;
+    }
+
+    .contrib-icon-wrap {
+      width: 2.25rem;
+      height: 2.25rem;
+      background: rgba(0,102,204,0.1);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .contrib-badge {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .contrib-card h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+    }
+
+    .contrib-card p {
+      font-size: 0.855rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .contrib-card a {
+      font-size: 0.855rem;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .contrib-card a:hover { text-decoration: underline; }
+
+    /* Flow bar */
+    .flow-bar {
+      background: var(--card-bg);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      padding: 1.4rem 1.6rem;
+    }
+
+    .flow-bar .section-label { margin-bottom: 1rem; }
+
+    .flow-steps {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .flow-step {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      padding: 0.4rem 0.85rem;
+      border-radius: 2px;
+    }
+
+    .flow-step--dark   { background: var(--ink);    color: var(--paper); }
+    .flow-step--light  { background: var(--warm);   color: var(--ink); border: 1px solid var(--rule); }
+    .flow-step--accent { background: var(--accent); color: var(--paper); }
+    .flow-arrow { color: var(--muted); font-size: 0.85rem; }
+
+    /* ────────────────────────────────
+       CONTACT & CREDITS
+    ──────────────────────────────── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 3rem;
+      margin-top: 2.5rem;
+    }
+
+    .contact-grid h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--ink);
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 1.25rem;
+    }
+
+    dl.contact-list { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    dl.contact-list dt {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    dl.contact-list dd { font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
+    dl.contact-list dd a { color: var(--accent); text-decoration: none; }
+    dl.contact-list dd a:hover { text-decoration: underline; }
+
+    code.tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      background: var(--warm);
+      color: var(--accent);
+      padding: 0.1rem 0.45rem;
+      border-radius: 2px;
+    }
+
+    .credits-list { display: flex; flex-direction: column; gap: 1.25rem; font-size: 0.875rem; }
+
+    .cred-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .credits-list p { color: var(--muted); line-height: 1.6; }
+    .cred-version { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+
+    /* ────────────────────────────────
+       FOOTER
+    ──────────────────────────────── */
+    footer {
+      background: var(--warm);
+      color: #555555;
+      padding-block: 2.5rem;
+      margin-top: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-inner {
+      max-width: 1024px;
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 5vw, 3rem);
+    }
+
+    .footer-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .footer-logo {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .footer-tagline { font-size: 0.8rem; color: #888888; margin-top: 0.3rem; }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      list-style: none;
+    }
+
+    .footer-nav a {
+      font-size: 0.85rem;
+      color: #666666;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-nav a:hover { color: var(--ink); }
+
+    .footer-bottom { padding-top: 1.25rem; font-size: 0.78rem; color: #888888; }
+    .footer-bottom a { color: var(--accent); text-decoration: none; }
+    .footer-bottom a:hover { color: var(--accent-dark); }
+
+    /* ────────────────────────────────
+       SCROLL REVEAL
+    ──────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
 </head>
 <body>
-    <h1>Bienvenido a la Cursoteca</h1>
-    <p>Este es un archivo histórico de material de cursos (Syllabus, Diapositivas, Enunciados de Exámenes) compartido bajo el principio de opt-in por los profesores de la facultad.</p>
 
-    <a href="/cursos/" class="btn">Explorar Archivos</a>
-    <hr>
-    <small>Todos los materiales están aquí bajo el consentimiento escrito del autor original. No se publican respuestas ni solucionarios.</small>
+  <!-- ── NAV ── -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Cursoteca</a>
+      <ul class="nav-links">
+        <li class="nav-text-link"><a href="#principios">Principios</a></li>
+        <li class="nav-text-link"><a href="#contribuir">Contribuir</a></li>
+        <li class="nav-text-link"><a href="#contacto">Contacto</a></li>
+        <li>
+          <a href="/cursos/" class="btn-primary">Explorar archivos →</a>
+        </li>
+        <li>
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+            <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <div class="container">
+    <section class="hero stagger">
+      <p class="hero-label">AECCI · Repositorio Abierto</p>
+      <h1>Cursoteca</h1>
+      <h2>Archivo Histórico de<br />Material Académico</h2>
+      <p class="hero-desc">
+        Un repositorio colaborativo donde estudiantes y profesores acceden
+        a diapositivas, enunciados de exámenes, quices y cartas de estudiante de cursos anteriores
+        — con transparencia, respeto al autor y cero barreras.
+      </p>
+      <div class="hero-cta">
+        <a href="/cursos/" class="btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          Explorar Archivos
+        </a>
+        <a href="#contacto" class="btn-ghost">Contacto y Créditos</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <span class="hero-stat-num">Inclusión Participativa</span>
+          <p class="hero-stat-label">Con consentimiento explícito</p>
+        </div>
+        <div>
+          <span class="hero-stat-num">Libre</span>
+          <p class="hero-stat-label">Sin barreras de acceso</p>
+        </div>
+        <div>
+          <span class="hero-stat-num">Simple</span>
+          <p class="hero-stat-label">Control total del autor</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="container"><hr class="rule" /></div>
+
+  <!-- ── PRINCIPIOS ── -->
+  <div class="container">
+    <section id="principios" class="reveal">
+      <div class="deco-line" style="margin-bottom:0.5rem;">
+        <span class="section-label">Principios de Publicación</span>
+      </div>
+      <h3 class="section-heading">
+        Todo material publicado<br />
+        <span style="font-family:var(--font-serif);font-style:italic;color:var(--muted);">sigue estas reglas</span>
+      </h3>
+      <p class="section-sub">
+        Cursoteca solo existe si los autores confían en él. Estos principios
+        no son sugerencias — son la base del proyecto.
+      </p>
+      <div class="principles-grid">
+        <div class="card reveal">
+          <div class="card-header">
+            <span class="badge-num">1</span>
+            <h4>Opt‑in explícito</h4>
+          </div>
+          <p>Nada se publica sin <strong>consentimiento por escrito</strong> del autor, ya sea vía correo institucional o formulario oficial. El silencio no es aceptación.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-header">
+            <span class="badge-num">2</span>
+            <h4>Control del autor</h4>
+          </div>
+          <p>El profesor conserva su autoría y puede <strong>solicitar la baja de su material en cualquier momento</strong>, sin justificación. Se procesa en 24–48 horas.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-header">
+            <span class="badge-num">3</span>
+            <h4>Exámenes sin respuestas</h4>
+          </div>
+          <p>Solo se archivan <strong>enunciados</strong> con autorización expresa. No se almacenan soluciones, pautas, rúbricas internas ni bancos de preguntas.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-header">
+            <span class="badge-num">4</span>
+            <h4>Nada de terceros</h4>
+          </div>
+          <p>No se suben capítulos de libros, papers con copyright ni imágenes con licencia restrictiva. En su lugar se publican <strong>links oficiales</strong>.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="container"><hr class="rule" /></div>
+
+  <!-- ── CONTRIBUIR ── -->
+  <div class="container">
+    <section id="contribuir" class="reveal">
+      <div class="deco-line" style="margin-bottom:0.5rem;">
+        <span class="section-label">Cómo Contribuir</span>
+      </div>
+      <h3 class="section-heading">
+        ¿Tenés material que<br />
+        <span style="font-family:var(--font-serif);font-style:italic;color:var(--muted);">podría ayudar a otros?</span>
+      </h3>
+      <p class="section-sub">
+        Si sos docente o estudiante con acceso a material original y
+        tenés permiso para compartirlo, estas son las formas de contribuir.
+      </p>
+      <div class="contrib-grid">
+        <div class="contrib-card reveal">
+          <div class="contrib-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <span class="contrib-badge">01 · Email</span>
+          <h4>Correo institucional</h4>
+          <p>Enviá tu material desde tu cuenta institucional junto con el formulario de consentimiento al correo del proyecto.</p>
+          <a href="#contacto">Ver contacto →</a>
+        </div>
+        <div class="contrib-card reveal">
+          <div class="contrib-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+          </div>
+          <span class="contrib-badge">02 · Formulario</span>
+          <h4>Formulario de contribución</h4>
+          <p>Completá el formulario de donación de material con los metadatos del curso y adjuntá los archivos. El curador los revisará.</p>
+          <a href="submit.html">Ir al formulario →</a>
+        </div>
+        <div class="contrib-card reveal">
+          <div class="contrib-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <span class="contrib-badge">03 · Contacto Directo</span>
+          <h4>Hablar con un curador</h4>
+          <p>Si tenés dudas sobre qué material es apto o cómo funciona el proceso, podés contactar directamente a un curador antes de.</p>
+          <a href="#contacto">Contactar →</a>
+        </div>
+      </div>
+      <div class="flow-bar reveal">
+        <span class="section-label">Flujo de publicación</span>
+        <div class="flow-steps">
+          <span class="flow-step flow-step--dark">1 · Enviás material</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step flow-step--light">2 · Curador revisa</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step flow-step--light">3 · Confirmás consentimiento</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step flow-step--accent">4 · Se publica</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="container"><hr class="rule" /></div>
+
+  <!-- ── CONTACTO Y CRÉDITOS ── -->
+  <div class="container">
+    <section id="contacto" class="reveal">
+      <div class="deco-line" style="margin-bottom:0.5rem;">
+        <span class="section-label">Contacto y Créditos</span>
+      </div>
+      <h3 class="section-heading">
+        ¿Dudas o consultas?<br />
+        <span style="font-family:var(--font-serif);font-style:italic;color:var(--muted);">Estamos disponibles</span>
+      </h3>
+      <div class="contact-grid">
+        <div class="reveal">
+          <h4>Contacto del administrador</h4>
+          <dl class="contact-list">
+            <div>
+              <dt>Correo principal</dt>
+              <dd><a href="mailto:cursoteca@universidad.ac.cr">cursoteca@universidad.ac.cr</a></dd>
+            </div>
+            <div>
+              <dt>Solicitud de baja de material</dt>
+              <dd>Enviá un correo con el asunto <code class="tag">BAJA: [Nombre del curso]</code> desde tu cuenta institucional. Tiempo de respuesta: 24–48 h.</dd>
+            </div>
+            <div>
+              <dt>Reportar un problema</dt>
+              <dd>Si encontraste material que no debería estar publicado, escribe con el asunto <code class="tag">REPORTE</code>.</dd>
+            </div>
+          </dl>
+        </div>
+        <div class="reveal">
+          <h4>Créditos del proyecto</h4>
+          <div class="credits-list">
+            <div>
+              <span class="cred-label">Concepto y curaduría</span>
+              <p>Estudiantes de la Escuela de Ciencias de la Computación</p>
+            </div>
+            <div>
+              <span class="cred-label">Infraestructura</span>
+              <p>Caddy Web Server · Docker · Ubuntu Server<br />Alojado en hardware local donado al proyecto</p>
+            </div>
+            <div>
+              <span class="cred-label">Licencia del repositorio</span>
+              <p>La plataforma es de código abierto. El material individual pertenece a sus respectivos autores con todos los derechos reservados salvo indicación contraria.</p>
+            </div>
+            <div>
+              <span class="cred-label">Versión</span>
+              <p class="cred-version">cursoteca v1.0 · 2025</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <a href="#" class="footer-logo">Cursoteca</a>
+          <p class="footer-tagline">Archivo Histórico de Material Académico</p>
+        </div>
+        <ul class="footer-nav">
+          <li><a href="#principios">Principios</a></li>
+          <li><a href="#contribuir">Contribuir</a></li>
+          <li><a href="/cursos/">Explorar</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        El material publicado es propiedad de sus respectivos autores. Esta plataforma es un servicio sin fines de lucro. ·
+        <a href="mailto:cursoteca@universidad.ac.cr">Reportar un problema</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── SCROLL REVEAL ── -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.10 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* ── Theme toggle ── */
+    const themeToggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+
+    // Initialize theme from localStorage or system preference
+    function initializeTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      let isDark = false;
+
+      if (savedTheme) {
+        isDark = savedTheme === 'dark';
+      } else {
+        isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+
+      setTheme(isDark);
+    }
+
+    // Set theme and update icons
+    function setTheme(isDark) {
+      if (isDark) {
+        html.classList.add('dark-theme');
+        localStorage.setItem('theme', 'dark');
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      } else {
+        html.classList.remove('dark-theme');
+        localStorage.setItem('theme', 'light');
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      }
+    }
+
+    // Toggle theme on button click
+    themeToggle.addEventListener('click', () => {
+      const isDark = html.classList.contains('dark-theme');
+      setTheme(!isDark);
+    });
+
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.getItem('theme')) {
+        setTheme(e.matches);
+      }
+    });
+
+    // Initialize on page load
+    initializeTheme();
+  </script>
+
 </body>
 </html>
