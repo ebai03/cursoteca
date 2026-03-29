@@ -24,7 +24,7 @@ STORAGE_BYTES=$(
 )
 
 STORAGE_GB=$(
-  echo "scale=2; $STORAGE_BYTES / 1024 / 1024 / 1024" | bc 2>/dev/null || echo "0.00"
+  echo "scale=2; $STORAGE_BYTES / 1024 / 1024 / 1024" | bc 2>/dev/null | awk '{printf "%.2f", $0}' || echo "0.00"
 )
 
 STORAGE_TB=$(
