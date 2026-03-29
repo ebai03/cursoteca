@@ -324,7 +324,7 @@
 
     .hero-stat-num {
       font-family: var(--font-serif);
-      font-size: 2rem;
+      font-size: 1rem;
       color: var(--ink);
       display: block;
     }
@@ -693,16 +693,16 @@
       </div>
       <div class="hero-stats">
         <div>
-          <span class="hero-stat-num">Inclusión Participativa</span>
-          <p class="hero-stat-label">Con consentimiento explícito</p>
+          <span class="hero-stat-num" id="stat-courses">-</span>
+          <p class="hero-stat-label">Cursos Archivados</p>
         </div>
         <div>
-          <span class="hero-stat-num">Libre</span>
-          <p class="hero-stat-label">Sin barreras de acceso</p>
+          <span class="hero-stat-num" id="stat-files">-</span>
+          <p class="hero-stat-label">Almacenamiento Usado</p>
         </div>
         <div>
-          <span class="hero-stat-num">Simple</span>
-          <p class="hero-stat-label">Control total del autor</p>
+          <span class="hero-stat-num" id="stat-visitors">-</span>
+          <p class="hero-stat-label">Archivos Disponibles</p>
         </div>
       </div>
     </section>
@@ -956,6 +956,69 @@
 
     // Initialize on page load
     initializeTheme();
+
+    async function loadStats() {
+    try {
+      const response = await fetch('/stats.json');
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+      
+      const stats = await response.json();
+      
+      const formatNumber = (num) => num.toLocaleString('es-ES');
+      
+      // Select appropriate unit for storage
+      const formatStorage = (gb) => {
+        if (gb >= 1024) {
+          return (gb / 1024).toFixed(2) + ' TB';
+        }
+        return gb.toFixed(2) + ' GB';
+      };
+      
+      // Update DOM with stats
+      document.getElementById('stat-courses').textContent = formatNumber(stats.total_courses);
+      document.getElementById('stat-storage').textContent = formatStorage(stats.storage_gb);
+      document.getElementById('stat-files').textContent = formatNumber(stats.total_files);
+      document.getElementById('stat-visitors').textContent = formatNumber(stats.download_count);
+      
+      // Localize timestamp
+      const updateTime = new Date(stats.timestamp_iso);
+      const timeStr = updateTime.toLocaleString('es-ES', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+      
+      document.getElementById('update-timestamp').textContent = 
+        `📅 Última actualización: ${timeStr}`;
+        
+    } catch (error) {
+      console.error('❌ Error cargando estadísticas:', error);
+      document.getElementById('update-timestamp').textContent = 
+        '⚠️ Error al cargar estadísticas. Reintentando...';
+      
+      // Reintentar en 10 segundos
+      setTimeout(loadStats, 10000);
+    }
+  }
+
+  // Load stats on page load
+  loadStats();
+
+  // Update stats every 5 minutes
+  setInterval(loadStats, 5 * 60 * 1000);
+
+  // Update stats when page becomes visible
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      loadStats();
+    }
+  });
   </script>
 
 </body>
