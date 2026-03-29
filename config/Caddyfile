@@ -23,6 +23,14 @@
         Cache-Control "public, max-age=3600"
     }
 
+    @stats {
+        path /stats.json
+    }
+    header @stats {
+        Cache-Control "public, max-age=120"
+        Content-Type "application/json"
+    }
+    
     file_server
 
     # 2. Intercept requests to /cursos and show the file browser
