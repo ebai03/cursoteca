@@ -9,8 +9,30 @@ services:
       - "443:443"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - ./frontend:/var/www/frontend:ro        # Static HTML pages (read-only)
-      - ./shared_cursos:/var/www/cursos:ro     # Course files (read-only for Caddy)
+      - ../frontend:/var/www/frontend:ro        # Static HTML pages + stats.json (read-only)
+      - ../data:/var/www/cursos:ro     # Course files (read-only for Caddy)
+      - /var/log/caddy:/var/log/caddy # Caddy logs
+    entrypoint: |
+      /bin/sh -c '
+      # Install cron and necessary tools
+      apk add --no-cache dcron bc grep
+      
+      # Execute the stats update script once at startup to ensure stats.json is created
+      /scripts/update-stats.sh
+      
+      # Cron job to update stats every 30 minutes
+      echo "*/30 * * * * /scripts/update-stats.sh >> /var/log/cursoteca/cron.log 2>&1" | crontab -
+      
+      # Log dir
+      mkdir -p /var/log/cursoteca
+      
+      # Init cron in the background
+      crond -f -l 2 &
+      
+      # Init Caddy
+      caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
+      '
+    
   # 2. THE BACKEND: FILEBROWSER (For Admins/Professors)
   filebrowser:
     image: filebrowser/filebrowser:s6 # See why: https://github.com/filebrowser/filebrowser/issues/5256
@@ -19,10 +41,6 @@ services:
     ports:
       - "8080:80" # Access the admin panel at port 8080
     volumes:
-      - ./shared_cursos:/srv # FileBrowser manages the EXACT same folder
+      - ../data:/srv # FileBrowser manages the EXACT same folder
       - ./filebrowser.db:/database/filebrowser.db
       - ./filebrowse_config:/config
-
-    #environment:
-    #  - PUID:$(id -u)
-    #  - GUID:$(id -g)
