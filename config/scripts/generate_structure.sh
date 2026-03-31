@@ -14,6 +14,16 @@
 #
 ##############################################################################
 
+# Prepend "X_" to all directories within:
+# for dir in */; do [ -d "$dir" ] && mv "$dir" "X_${dir%/}"; done
+
+# Update all symlinks to point to the new "X_" directories:
+# for link in *; do [ -L "$link" ] && target=$(readlink "$link") && ln -snf "$(dirname "$target")/X_$(basename "$target")" "$link"; done
+
+# Rename the symlinks themselves by prepending "X_" to their names:
+# for link in *; do [ -L "$link" ] && mv "$link" "X_$link"; done
+
+
 set -e
 
 # ============================================================================
@@ -216,30 +226,3 @@ for ENFASIS in "${!ENFASIS_ARCHIVOS[@]}"; do
     
     echo ""
 done
-
-# ============================================================================
-# STEP 3: GENERATE DOCUMENTATION
-# ============================================================================
-
-echo "═══════════════════════════════════════════════════════════════"
-echo "STEP 3: Generating documentation"
-echo "═══════════════════════════════════════════════════════════════"
-echo ""
-
-# Main README.md
-README_FILE="$OUTPUT_DIR/README.md"
-
-cat > "$README_FILE" << 'EOF'
-# Course Structure - Cursoteca
-
-## Description
-
-**Cursoteca** is a collaborative historical archive of academic materials from the **Computing Bachelor with Multiple Emphases** of the **School of Computer Science and Informatics (ECCI)**.
-
-Organized in two levels:
-1. **Mandatory courses**: By YEAR and cycle (main structure)
-2. **Optional courses**: By emphasis (ITI, IS, CC) with symlinks to avoid duplication
-
-## General Structure
-
-EOF
