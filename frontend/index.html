@@ -360,11 +360,6 @@
     /* ────────────────────────────────
        PRINCIPLES GRID
     ──────────────────────────────── */
-    .principles-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.1rem;
-    }
 
     .card {
       background: var(--card-bg);
@@ -382,29 +377,6 @@
       box-shadow: 0 8px 28px rgba(171,200,227,0.15);
     }
 
-    .card-header {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .badge-num {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      font-weight: 600;
-      background: var(--accent);
-      color: var(--paper);
-      width: 1.55rem;
-      height: 1.55rem;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
     .card h4 {
       font-size: 0.95rem;
       font-weight: 600;
@@ -420,6 +392,73 @@
     }
 
     .card p strong { color: var(--ink); font-weight: 500; }
+
+    /* Structure example sections */
+    .structure-example {
+      margin-top: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .structure-example:last-of-type {
+      margin-top: 2rem;
+    }
+
+    .structure-title {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--ink);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .code-container {
+      background: var(--card-bg);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      padding: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .code-block {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.6;
+      overflow-x: auto;
+    }
+
+    .code-path {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .code-path strong {
+      color: var(--ink);
+    }
+
+    .code-path code {
+      color: var(--accent);
+    }
+
+    .structure-note {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-top: 1rem;
+      line-height: 1.6;
+    }
+
+    .structure-note strong {
+      color: var(--ink);
+    }
+
+    .section-subtitle {
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--muted);
+    }
 
     /* ────────────────────────────────
        CONTRIBUTE
@@ -720,45 +759,65 @@
   <!-- ── PRINCIPIOS ── -->
   <div class="container">
     <section id="principios" class="reveal">
-      <div class="deco-line" style="margin-bottom:0.5rem;">
-        <span class="section-label">Principios de Publicación</span>
+      <div class="deco-line">
+        <span class="section-label">Organización de Archivos</span>
       </div>
       <h3 class="section-heading">
-        Todo material publicado<br />
-        <span style="font-family:var(--font-serif);font-style:italic;color:var(--muted);">sigue estas reglas</span>
+        Una estructura intuitiva que<br />
+        <span class="section-subtitle">replica tu avance en la carrera</span>
       </h3>
       <p class="section-sub">
-        Cursoteca solo existe si los autores confían en él. Estos principios
-        no son sugerencias — son la base del proyecto.
+        Los archivos están organizados en 5 niveles jerárquicos, desde lo general (año de carrera)
+        hasta lo específico (material de un semestre concreto). Esto facilita la navegación y soluciona
+        problemas de escalabilidad a largo plazo.
       </p>
-      <div class="principles-grid">
-        <div class="card reveal">
-          <div class="card-header">
-            <span class="badge-num">1</span>
-            <h4>Opt‑in explícito</h4>
-          </div>
-          <p>Nada se publica sin <strong>consentimiento por escrito</strong> del autor, ya sea vía correo institucional o formulario oficial. El silencio no es aceptación.</p>
+
+      <!-- Structure overview visualization -->
+      <div class="structure-example reveal">
+        <p class="structure-title">Estructura general del repositorio:</p>
+        <div class="code-container">
+          <pre class="code-block"><code>data/
+├── Año_1
+│   ├── Ciclo_1
+│   │   ├── X_introduccion_a_la_computacion_CI0110
+│   │   └── X_introduccion_a_la_matematica_para_computacion_MA0291
+│   └── Ciclo_2
+│       ├── X_calculo_para_computacion_i_MA0293
+│       ├── X_estructuras_discretas_CI0111
+│       └── X_programacion_i_CI0112
+├── Año_2
+│   ├── Ciclo_1
+│   │   ├── X_algebra_lineal_para_computacion_MA0292
+│   │   └── ... (otros cursos)
+│   └── Ciclo_2
+│       └── ... (cursos)
+└── Año_3, Año_4, Optativas
+    └── ... (estructura similar)</code></pre>
+          <p class="structure-note"><strong>Nota:</strong> Las carpetas prefijadas con <code class="tag">X_</code> son <strong>placeholders temporales</strong> sin contenido. Aparecen aquí para mostrar la estructura completa del plan de estudios.</p>
         </div>
-        <div class="card reveal">
-          <div class="card-header">
-            <span class="badge-num">2</span>
-            <h4>Control del autor</h4>
-          </div>
-          <p>El profesor conserva su autoría y puede <strong>solicitar la baja de su material en cualquier momento</strong>, sin justificación. Se procesa en 24–48 horas.</p>
-        </div>
-        <div class="card reveal">
-          <div class="card-header">
-            <span class="badge-num">3</span>
-            <h4>Exámenes sin respuestas</h4>
-          </div>
-          <p>Solo se archivan <strong>enunciados</strong> con autorización expresa. No se almacenan soluciones, pautas, rúbricas internas ni bancos de preguntas.</p>
-        </div>
-        <div class="card reveal">
-          <div class="card-header">
-            <span class="badge-num">4</span>
-            <h4>Nada de terceros</h4>
-          </div>
-          <p>No se suben capítulos de libros, papers con copyright ni imágenes con licencia restrictiva. En su lugar se publican <strong>links oficiales</strong>.</p>
+      </div>
+
+      <!-- Material inside a semester -->
+      <div class="structure-example reveal">
+        <p class="structure-title">Contenido dentro de una instancia de curso:</p>
+        <div class="code-container">
+          <p class="code-path">
+            <strong>Ruta ejemplo:</strong> <code>data/Año_1/Ciclo_2/Programacion_I_CI0112/2025_Semestre_I/</code>
+          </p>
+          <pre class="code-block"><code>2025_Semestre_I/
+├── Carta_al_Estudiante_CI0112_I_2025.pdf
+├── 01_Material/
+│   ├── Tema_01_Punteros.pdf
+│   ├── Tema_02_Memoria_Dinamica.pdf
+│   └── Tema_03_Estructuras.pdf
+├── 02_Quices/
+│   ├── Quiz_1_Enunciado.pdf
+│   ├── Quiz_2_Enunciado.pdf
+│   └── Quiz_3_Enunciado.pdf
+└── 03_Examenes_Enunciados/
+    ├── Parcial_1_Enunciado.pdf
+    ├── Parcial_2_Enunciado.pdf
+    └── Final_Enunciado.pdf</code></pre>
         </div>
       </div>
     </section>
@@ -769,12 +828,12 @@
   <!-- ── CONTRIBUIR ── -->
   <div class="container">
     <section id="contribuir" class="reveal">
-      <div class="deco-line" style="margin-bottom:0.5rem;">
+      <div class="deco-line">
         <span class="section-label">Cómo Contribuir</span>
       </div>
       <h3 class="section-heading">
         ¿Tenés material que<br />
-        <span style="font-family:var(--font-serif);font-style:italic;color:var(--muted);">podría ayudar a otros?</span>
+        <span class="section-subtitle">podría ayudar a otros?</span>
       </h3>
       <p class="section-sub">
         Si sos docente o estudiante con acceso a material original y
