@@ -14,8 +14,9 @@ CADDY_LOG="/var/log/caddy/access.log"
 mkdir -p /var/log/cursoteca
 
 # Count courses
+# Después (contará carpetas a una profundidad de 3: /Ano/Ciclo/Curso)
 TOTAL_COURSES=$(
-    find "$DATA" -maxdepth 1 -type d ! -name ".*" 2>/dev/null | tail -n +2 | wc -l
+  find "$DATA" -mindepth 3 -maxdepth 3 -type d ! -name ".*" 2>/dev/null | wc -l
 )
 
 # Calculate storage
