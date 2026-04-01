@@ -14,9 +14,8 @@ CADDY_LOG="/var/log/caddy/access.log"
 mkdir -p /var/log/cursoteca
 
 # Count courses
-# Después (contará carpetas a una profundidad de 3: /Ano/Ciclo/Curso)
 TOTAL_COURSES=$(
-  find "$DATA" -mindepth 3 -maxdepth 3 -type d ! -name ".*" 2>/dev/null | wc -l
+  find "$DATA" -mindepth 3 -maxdepth 3 -type d ! -name ".*" ! -name "X_*" 2>/dev/null | wc -l
 )
 
 # Calculate storage
@@ -37,24 +36,31 @@ TOTAL_FILES=$(
   find "$DATA" -type f 2>/dev/null | wc -l || echo 0
 )
 
-# Count downloads
+# Count downloads and data transfer
 DOWNLOAD_COUNT=0
 UNIQUE_IPS=0
+DOWNLOAD_BYTES=0
+DOWNLOADED_GB="0.00"
 
 if [ -f "$CADDY_LOG" ]; then
-  # Counts the number of GET requests in the Caddy log
-  DOWNLOAD_COUNT=$(
-    grep -c '"method":"GET"' "$CADDY_LOG" 2>/dev/null || echo 0
-  )
+  # Filter valid file downloads: GET requests to /cursos/ that do not end in /, successful status
+  # Note: grep -a is used to treat log as text
+  FILE_REQS=$(grep -a '"method":"GET"' "$CADDY_LOG" 2>/dev/null | grep -a -E '"uri":"/cursos/[^"]*[^/]"' | grep -a -E '"status":(200|206)' || true)
   
-  # Counts unique IPs that made GET requests in the Caddy log
-  UNIQUE_IPS=$(
-    grep '"method":"GET"' "$CADDY_LOG" 2>/dev/null | \
-    grep -o '"remote_addr":"[^"]*' | \
-    cut -d'"' -f4 | \
-    sort -u | \
-    wc -l || echo 0
-  )
+  if [ -n "$FILE_REQS" ]; then
+    DOWNLOAD_COUNT=$(echo "$FILE_REQS" | wc -l | awk '{print $1}')
+    
+    # Calculate downloaded bytes summing the "size" field
+    DOWNLOAD_BYTES=$(echo "$FILE_REQS" | grep -a -o '"size":[0-9]*' | cut -d: -f2 | awk '{s+=$1} END {if(s=="") print 0; else print s}' || echo 0)
+    DOWNLOADED_GB=$(echo "scale=2; $DOWNLOAD_BYTES / 1024 / 1024 / 1024" | bc 2>/dev/null | awk '{printf "%.2f", $0}' || echo "0.00")
+    
+    # Extract unique IPs (Caddy standard is remote_ip, fallback to remote_addr)
+    UNIQUE_IPS=$(echo "$FILE_REQS" | grep -a -o '"remote_ip":"[^"]*' | cut -d'"' -f4 | cut -d: -f1 | sort -u | wc -l | awk '{print $1}')
+    
+    if [ "$UNIQUE_IPS" -eq 0 ]; then
+      UNIQUE_IPS=$(echo "$FILE_REQS" | grep -a -o '"remote_addr":"[^"]*' | cut -d'"' -f4 | cut -d: -f1 | sort -u | wc -l | awk '{print $1}')
+    fi
+  fi
 fi
 
 # Timestamps for last update
@@ -70,6 +76,7 @@ cat > "$STATS_JSON" << EOF
   "storage_bytes": $STORAGE_BYTES,
   "total_files": $TOTAL_FILES,
   "download_count": $DOWNLOAD_COUNT,
+  "downloaded_gb": $DOWNLOADED_GB,
   "unique_ips": $UNIQUE_IPS,
   "last_update": "$LAST_UPDATE",
   "timestamp_iso": "$TIMESTAMP_ISO"
@@ -77,4 +84,4 @@ cat > "$STATS_JSON" << EOF
 EOF
 
 # Logging
-echo "[$(date +'%Y-%m-%d %H:%M:%S')] ✓ Stats actualizado: Cursos=$TOTAL_COURSES, Storage=$STORAGE_GB GB, Archivos=$TOTAL_FILES" >> "$LOG_FILE"
+echo "[$(date +'%Y-%m-%d %H:%M:%S')] ✓ Stats actualizado: Cursos=$TOTAL_COURSES, Storage=$STORAGE_GB GB, Archivos=$TOTAL_FILES, Descargas=$DOWNLOAD_COUNT ($DOWNLOADED_GB GB)" >> "$LOG_FILE"
