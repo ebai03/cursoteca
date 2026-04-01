@@ -1,0 +1,10 @@
+protocol: http2
+
+ingress:
+  - hostname: aecci-ucr.com
+    service: http://caddy:80
+
+  - hostname: admin.aecci-ucr.com
+    service: http://filebrowser:80
+
+  - service: http_status:404

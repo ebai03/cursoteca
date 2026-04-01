@@ -45,3 +45,21 @@ services:
       - ../data:/srv # FileBrowser manages the EXACT same folder
       - ./filebrowser.db:/database/filebrowser.db
       - ./filebrowse_config:/config
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cursoteca_tunnel
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    volumes:
+      - ./cloudflared/config.yml:/etc/cloudflared/config.yml:ro
+    depends_on:
+      - caddy
+      - filebrowser
+    networks:
+      - cursoteca_network
+
+networks:
+  cursoteca_network:
+    driver: bridge
