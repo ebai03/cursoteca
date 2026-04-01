@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cursoteca — Archivo Histórico de Material Académico</title>
+  <title>AECCI — Asociación de Estudiantes de Computación e Informática</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -151,11 +151,36 @@
     }
 
     .nav-logo {
-      font-family: var(--font-serif);
-      font-size: 1.25rem;
-      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
       text-decoration: none;
       white-space: nowrap;
+      height: 50px;
+      outline: none !important;
+      border: none;
+      box-shadow: none !important;
+    }
+
+    .nav-logo:focus {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    .nav-logo:focus-visible {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    .nav-logo:visited {
+      color: inherit;
+    }
+
+    .nav-logo svg {
+      height: 42.5px;
+      width: auto;
+      max-width: 153px;
+      outline: none;
+      text-decoration: none;
     }
 
     .nav-links {
@@ -691,13 +716,26 @@
   <!-- ── NAV ── -->
   <nav>
     <div class="nav-inner">
-      <a href="#" class="nav-logo">Cursoteca</a>
+      <a href="#" class="nav-logo">
+        <svg width="350" height="60" viewBox="0 0 581 99" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M17.0381 0C7.62823 0 0 7.61577 0 17.0103V81.9897C0 91.3842 7.62822 99 17.0381 99H89.6205C99.0304 99 106.659 91.3842 106.659 81.9897V17.0103C106.659 7.61578 99.0304 0 89.6205 0H17.0381ZM23.8534 5.4433C16.3255 5.4433 10.2229 11.5359 10.2229 19.0515V72.1237C10.2229 79.6393 16.3255 85.732 23.8534 85.732H82.1238C89.6517 85.732 95.7542 79.6393 95.7542 72.1237V19.0515C95.7542 11.5359 89.6517 5.4433 82.1238 5.4433H23.8534Z" fill="currentColor"/>
+          <path d="M55.6385 62.0982L50.2475 47.646H31.1795L25.855 62.0982H18.7669L37.3358 13.3264H44.3241L62.7932 62.0982H55.6385ZM48.3507 41.7323L43.2259 27.4131C43.0706 26.9258 42.8266 26.1949 42.4938 25.2203C42.1832 24.2458 41.8616 23.238 41.5288 22.197C41.2182 21.156 40.9631 20.2922 40.7634 19.6056C40.5415 20.5137 40.2864 21.4772 39.998 22.496C39.7096 23.4927 39.4212 24.4341 39.1328 25.32C38.8666 26.1838 38.6447 26.8815 38.4672 27.4131L33.2759 41.7323H48.3507Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M135.623 0C126.214 0 118.585 7.61577 118.585 17.0103V81.9897C118.585 91.3842 126.214 99 135.623 99H208.206C217.616 99 225.244 91.3842 225.244 81.9897V17.0103C225.244 7.61578 217.616 0 208.206 0H135.623ZM142.439 5.4433C134.911 5.4433 128.808 11.5359 128.808 19.0515V72.1237C128.808 79.6393 134.911 85.732 142.439 85.732H200.709C208.237 85.732 214.34 79.6393 214.34 72.1237V19.0515C214.34 11.5359 208.237 5.4433 200.709 5.4433H142.439Z" fill="currentColor"/>
+          <path d="M171.196 62.0982H143.875V13.5257H171.196V19.373H150.697V33.8252H169.964V39.606H150.697V56.2176H171.196V62.0982Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M254.209 0C244.799 0 237.171 7.61577 237.171 17.0103V81.9897C237.171 91.3842 244.799 99 254.209 99H326.791C336.201 99 343.829 91.3842 343.829 81.9897V17.0103C343.829 7.61578 336.201 0 326.791 0H254.209ZM261.024 5.4433C253.496 5.4433 247.394 11.5359 247.394 19.0515V72.1237C247.394 79.6393 253.496 85.732 261.024 85.732H319.294C326.822 85.732 332.925 79.6393 332.925 72.1237V19.0515C332.925 11.5359 326.822 5.4433 319.294 5.4433H261.024Z" fill="currentColor"/>
+          <path d="M283.225 18.7086C280.718 18.7086 278.466 19.1516 276.47 20.0375C274.495 20.9013 272.82 22.1749 271.445 23.8582C270.069 25.5193 269.016 27.5238 268.284 29.8716C267.551 32.2194 267.185 34.8662 267.185 37.812C267.185 41.7323 267.762 45.1211 268.916 47.9783C270.092 50.8355 271.855 53.0393 274.207 54.5897C276.559 56.1401 279.52 56.9153 283.092 56.9153C285.222 56.9153 287.252 56.7271 289.182 56.3505C291.134 55.9519 293.075 55.4424 295.005 54.8223V60.6696C293.142 61.3783 291.212 61.8988 289.215 62.231C287.241 62.5854 284.922 62.7626 282.26 62.7626C277.291 62.7626 273.153 61.7327 269.848 59.6729C266.564 57.613 264.113 54.7226 262.493 51.0016C260.874 47.2584 260.064 42.8508 260.064 37.7787C260.064 34.102 260.574 30.7465 261.595 27.7121C262.615 24.6555 264.113 22.0198 266.087 19.8049C268.062 17.5679 270.48 15.8514 273.342 14.6553C276.226 13.4372 279.543 12.8281 283.292 12.8281C285.732 12.8281 288.106 13.0938 290.413 13.6254C292.743 14.1348 294.883 14.8547 296.836 15.7849L294.307 21.4661C292.687 20.7352 290.946 20.0929 289.082 19.5392C287.241 18.9854 285.288 18.7086 283.225 18.7086Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M372.794 0C363.384 0 355.756 7.61577 355.756 17.0103V81.9897C355.756 91.3842 363.384 99 372.794 99H445.377C454.786 99 462.415 91.3842 462.415 81.9897V17.0103C462.415 7.61578 454.786 0 445.377 0H372.794ZM379.609 5.4433C372.081 5.4433 365.979 11.5359 365.979 19.0515V72.1237C365.979 79.6393 372.081 85.732 379.609 85.732H437.88C445.408 85.732 451.51 79.6393 451.51 72.1237V19.0515C451.51 11.5359 445.408 5.4433 437.88 5.4433H379.609Z" fill="currentColor"/>
+          <path d="M401.811 18.7086C399.304 18.7086 397.052 19.1516 395.055 20.0375C393.081 20.9013 391.406 22.1749 390.03 23.8582C388.655 25.5193 387.601 27.5238 386.869 29.8716C386.137 32.2194 385.771 34.8662 385.771 37.812C385.771 41.7323 386.348 45.1211 387.501 47.9783C388.677 50.8355 390.441 53.0393 392.792 54.5897C395.144 56.1401 398.106 56.9153 401.677 56.9153C403.807 56.9153 405.837 56.7271 407.767 56.3505C409.719 55.9519 411.661 55.4424 413.591 54.8223V60.6696C411.727 61.3783 409.797 61.8988 407.801 62.231C405.826 62.5854 403.508 62.7626 400.845 62.7626C395.876 62.7626 391.739 61.7327 388.433 59.6729C385.15 57.613 382.698 54.7226 381.079 51.0016C379.459 47.2584 378.649 42.8508 378.649 37.7787C378.649 34.102 379.16 30.7465 380.18 27.7121C381.201 24.6555 382.698 22.0198 384.673 19.8049C386.647 17.5679 389.065 15.8514 391.927 14.6553C394.811 13.4372 398.128 12.8281 401.877 12.8281C404.317 12.8281 406.691 13.0938 408.998 13.6254C411.328 14.1348 413.469 14.8547 415.421 15.7849L412.892 21.4661C411.272 20.7352 409.531 20.0929 407.667 19.5392C405.826 18.9854 403.874 18.7086 401.811 18.7086Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M491.379 0C481.97 0 474.341 7.61577 474.341 17.0103V81.9897C474.341 91.3842 481.97 99 491.379 99H563.962C573.372 99 581 91.3842 581 81.9897V17.0103C581 7.61578 573.372 0 563.962 0H491.379ZM498.195 5.4433C490.667 5.4433 484.564 11.5359 484.564 19.0515V72.1237C484.564 79.6393 490.667 85.732 498.195 85.732H556.465C563.993 85.732 570.096 79.6393 570.096 72.1237V19.0515C570.096 11.5359 563.993 5.4433 556.465 5.4433H498.195Z" fill="currentColor"/>
+          <path d="M499.631 62.0982V13.5257H506.453V62.0982H499.631Z" fill="currentColor"/>
+        </svg>
+      </a>
       <ul class="nav-links">
-        <li class="nav-text-link"><a href="#org">Organización</a></li>
-        <li class="nav-text-link"><a href="#contribuir">Contribuir</a></li>
+        <li class="nav-text-link"><a href="#sobre">Sobre Nosotros</a></li>
+        <li class="nav-text-link"><a href="#proyectos">Proyectos</a></li>
         <li class="nav-text-link"><a href="#contacto">Contacto</a></li>
         <li>
-          <a href="/cursos/" class="btn-primary">Explorar archivos →</a>
+          <a href="/cursos/" class="btn-primary">Cursoteca →</a>
         </li>
         <li>
           <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
@@ -724,20 +762,20 @@
   <!-- ── HERO ── -->
   <div class="container">
     <section class="hero stagger">
-      <p class="hero-label">AECCI · Repositorio Abierto</p>
-      <h1>Cursoteca</h1>
-      <h2>Archivo Histórico de<br />Material Académico</h2>
+      <p class="hero-label">UCR · Escuela de Ciencias de la Computación</p>
+      <h1>AECCI</h1>
+      <h2>Asociación de Estudiantes de<br />Computación e Informática</h2>
       <p class="hero-desc">
-        Un repositorio colaborativo donde estudiantes y profesores acceden
-        a diapositivas, enunciados de exámenes, quices y cartas de estudiante de cursos anteriores
-        — con transparencia, respeto al autor y cero barreras.
+        Somos la voz estudiantil de la Escuela de Ciencias de la Computación e Informática de la UCR.
+        Construimos herramientas, recursos y comunidad para quienes estudian
+        computación — con apertura, colaboración y sin barreras.
       </p>
       <div class="hero-cta">
         <a href="/cursos/" class="btn-primary">
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-          Explorar Archivos
+          Explorar Cursoteca
         </a>
-        <a href="#contacto" class="btn-ghost">Contacto y Créditos</a>
+        <a href="#proyectos" class="btn-ghost">Nuestros Proyectos</a>
       </div>
       <div class="hero-stats">
         <div>
@@ -765,11 +803,59 @@
 
   <div class="container"><hr class="rule" /></div>
 
-  <!-- ── ORGANIZATION ── -->
+  <!-- ── PROYECTOS ── -->
+  <div class="container">
+    <section id="proyectos" class="reveal">
+      <div class="deco-line">
+        <span class="section-label">Proyectos Destacados</span>
+      </div>
+      <h3 class="section-heading">
+        Nuestras iniciativas<br />
+        <span class="section-subtitle">herramientas para la comunidad</span>
+      </h3>
+      <p class="section-sub">
+        Desde Cursoteca hasta otras herramientas educativas, nuestros proyectos están diseñados 
+        para mejorar la experiencia de aprendizaje en la Escuela de Computación.
+      </p>
+      <div class="contrib-grid">
+        <div class="contrib-card reveal">
+          <div class="contrib-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <span class="contrib-badge">PROYECTO · 01</span>
+          <h4>Cursoteca</h4>
+          <p>Archivo histórico colaborativo de material académico: diapositivas, exámenes, quices y recursos de cursos anteriores.</p>
+          <a href="/cursos/">Ver Cursoteca →</a>
+        </div>
+        <div class="contrib-card reveal">
+          <div class="contrib-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7z"/></svg>
+          </div>
+          <span class="contrib-badge">PROYECTO · 02</span>
+          <h4>Comunidad</h4>
+          <p>Espacios de conexión, eventos, talleres y actividades para fortalecer la comunidad estudiantil.</p>
+          <a href="#contacto">Saber más →</a>
+        </div>
+        <div class="contrib-card reveal">
+          <div class="contrib-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L15.09 8.26H22L17.82 12.74H19.91L12 19.26L4.09 12.74H6.18L2 8.26H8.91L12 2Z"/></svg>
+          </div>
+          <span class="contrib-badge">PROYECTO · 03</span>
+          <h4>Recursos Abiertos</h4>
+          <p>Herramientas, guías y tutoriales desarrollados por y para estudiantes de Computación.</p>
+          <a href="#contacto">Explorar →</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="container"><hr class="rule" /></div>
+
+  <!-- ── ORGANIZACIÓN DE CURSOTECA ── -->
   <div class="container">
     <section id="org" class="reveal">
       <div class="deco-line">
-        <span class="section-label">Organización de Archivos</span>
+        <span class="section-label">Organización de Cursoteca</span>
       </div>
       <h3 class="section-heading">
         Estructura del repositorio<br />
@@ -838,7 +924,67 @@
   <div class="container">
     <section id="contribuir" class="reveal">
       <div class="deco-line">
-        <span class="section-label">Cómo Contribuir</span>
+        <span class="section-label">Cómo Participar</span>
+      </div>
+      <h3 class="section-heading">
+        ¿Quieres formar parte<br />
+        <span class="section-subtitle">de la AECCI?</span>
+      </h3>
+      <p class="section-sub">
+        Ya sea como miembro activo, contribuyendo al repositorio de Cursoteca 
+        o participando en nuestros proyectos, hay muchas formas de ser parte de la asociación.
+      </p>
+      <div class="contrib-grid">
+        <div class="contrib-card reveal">
+          <div class="contrib-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <span class="contrib-badge">01 · Unirse</span>
+          <h4>Sé miembro activo</h4>
+          <p>Participa en reuniones, eventos y proyectos de la asociación. Conecta con otros estudiantes y contribuye a las iniciativas.</p>
+          <a href="#contacto">Contactar →</a>
+        </div>
+        <div class="contrib-card reveal">
+          <div class="contrib-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <span class="contrib-badge">02 · Compartir Material</span>
+          <h4>Aporta a Cursoteca</h4>
+          <p>Comparte apuntes, exámenes y recursos académicos. Ayuda a otros estudiantes a tener acceso a material de calidad.</p>
+          <a href="/cursos/">Ir a Cursoteca →</a>
+        </div>
+        <div class="contrib-card reveal">
+          <div class="contrib-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
+          <span class="contrib-badge">03 · Colaborar</span>
+          <h4>Mejora nuestros proyectos</h4>
+          <p>Contribuye ideas, reporta problemas o ayuda en el desarrollo de herramientas y recursos.</p>
+          <a href="#contacto">Sugerencias →</a>
+        </div>
+      </div>
+      <div class="flow-bar reveal">
+        <span class="section-label">Formas de participar</span>
+        <div class="flow-steps">
+          <span class="flow-step flow-step--dark">Eventos</span>
+          <span class="flow-arrow">·</span>
+          <span class="flow-step flow-step--light">Proyectos</span>
+          <span class="flow-arrow">·</span>
+          <span class="flow-step flow-step--light">Recursos</span>
+          <span class="flow-arrow">·</span>
+          <span class="flow-step flow-step--accent">Comunidad</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="container"><hr class="rule" /></div>
+
+  <!-- ── CONTRIBUIR A CURSOTECA ── -->
+  <div class="container">
+    <section id="contribuir-cursoteca" class="reveal">
+      <div class="deco-line">
+        <span class="section-label">Contribuir a Cursoteca</span>
       </div>
       <h3 class="section-heading">
         ¿Tenés material que<br />
@@ -898,7 +1044,7 @@
   <div class="container">
     <section id="contacto" class="reveal">
       <div class="deco-line" style="margin-bottom:0.5rem;">
-        <span class="section-label">Contacto y Créditos</span>
+        <span class="section-label">Contacto e Información</span>
       </div>
       <h3 class="section-heading">
         ¿Dudas o consultas?<br />
@@ -906,40 +1052,44 @@
       </h3>
       <div class="contact-grid">
         <div class="reveal">
-          <h4>Contacto del administrador</h4>
+          <h4>Contacto de la AECCI</h4>
           <dl class="contact-list">
             <div>
-              <dt>Correo principal</dt>
+              <dt>Correo general</dt>
+              <dd><a href="mailto:aecci@universidad.ac.cr">aecci@universidad.ac.cr</a></dd>
+            </div>
+            <div>
+              <dt>Sobre Cursoteca</dt>
               <dd><a href="mailto:cursoteca@universidad.ac.cr">cursoteca@universidad.ac.cr</a></dd>
             </div>
             <div>
-              <dt>Solicitud de baja de material</dt>
-              <dd>Enviá un correo con el asunto <code class="tag">BAJA: [Nombre del curso]</code> desde tu cuenta institucional. Tiempo de respuesta: 24–48 h.</dd>
+              <dt>Ubicación</dt>
+              <dd>Escuela de Ciencias de la Computación e Informática<br />Universidad de Costa Rica, San José</dd>
             </div>
             <div>
               <dt>Reportar un problema</dt>
-              <dd>Si encontraste material que no debería estar publicado, escribe con el asunto <code class="tag">REPORTE</code>.</dd>
+              <dd>Si encontraste un inconveniente, escribe con el asunto <code class="tag">REPORTE</code> al correo de contacto.</dd>
             </div>
           </dl>
         </div>
         <div class="reveal">
-          <h4>Créditos del proyecto</h4>
+          <h4>Sobre la AECCI</h4>
           <div class="credits-list">
             <div>
-              <span class="cred-label">Concepto y curaduría</span>
-              <p>Estudiantes de la Escuela de Ciencias de la Computación</p>
+              <span class="cred-label">Qué somos</span>
+              <p>Somos la asociación que representa a los estudiantes de Computación e Informática de la UCR, trabajando para mejorar la vida estudiantil y crear comunidad.</p>
+            </div>
+            <div>
+              <span class="cred-label">Nuestros proyectos</span>
+              <p>Cursoteca, Recursos Comunitarios, Herramientas Educativas y más iniciativas desarrolladas por y para estudiantes.</p>
             </div>
             <div>
               <span class="cred-label">Infraestructura</span>
-              <p>Caddy Web Server · Docker · Ubuntu Server<br />Alojado en hardware local donado al proyecto</p>
+              <p>Caddy Web Server · Docker · Ubuntu Server · Alojado en hardware local y servicios donados al proyecto.</p>
             </div>
             <div>
-              <span class="cred-label">Licencia del repositorio</span>
-              <p>La plataforma es de código abierto. El material individual pertenece a sus respectivos autores con todos los derechos reservados salvo indicación contraria.</p>
-            </div>
-            <div>
-              <span class="cred-label">Versión</span>
-              <p class="cred-version">cursoteca v1.0 · 2025</p>
+              <span class="cred-label">Licencia</span>
+              <p>Nuestras herramientas son de código abierto. El material individual en Cursoteca pertenece a sus autores con todos los derechos reservados.</p>
             </div>
           </div>
         </div>
@@ -952,19 +1102,19 @@
     <div class="footer-inner">
       <div class="footer-top">
         <div>
-          <a href="#" class="footer-logo">Cursoteca</a>
-          <p class="footer-tagline">Archivo Histórico de Material Académico</p>
+          <a href="#" class="footer-logo">AECCI</a>
+          <p class="footer-tagline">Asociación de Estudiantes de Computación e Informática</p>
         </div>
         <ul class="footer-nav">
-          <li><a href="#org">Organización</a></li>
-          <li><a href="#contribuir">Contribuir</a></li>
-          <li><a href="/cursos/">Explorar</a></li>
+          <li><a href="#sobre">Sobre Nosotros</a></li>
+          <li><a href="#proyectos">Proyectos</a></li>
+          <li><a href="/cursos/">Cursoteca</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
       </div>
       <div class="footer-bottom">
-        El material publicado es propiedad de sus respectivos autores. Esta plataforma es un servicio sin fines de lucro. ·
-        <a href="mailto:cursoteca@universidad.ac.cr">Reportar un problema</a>
+        Asociación de Estudiantes de Computación e Informática de la UCR · 
+        <a href="mailto:aecci@universidad.ac.cr">Contacto</a>
       </div>
     </div>
   </footer>
