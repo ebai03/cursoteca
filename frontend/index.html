@@ -750,7 +750,7 @@
         </div>
         <div>
           <span class="hero-stat-num" id="stat-visitors">-</span>
-          <p class="hero-stat-label">Visitantes Únicos</p>
+          <p class="hero-stat-label">Almacenamiento Descargado</p>
         </div>
         <div>
           <span class="hero-stat-num" id="stat-storage">-</span>
@@ -1056,7 +1056,7 @@
       document.getElementById('stat-courses').textContent = formatNumber(stats.total_courses);
       document.getElementById('stat-storage').textContent = formatStorage(stats.storage_gb);
       document.getElementById('stat-files').textContent = formatNumber(stats.total_files);
-      document.getElementById('stat-visitors').textContent = formatNumber(stats.download_count);
+      document.getElementById('stat-visitors').textContent = formatStorage(stats.downloaded_gb);
       
       // Localize timestamp
       const updateTime = new Date(stats.timestamp_iso);
