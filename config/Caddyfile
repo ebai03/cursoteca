@@ -1,5 +1,5 @@
 # Replace :80 with your domain (e.g., cursoteca.ucr.ac.cr) for automatic HTTPS
-:80 {
+:aecci-ucr.com {
     # Enable compression for faster loading
     encode gzip
 
@@ -64,4 +64,9 @@
         }
         format json
     }
+}
+
+# Admin subdomain for managing content through FileBrowser
+admin.aecci-ucr.com {
+    reverse_proxy filebrowser:80
 }
