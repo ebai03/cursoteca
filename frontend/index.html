@@ -704,6 +704,53 @@
       transform: translateY(18px);
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
+    /* ── KEYBOARD STRIP DECORATION ── */
+    .key-strip {
+      overflow: hidden;
+      padding: 1.5rem 0;
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+
+    .key-strip-inner {
+      display: flex;
+      gap: 8px;
+      animation: marquee 30s linear infinite;
+      width: max-content;
+    }
+
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .key-strip .key {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--warm);
+      border: 1.5px solid var(--rule);
+      border-radius: 5px;
+      box-shadow: 0 2px 0 var(--rule);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--muted);
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .key-strip .key.highlight {
+      background: var(--ink);
+      border-color: var(--ink);
+      box-shadow: 0 2px 0 rgba(0,0,0,0.4);
+      color: var(--paper);
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
     .reveal.visible {
       opacity: 1;
       transform: none;
@@ -800,7 +847,36 @@
     </section>
   </div>
 
-  <div class="container"><hr class="rule" /></div>
+  <!-- ── KEYBOARD STRIP DECORATION ── -->
+  <div class="key-strip" aria-hidden="true">
+    <div class="key-strip-inner">
+      <div class="key highlight">A</div><div class="key">E</div><div class="key highlight">C</div><div class="key highlight">C</div><div class="key highlight">I</div>
+      <div class="key">←</div><div class="key">↑</div><div class="key">↓</div><div class="key">→</div>
+      <div class="key">⌘</div><div class="key">⌥</div><div class="key">⇧</div><div class="key">⌃</div>
+      <div class="key" style="width:60px">SPC</div>
+      <div class="key">F1</div><div class="key">F2</div><div class="key">F3</div>
+      <div class="key">ESC</div><div class="key">TAB</div><div class="key">↵</div>
+      <div class="key highlight">A</div><div class="key highlight">E</div><div class="key highlight">C</div><div class="key highlight">C</div><div class="key highlight">I</div>
+      <div class="key">←</div><div class="key">↑</div><div class="key">↓</div><div class="key">→</div>
+      <div class="key">⌘</div><div class="key">⌥</div><div class="key">⇧</div><div class="key">⌃</div>
+      <div class="key" style="width:60px">SPC</div>
+      <div class="key">F1</div><div class="key">F2</div><div class="key">F3</div>
+      <div class="key">ESC</div><div class="key">TAB</div><div class="key">↵</div>
+      <!-- Duplicate for seamless loop -->
+      <div class="key highlight">A</div><div class="key highlight">E</div><div class="key highlight">C</div><div class="key highlight">C</div><div class="key highlight">I</div>
+      <div class="key">←</div><div class="key">↑</div><div class="key">↓</div><div class="key">→</div>
+      <div class="key">⌘</div><div class="key">⌥</div><div class="key">⇧</div><div class="key">⌃</div>
+      <div class="key" style="width:60px">SPC</div>
+      <div class="key">F1</div><div class="key">F2</div><div class="key">F3</div>
+      <div class="key">ESC</div><div class="key">TAB</div><div class="key">↵</div>
+      <div class="key highlight">A</div><div class="key highlight">E</div><div class="key highlight">C</div><div class="key highlight">C</div><div class="key highlight">I</div>
+      <div class="key">←</div><div class="key">↑</div><div class="key">↓</div><div class="key">→</div>
+      <div class="key">⌘</div><div class="key">⌥</div><div class="key">⇧</div><div class="key">⌃</div>
+      <div class="key" style="width:60px">SPC</div>
+      <div class="key">F1</div><div class="key">F2</div><div class="key">F3</div>
+      <div class="key">ESC</div><div class="key">TAB</div><div class="key">↵</div>
+    </div>
+  </div>
 
   <!-- ── PROYECTOS ── -->
   <div class="container">
