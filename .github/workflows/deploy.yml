@@ -1,0 +1,51 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    name: Pull & restart
+    runs-on: self-hosted
+    environment: prod
+
+    env:
+      PROD_DIR: /home/ebai/cursoteca
+
+    steps:
+      - name: Fetch remote changes
+        run: git -C "$PROD_DIR" fetch origin main
+
+      - name: Detect what is about to change
+        id: changes
+        run: |
+          CHANGED=$(git -C "$PROD_DIR" diff --name-only HEAD origin/main)
+          echo "Changed files:"
+          echo "${CHANGED:-<none>}"
+
+          if echo "$CHANGED" | grep -qE '^config/docker-compose\.yml$'; then
+            echo "compose=true"  >> "$GITHUB_OUTPUT"
+          else
+            echo "compose=false" >> "$GITHUB_OUTPUT"
+          fi
+
+          if echo "$CHANGED" | grep -qE '^config/Caddyfile$'; then
+            echo "caddyfile=true"  >> "$GITHUB_OUTPUT"
+          else
+            echo "caddyfile=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Pull latest changes
+        run: git -C "$PROD_DIR" pull --ff-only origin main
+
+      - name: Apply compose changes
+        if: steps.changes.outputs.compose == 'true'
+        working-directory: /home/ebai/cursoteca/config
+        run: docker compose up -d
+
+      - name: Reload Caddy config
+        if: steps.changes.outputs.caddyfile == 'true' && steps.changes.outputs.compose == 'false'
+        run: |
+          docker exec cursoteca_caddy \
+            caddy reload --config /etc/caddy/Caddyfile --adapter caddyfile

@@ -1,3 +1,10 @@
 .env
 CLAUDE.md
 .claude
+
+# Production-generated files
+config/filebrowser.db
+config/filebrowse_config/
+config/.env
+frontend/stats.json
+data/
