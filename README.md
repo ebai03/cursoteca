@@ -28,7 +28,7 @@ data/
                 └── 03_Examenes_Enunciados/
 ```
 
-## 🚀 Despliegue Local
+## Despliegue Local
 
 La infraestructura está definida en `config/docker-compose.yml`. Para levantar los servicios:
 
