@@ -38,7 +38,7 @@
         root * /var/www/cursos
 
         # Enable the directory browser and hide hidden/git files
-        file_server browse {
+        file_server browse /var/www/frontend/browse.html {
             hide .* .gitkeep .gitignore .gitattributes .gitmodules
         }
     }
