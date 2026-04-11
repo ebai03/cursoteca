@@ -37,9 +37,9 @@
     handle_path /cursos/* {
         root * /var/www/cursos
 
-        # Enable the directory browser and hide hidden files
+        # Enable the directory browser and hide hidden/git files
         file_server browse {
-            hide .*
+            hide .* .gitkeep .gitignore .gitattributes .gitmodules
         }
     }
 
