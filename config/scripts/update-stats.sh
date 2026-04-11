@@ -9,7 +9,6 @@ set -e
 DATA="/var/www/cursos"
 STATS_JSON="/var/www/frontend/stats.json"
 LOG_FILE="/var/log/cursoteca/stats-update.log"
-CADDY_LOG="/var/log/caddy/access.log"
 
 mkdir -p /var/log/cursoteca
 
@@ -36,36 +35,22 @@ TOTAL_FILES=$(
   find "$DATA" -type f 2>/dev/null | wc -l || echo 0
 )
 
-# Count downloads and data transfer
-DOWNLOAD_COUNT=0
-UNIQUE_IPS=0
-DOWNLOAD_BYTES=0
-DOWNLOADED_GB="0.00"
-
-if [ -f "$CADDY_LOG" ]; then
-  # Filter valid file downloads: GET requests to /cursos/ that do not end in /, successful status
-  # Note: grep -a is used to treat log as text
-  FILE_REQS=$(grep -a '"method":"GET"' "$CADDY_LOG" 2>/dev/null | grep -a -E '"uri":"/cursos/[^"]*[^/]"' | grep -a -E '"status":(200|206)' || true)
-  
-  if [ -n "$FILE_REQS" ]; then
-    DOWNLOAD_COUNT=$(echo "$FILE_REQS" | wc -l | awk '{print $1}')
-    
-    # Calculate downloaded bytes summing the "size" field
-    DOWNLOAD_BYTES=$(echo "$FILE_REQS" | grep -a -o '"size":[0-9]*' | cut -d: -f2 | awk '{s+=$1} END {if(s=="") print 0; else print s}' || echo 0)
-    DOWNLOADED_GB=$(echo "scale=2; $DOWNLOAD_BYTES / 1024 / 1024 / 1024" | bc 2>/dev/null | awk '{printf "%.2f", $0}' || echo "0.00")
-    
-    # Extract unique IPs (Caddy standard is remote_ip, fallback to remote_addr)
-    UNIQUE_IPS=$(echo "$FILE_REQS" | grep -a -o '"remote_ip":"[^"]*' | cut -d'"' -f4 | cut -d: -f1 | sort -u | wc -l | awk '{print $1}')
-    
-    if [ "$UNIQUE_IPS" -eq 0 ]; then
-      UNIQUE_IPS=$(echo "$FILE_REQS" | grep -a -o '"remote_addr":"[^"]*' | cut -d'"' -f4 | cut -d: -f1 | sort -u | wc -l | awk '{print $1}')
-    fi
-  fi
+# Last update of data/ directory (via git pull from GitHub Actions)
+if [ -f "/var/www/cursos/.git/FETCH_HEAD" ]; then
+  DATA_EPOCH=$(stat -c '%Y' /var/www/cursos/.git/FETCH_HEAD 2>/dev/null || echo "")
+else
+  DATA_EPOCH=""
 fi
 
-# Timestamps for last update
-LAST_UPDATE=$(date '+%Y-%m-%d %H:%M:%S')
-TIMESTAMP_ISO=$(date -u '+%Y-%m-%dT%H:%M:%SZ')
+if [ -n "$DATA_EPOCH" ] && [ "$DATA_EPOCH" -gt 0 ] 2>/dev/null; then
+  # Container runs in UTC; date -d @epoch gives UTC time
+  LAST_UPDATE=$(date -d "@$DATA_EPOCH" '+%Y-%m-%d %H:%M:%S' 2>/dev/null || date '+%Y-%m-%d %H:%M:%S')
+  TIMESTAMP_ISO=$(date -d "@$DATA_EPOCH" '+%Y-%m-%dT%H:%M:%SZ' 2>/dev/null || date -u '+%Y-%m-%dT%H:%M:%SZ')
+else
+  # Fallback: use current time if FETCH_HEAD not available
+  LAST_UPDATE=$(date '+%Y-%m-%d %H:%M:%S')
+  TIMESTAMP_ISO=$(date -u '+%Y-%m-%dT%H:%M:%SZ')
+fi
 
 # Create stats JSON
 cat > "$STATS_JSON" << EOF
@@ -75,13 +60,10 @@ cat > "$STATS_JSON" << EOF
   "storage_tb": $STORAGE_TB,
   "storage_bytes": $STORAGE_BYTES,
   "total_files": $TOTAL_FILES,
-  "download_count": $DOWNLOAD_COUNT,
-  "downloaded_gb": $DOWNLOADED_GB,
-  "unique_ips": $UNIQUE_IPS,
   "last_update": "$LAST_UPDATE",
   "timestamp_iso": "$TIMESTAMP_ISO"
 }
 EOF
 
 # Logging
-echo "[$(date +'%Y-%m-%d %H:%M:%S')] ✓ Stats actualizado: Cursos=$TOTAL_COURSES, Storage=$STORAGE_GB GB, Archivos=$TOTAL_FILES, Descargas=$DOWNLOAD_COUNT ($DOWNLOADED_GB GB)" >> "$LOG_FILE"
+echo "[$(date +'%Y-%m-%d %H:%M:%S')] ✓ Stats actualizado: Cursos=$TOTAL_COURSES, Storage=$STORAGE_GB GB, Archivos=$TOTAL_FILES, Última actualización de datos=$LAST_UPDATE" >> "$LOG_FILE"

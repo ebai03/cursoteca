@@ -878,17 +878,17 @@
           <p class="hero-stat-label">Archivos Subidos</p>
         </div>
         <div>
-          <span class="hero-stat-num" id="stat-visitors">-</span>
-          <p class="hero-stat-label">Almacenamiento Descargado</p>
-        </div>
-        <div>
           <span class="hero-stat-num" id="stat-storage">-</span>
           <p class="hero-stat-label">Almacenamiento Usado</p>
         </div>
-        <p id="update-timestamp" class="update-timestamp">
-          <small>Cargando estadísticas...</small>
-        </p>
+        <div>
+          <span class="hero-stat-timestamp" id="stat-time">-</span>
+          <p class="hero-stat-label">Última Actualización</p>
+        </div>
       </div>
+      <p id="update" class="update" style="padding-top: 1rem;">
+            <small>Cargando estadísticas...</small>
+      </p>
     </section>
   </div>
 
@@ -1252,12 +1252,6 @@
         return gb.toFixed(2) + ' GB';
       };
       
-      // Update DOM with stats
-      document.getElementById('stat-courses').textContent = formatNumber(stats.total_courses);
-      document.getElementById('stat-storage').textContent = formatStorage(stats.storage_gb);
-      document.getElementById('stat-files').textContent = formatNumber(stats.total_files);
-      document.getElementById('stat-visitors').textContent = formatStorage(stats.downloaded_gb);
-      
       // Localize timestamp
       const updateTime = new Date(stats.timestamp_iso);
       const timeStr = updateTime.toLocaleString('es-ES', {
@@ -1268,13 +1262,16 @@
         minute: '2-digit',
         second: '2-digit'
       });
-      
-      document.getElementById('update-timestamp').textContent = 
-        `⏱ Última actualización: ${timeStr}`;
+
+      // Update DOM with stats
+      document.getElementById('stat-courses').textContent = formatNumber(stats.total_courses);
+      document.getElementById('stat-storage').textContent = formatStorage(stats.storage_gb);
+      document.getElementById('stat-files').textContent = formatNumber(stats.total_files);
+      document.getElementById('stat-time').textContent = `${timeStr}`;
         
     } catch (error) {
       console.error('Error cargando estadísticas:', error);
-      document.getElementById('update-timestamp').textContent = 
+      document.getElementById('update').textContent = 
         '⚠ Error al cargar estadísticas. Reintentando...';
       
       // Reintentar en 10 segundos
