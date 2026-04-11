@@ -755,6 +755,42 @@
       opacity: 1;
       transform: none;
     }
+
+    /* ────────────────────────────────
+       WIP NOTICE BANNER
+    ──────────────────────────────── */
+    .wip-banner {
+      background: var(--warm);
+      border-bottom: 1px solid var(--rule);
+      padding: 0.55rem 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .wip-banner-inner {
+      max-width: 1024px;
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 5vw, 3rem);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .wip-badge {
+      background: var(--accent);
+      color: var(--paper);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
   </style>
 </head>
 <body>
@@ -804,6 +840,14 @@
       </ul>
     </div>
   </nav>
+
+  <!-- ── WIP NOTICE ── -->
+  <div class="wip-banner" role="status">
+    <div class="wip-banner-inner">
+      <span class="wip-badge">En desarrollo</span>
+      Esta página está en construcción — algunos contenidos y funcionalidades pueden estar incompletos.
+    </div>
+  </div>
 
   <!-- ── HERO ── -->
   <div class="container">
