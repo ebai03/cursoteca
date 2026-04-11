@@ -37,6 +37,9 @@ http://aecci-ucr.com {
     handle_path /cursos/* {
         root * /var/www/cursos
 
+        # Prevent browsers from caching directory listings
+        header Cache-Control "no-cache"
+
         # Enable the directory browser and hide hidden/git files
         file_server {
             browse /var/www/frontend/browse.html
