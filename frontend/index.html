@@ -638,6 +638,8 @@
     }
 
     .credits-list p { color: var(--muted); line-height: 1.6; }
+    .credits-list p a { color: var(--accent); text-decoration: none; }
+    .credits-list p a:hover { text-decoration: underline; }
     .cred-version { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
 
     /* ────────────────────────────────
@@ -743,9 +745,9 @@
     }
 
     .key-strip .key.highlight {
-      background: var(--ink);
-      border-color: var(--ink);
-      box-shadow: 0 2px 0 rgba(0,0,0,0.4);
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 2px 0 var(--accent-dark);
       color: var(--paper);
       font-size: 0.75rem;
       font-weight: 600;
@@ -894,7 +896,7 @@
   <!-- ── KEYBOARD STRIP DECORATION ── -->
   <div class="key-strip" aria-hidden="true">
     <div class="key-strip-inner">
-      <div class="key highlight">A</div><div class="key">E</div><div class="key highlight">C</div><div class="key highlight">C</div><div class="key highlight">I</div>
+      <div class="key highlight">A</div><div class="key highlight">E</div><div class="key highlight">C</div><div class="key highlight">C</div><div class="key highlight">I</div>
       <div class="key">←</div><div class="key">↑</div><div class="key">↓</div><div class="key">→</div>
       <div class="key">⌘</div><div class="key">⌥</div><div class="key">⇧</div><div class="key">⌃</div>
       <div class="key" style="width:60px">SPC</div>
