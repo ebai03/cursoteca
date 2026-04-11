@@ -1,5 +1,5 @@
-# Replace :80 with your domain (e.g., cursoteca.ucr.ac.cr) for automatic HTTPS
-:aecci-ucr.com {
+# http:// prefix — Cloudflare handles TLS, origin serves plain HTTP
+http://aecci-ucr.com {
     # Enable compression for faster loading
     encode gzip
 
@@ -38,7 +38,8 @@
         root * /var/www/cursos
 
         # Enable the directory browser and hide hidden/git files
-        file_server browse /var/www/frontend/browse.html {
+        file_server {
+            browse /var/www/frontend/browse.html
             hide .* .gitkeep .gitignore .gitattributes .gitmodules
         }
     }
@@ -67,6 +68,6 @@
 }
 
 # Admin subdomain for managing content through FileBrowser
-admin.aecci-ucr.com {
+http://admin.aecci-ucr.com {
     reverse_proxy filebrowser:80
 }
