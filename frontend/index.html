@@ -638,6 +638,8 @@
     }
 
     .credits-list p { color: var(--muted); line-height: 1.6; }
+    .credits-list p a { color: var(--accent); text-decoration: none; }
+    .credits-list p a:hover { text-decoration: underline; }
     .cred-version { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
 
     /* ────────────────────────────────
@@ -743,9 +745,9 @@
     }
 
     .key-strip .key.highlight {
-      background: var(--ink);
-      border-color: var(--ink);
-      box-shadow: 0 2px 0 rgba(0,0,0,0.4);
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 2px 0 var(--accent-dark);
       color: var(--paper);
       font-size: 0.75rem;
       font-weight: 600;
@@ -754,6 +756,42 @@
     .reveal.visible {
       opacity: 1;
       transform: none;
+    }
+
+    /* ────────────────────────────────
+       WIP NOTICE BANNER
+    ──────────────────────────────── */
+    .wip-banner {
+      background: var(--warm);
+      border-bottom: 1px solid var(--rule);
+      padding: 0.55rem 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .wip-banner-inner {
+      max-width: 1024px;
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 5vw, 3rem);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .wip-badge {
+      background: var(--accent);
+      color: var(--paper);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+      flex-shrink: 0;
     }
   </style>
 </head>
@@ -805,6 +843,14 @@
     </div>
   </nav>
 
+  <!-- ── WIP NOTICE ── -->
+  <div class="wip-banner" role="status">
+    <div class="wip-banner-inner">
+      <span class="wip-badge">En desarrollo</span>
+      Esta página está en construcción — algunos contenidos y funcionalidades pueden estar incompletos.
+    </div>
+  </div>
+
   <!-- ── HERO ── -->
   <div class="container">
     <section class="hero stagger">
@@ -850,7 +896,7 @@
   <!-- ── KEYBOARD STRIP DECORATION ── -->
   <div class="key-strip" aria-hidden="true">
     <div class="key-strip-inner">
-      <div class="key highlight">A</div><div class="key">E</div><div class="key highlight">C</div><div class="key highlight">C</div><div class="key highlight">I</div>
+      <div class="key highlight">A</div><div class="key highlight">E</div><div class="key highlight">C</div><div class="key highlight">C</div><div class="key highlight">I</div>
       <div class="key">←</div><div class="key">↑</div><div class="key">↓</div><div class="key">→</div>
       <div class="key">⌘</div><div class="key">⌥</div><div class="key">⇧</div><div class="key">⌃</div>
       <div class="key" style="width:60px">SPC</div>
@@ -995,66 +1041,6 @@
 
   <div class="container"><hr class="rule" /></div>
 
-  <!-- ── CONTRIBUIR ── -->
-  <div class="container">
-    <section id="contribuir" class="reveal">
-      <div class="deco-line">
-        <span class="section-label">Cómo Participar</span>
-      </div>
-      <h3 class="section-heading">
-        ¿Quieres formar parte<br />
-        <span class="section-subtitle">de la AECCI?</span>
-      </h3>
-      <p class="section-sub">
-        Ya sea como miembro activo, contribuyendo al repositorio de Cursoteca 
-        o participando en nuestros proyectos, hay muchas formas de ser parte de la asociación.
-      </p>
-      <div class="contrib-grid">
-        <div class="contrib-card reveal">
-          <div class="contrib-icon-wrap">
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-          <span class="contrib-badge">01 · Unirse</span>
-          <h4>Sé miembro activo</h4>
-          <p>Participa en reuniones, eventos y proyectos de la asociación. Conecta con otros estudiantes y contribuye a las iniciativas.</p>
-          <a href="#contacto">Contactar →</a>
-        </div>
-        <div class="contrib-card reveal">
-          <div class="contrib-icon-wrap">
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-          </div>
-          <span class="contrib-badge">02 · Compartir Material</span>
-          <h4>Aporta a Cursoteca</h4>
-          <p>Comparte apuntes, exámenes y recursos académicos. Ayuda a otros estudiantes a tener acceso a material de calidad.</p>
-          <a href="/cursos/">Ir a Cursoteca →</a>
-        </div>
-        <div class="contrib-card reveal">
-          <div class="contrib-icon-wrap">
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-          </div>
-          <span class="contrib-badge">03 · Colaborar</span>
-          <h4>Mejora nuestros proyectos</h4>
-          <p>Contribuye ideas, reporta problemas o ayuda en el desarrollo de herramientas y recursos.</p>
-          <a href="#contacto">Sugerencias →</a>
-        </div>
-      </div>
-      <div class="flow-bar reveal">
-        <span class="section-label">Formas de participar</span>
-        <div class="flow-steps">
-          <span class="flow-step flow-step--dark">Eventos</span>
-          <span class="flow-arrow">·</span>
-          <span class="flow-step flow-step--light">Proyectos</span>
-          <span class="flow-arrow">·</span>
-          <span class="flow-step flow-step--light">Recursos</span>
-          <span class="flow-arrow">·</span>
-          <span class="flow-step flow-step--accent">Comunidad</span>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <div class="container"><hr class="rule" /></div>
-
   <!-- ── CONTRIBUIR A CURSOTECA ── -->
   <div class="container">
     <section id="contribuir-cursoteca" class="reveal">
@@ -1066,46 +1052,43 @@
         <span class="section-subtitle">podría ayudar a otros?</span>
       </h3>
       <p class="section-sub">
-        Si eres docente o estudiante con acceso a material original y
-        tenés permiso para compartirlo, estas son las formas de contribuir.
+        Si tenés material académico que querés compartir — o si encontraste información
+        que debe modificarse o censurarse — podés contribuir directamente al repositorio.
       </p>
       <div class="contrib-grid">
         <div class="contrib-card reveal">
           <div class="contrib-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+          </div>
+          <span class="contrib-badge">01 · Pull Request</span>
+          <h4>Agregar material</h4>
+          <p>Creá un pull request en <a href="https://github.com/aecci/banco_examenes" target="_blank" rel="noopener">aecci/banco_examenes</a> respetando la estructura del repositorio detallada en la sección anterior. Tus cambios serán revisados antes de publicarse.</p>
+        </div>
+        <div class="contrib-card reveal">
+          <div class="contrib-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
+          <span class="contrib-badge">02 · Modificar o censurar</span>
+          <h4>Solicitar cambios</h4>
+          <p>Si necesitás eliminar o censurar información personal en un documento existente, también podés usar el mismo flujo de pull request en <a href="https://github.com/aecci/banco_examenes" target="_blank" rel="noopener">aecci/banco_examenes</a>.</p>
+        </div>
+        <div class="contrib-card reveal">
+          <div class="contrib-icon-wrap">
             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
           </div>
-          <span class="contrib-badge">01 · Email</span>
-          <h4>Correo institucional</h4>
-          <p>Enviá tu material desde tu cuenta institucional junto con el formulario de consentimiento al correo del proyecto.</p>
-          <a href="#contacto">Ver contacto →</a>
-        </div>
-        <div class="contrib-card reveal">
-          <div class="contrib-icon-wrap">
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-          </div>
-          <span class="contrib-badge">02 · Formulario</span>
-          <h4>Formulario de contribución</h4>
-          <p>Completá el formulario de donación de material con los metadatos del curso y adjuntá los archivos.</p>
-          <a href="submit.html">Ir al formulario →</a>
-        </div>
-        <div class="contrib-card reveal">
-          <div class="contrib-icon-wrap">
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-          <span class="contrib-badge">03 · Contacto Directo</span>
-          <h4>Hablar con un curador</h4>
-          <p>Si tenés dudas sobre qué material es apto o cómo funciona el proceso, podés contactar directamente a un curador antes de.</p>
-          <a href="#contacto">Contactar →</a>
+          <span class="contrib-badge">03 · Archivos grandes</span>
+          <h4>Contacto directo</h4>
+          <p>Si un archivo es demasiado grande para añadirse a Git, contactá a un administrador directamente por correo electrónico: <a href="mailto:cursoteca@aecci-ucr.com">cursoteca@aecci-ucr.com</a></p>
         </div>
       </div>
       <div class="flow-bar reveal">
-        <span class="section-label">Flujo de publicación</span>
+        <span class="section-label">Flujo de contribución</span>
         <div class="flow-steps">
-          <span class="flow-step flow-step--dark">1 · Enviás material</span>
+          <span class="flow-step flow-step--dark">1 · Fork del repo</span>
           <span class="flow-arrow">→</span>
-          <span class="flow-step flow-step--light">2 · Curador revisa</span>
+          <span class="flow-step flow-step--light">2 · Agregás el material</span>
           <span class="flow-arrow">→</span>
-          <span class="flow-step flow-step--light">3 · Confirmás consentimiento</span>
+          <span class="flow-step flow-step--light">3 · Abrís un Pull Request</span>
           <span class="flow-arrow">→</span>
           <span class="flow-step flow-step--accent">4 · Se publica</span>
         </div>
@@ -1151,20 +1134,12 @@
           <h4>Sobre la AECCI</h4>
           <div class="credits-list">
             <div>
-              <span class="cred-label">Qué somos</span>
-              <p>Somos la asociación que representa a los estudiantes de Computación e Informática de la UCR, trabajando para mejorar la vida estudiantil y crear comunidad.</p>
-            </div>
-            <div>
               <span class="cred-label">Nuestros proyectos</span>
               <p>Cursoteca, Recursos Comunitarios, Herramientas Educativas y más iniciativas desarrolladas por y para estudiantes.</p>
             </div>
             <div>
               <span class="cred-label">Infraestructura</span>
-              <p>Caddy Web Server · Docker · Ubuntu Server · Alojado en hardware local y servicios donados al proyecto.</p>
-            </div>
-            <div>
-              <span class="cred-label">Licencia</span>
-              <p>Nuestras herramientas son de código abierto. El material individual en Cursoteca pertenece a sus autores con todos los derechos reservados.</p>
+              <p>Caddy Web Server · Docker · Ubuntu Server · Alojado en hardware local y servicios donados al proyecto. Código fuente en <a href="https://github.com/ebai03/cursoteca" target="_blank" rel="noopener">github.com/ebai03/cursoteca</a>.</p>
             </div>
           </div>
         </div>
