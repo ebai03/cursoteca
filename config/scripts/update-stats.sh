@@ -14,7 +14,7 @@ mkdir -p /var/log/cursoteca
 
 # Count courses
 TOTAL_COURSES=$(
-  find "$DATA" -mindepth 3 -maxdepth 3 -type d ! -name ".*" ! -name "X_*" 2>/dev/null | wc -l
+  find "$DATA" -mindepth 3 -maxdepth 3 -type d ! -name ".*" ! -path "*/.git/*" ! -name "X_*" 2>/dev/null | wc -l
 )
 
 # Calculate storage
