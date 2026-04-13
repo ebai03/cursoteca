@@ -710,6 +710,9 @@
     .key-strip {
       overflow: hidden;
       padding: 1.5rem 0;
+      max-width: 1024px;
+      margin-left: auto;
+      margin-right: auto;
       mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
       -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
     }
@@ -887,7 +890,7 @@
         </div>
       </div>
       <p id="update" class="update" style="padding-top: 1rem;">
-            <small>Cargando estadísticas...</small>
+            <small></small>
       </p>
     </section>
   </div>
@@ -1109,7 +1112,7 @@
       </h3>
       <div class="contact-grid">
         <div class="reveal">
-          <h4>Contacto de la AECCI</h4>
+          <h4>Contacto</h4>
           <dl class="contact-list">
             <div>
               <dt>Correo general</dt>
@@ -1117,20 +1120,16 @@
             </div>
             <div>
               <dt>Sobre Cursoteca</dt>
-              <dd><a href="mailto:cursoteca@universidad.ac.cr">cursoteca@universidad.ac.cr</a></dd>
+              <dd><a href="https://github.com/ebai03" target="_blank" rel="noopener">github.com/ebai03</a>.</dd>
             </div>
             <div>
               <dt>Ubicación</dt>
               <dd>Escuela de Ciencias de la Computación e Informática<br />Universidad de Costa Rica, San José</dd>
             </div>
-            <div>
-              <dt>Reportar un problema</dt>
-              <dd>Si encontraste un inconveniente, escribe con el asunto <code class="tag">REPORTE</code> al correo de contacto.</dd>
-            </div>
           </dl>
         </div>
         <div class="reveal">
-          <h4>Sobre la AECCI</h4>
+          <h4>Acerca de</h4>
           <div class="credits-list">
             <div>
               <span class="cred-label">Nuestros proyectos</span>
@@ -1272,7 +1271,7 @@
     } catch (error) {
       console.error('Error cargando estadísticas:', error);
       document.getElementById('update').textContent = 
-        '⚠ Error al cargar estadísticas. Reintentando...';
+        '⚠ Error al cargar estadísticas.';
       
       // Reintentar en 10 segundos
       setTimeout(loadStats, 10000);
