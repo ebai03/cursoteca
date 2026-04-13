@@ -14,7 +14,7 @@ mkdir -p /var/log/cursoteca
 
 # Count courses
 TOTAL_COURSES=$(
-  find "$DATA" -mindepth 3 -maxdepth 3 -type d ! -name ".*" ! -name "X_*" 2>/dev/null | wc -l
+  find "$DATA" -mindepth 3 -maxdepth 3 -type d ! -name ".*" ! -path "*/.git/*" ! -name "X_*" 2>/dev/null | wc -l
 )
 
 # Calculate storage
@@ -32,7 +32,7 @@ STORAGE_TB=$(
 
 # Files count
 TOTAL_FILES=$(
-  find "$DATA" -type f -name ".*" 2>/dev/null | wc -l || echo 0
+  find "$DATA" -type f ! -name ".*" 2>/dev/null | wc -l || echo 0
 )
 
 # Last update of data/ directory (via git pull from GitHub Actions)
