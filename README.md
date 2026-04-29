@@ -2,7 +2,7 @@
 
 **Cursoteca** es un archivo histórico colaborativo de materiales académicos de la Escuela de Ciencias de la Computación e Informática (UCR), gestionado por la Asociación de Estudiantes (AECCI). Su propósito es centralizar recursos de cursos anteriores (cartas al estudiante, diapositivas, enunciados de exámenes) para la consulta abierta de la comunidad estudiantil.
 
-Este es un nombre que se me ocurrió para el proyecto, pero es completamente intercambiable. Si hay alguna otra sugerencia, estoy abierto a ideas.
+> **Este repositorio contiene únicamente la infraestructura** (servidor web, scripts, configuración de Docker). El material académico (exámenes, diapositivas, cartas al estudiante, etc.) vive en el repositorio separado [**aecci/banco_examenes**](https://github.com/aecci/banco_examenes). Ahí es donde se contribuye material.
 
 ## Arquitectura
 
