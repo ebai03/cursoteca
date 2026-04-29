@@ -318,8 +318,17 @@ body {
 	font-family: Inter, system-ui, sans-serif;
 	font-size: 16px;
 	text-rendering: optimizespeed;
-	background-color: #f3f6f7;
+	background-color: #f8f9fa;
 	min-height: 100vh;
+}
+
+body::before {
+	content: '';
+	position: fixed;
+	top: 0; right: 0; bottom: 0; left: 0;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.015'/%3E%3C/svg%3E");
+	pointer-events: none;
+	z-index: 0;
 }
 
 img,
@@ -346,7 +355,7 @@ svg,
 .layout.current,
 .layout.current svg,
 .go-up {
-	color: #333;
+	color: #2c2c2c;
 	text-decoration: none;
 }
 
@@ -367,12 +376,12 @@ header,
 }
 
 td a {
-	color: #006ed3;
+	color: #0066cc;
 	text-decoration: none;
 }
 
 td a:hover {
-	color: #0095e4;
+	color: #3d8fe6;
 }
 
 td a:visited {
@@ -408,6 +417,8 @@ header {
 	padding-top: 15px;
 	padding-bottom: 15px;
 	box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 10%);
+	position: relative;
+	z-index: 1;
 }
 
 .breadcrumbs {
@@ -431,7 +442,7 @@ h1 {
 
 h1 a,
 th a {
-	color: #000;
+	color: #2c2c2c;
 }
 
 h1 a {
@@ -456,13 +467,15 @@ main {
 	margin: 3em auto 0;
 	border-radius: 5px;
 	box-shadow: 0 2px 5px 1px rgb(0 0 0 / 5%);
+	position: relative;
+	z-index: 1;
 }
 
 .meta {
 	display: flex;
 	gap: 1em;
 	font-size: 14px;
-	border-bottom: 1px solid #e5e9ea;
+	border-bottom: 1px solid #dfe5e9;
 	padding-top: 1em;
 	padding-bottom: 1em;
 }
@@ -517,7 +530,7 @@ tbody tr a,
 
 tbody tr:hover,
 .grid .entry a:hover {
-	background-color: #f4f9fd;
+	background-color: #f0f3f5;
 }
 
 th,
@@ -584,7 +597,7 @@ td .go-up {
 }
 
 .sizebar-bar {
-	background-color: #dbeeff;
+	background-color: #dfe5e9;
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -641,6 +654,8 @@ footer {
 	padding: 40px 20px;
 	font-size: 12px;
 	text-align: center;
+	position: relative;
+	z-index: 1;
 }
 
 .caddy-logo {
@@ -665,7 +680,7 @@ footer {
 	}
 
 	h1 {
-		color: #000;
+		color: #2c2c2c;
 	}
 
 	h1 a {
@@ -684,12 +699,15 @@ footer {
 
 @media (prefers-color-scheme: dark) {
 	html {
-		background: black; /* overscroll */
+		background: #0f1419;
 	}
 
 	body {
-		background: linear-gradient(180deg, rgb(34 50 66) 0%, rgb(26 31 38) 100%);
-		background-attachment: fixed;
+		background-color: #0f1419;
+	}
+
+	body::before {
+		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
 	}
 
 	body,
@@ -717,17 +735,17 @@ footer {
 	header,
 	main,
 	.grid .entry {
-		background-color: #101720;
+		background-color: #151d27;
 	}
 
 	tbody tr:hover,
 	.grid .entry a:hover {
-		background-color: #162030;
+		background-color: #1a2332;
 		color: #fff;
 	}
 
 	th {
-		background-color: #18212c;
+		background-color: #1a2332;
 	}
 
 	td a,
@@ -758,15 +776,15 @@ footer {
 	}
 
 	.meta {
-		border-bottom: 1px solid #222e3b;
+		border-bottom: 1px solid #2a3544;
 	}
 
 	.sizebar-bar {
-		background-color: #1f3549;
+		background-color: #2a3544;
 	}
 
 	.grid .entry a {
-		background-color: #080b0f;
+		background-color: #0f1419;
 	}
 
 	#Wordmark path,
@@ -776,19 +794,46 @@ footer {
 	#R circle {
 		stroke: #ccc !important;
 	}
+	.logo-light {
+		display: none;
+	}
+	.logo-dark {
+		display: inline;
+	}
+
 	.back-home a {
-		color: #8fb3d9;
+		color: #abc8e3;
 		text-decoration: none;
 	}
 	.back-home a:hover {
-		color: #abc8e3;
+		color: #d4e4f7;
 		text-decoration: underline;
 	}
 }
 
-.back-home {
+.header-top {
+	display: flex;
+	align-items: center;
+	gap: 1em;
 	margin-bottom: 6px;
 }
+
+.browse-logo {
+	display: inline-flex;
+	align-items: center;
+	height: 32px;
+}
+
+.browse-logo img {
+	height: 28px;
+	width: auto;
+	border-radius: 0;
+}
+
+.logo-dark {
+	display: none;
+}
+
 .back-home a {
 	font-size: 15px;
 	font-weight: 500;
@@ -809,7 +854,13 @@ footer {
 <body>
 	<header>
 		<div class="wrapper">
-			<div class="back-home"><a href="/">← Inicio</a></div>
+			<div class="header-top">
+				<a href="/" class="browse-logo" aria-label="AECCI - Ir al inicio">
+					<img src="/media/logo-dark.svg" alt="AECCI" class="logo-light" />
+					<img src="/media/logo-white.svg" alt="AECCI" class="logo-dark" />
+				</a>
+				<div class="back-home"><a href="/">← Inicio</a></div>
+			</div>
 			<div class="breadcrumbs">Folder Path</div>
 				<h1>
 					{{range $i, $crumb := .Breadcrumbs}}<a href="{{html $crumb.Link}}">{{html $crumb.Text}}</a>{{if ne $i 0}}/{{end}}{{end}}
