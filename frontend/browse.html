@@ -1,6 +1,6 @@
 {{ $nonce := uuidv4 -}}
 {{ $nonceAttribute := print "nonce=" (quote $nonce) -}}
-{{ $csp := printf "default-src 'none'; img-src 'self'; object-src 'none'; base-uri 'none'; script-src 'nonce-%s'; style-src 'nonce-%s'; frame-ancestors 'self'; form-action 'self';" $nonce $nonce -}}
+{{ $csp := printf "default-src 'none'; img-src 'self' data:; object-src 'none'; base-uri 'none'; script-src 'nonce-%s'; style-src 'nonce-%s'; frame-ancestors 'self'; form-action 'self';" $nonce $nonce -}}
 {{/* To disable the Content-Security-Policy, set this to false */}}{{ $enableCsp := true -}}
 {{ if $enableCsp -}}
   {{- .RespHeader.Set "Content-Security-Policy" $csp -}}
@@ -794,13 +794,6 @@ footer {
 	#R circle {
 		stroke: #ccc !important;
 	}
-	.logo-light {
-		display: none;
-	}
-	.logo-dark {
-		display: inline;
-	}
-
 	.back-home a {
 		color: #abc8e3;
 		text-decoration: none;
@@ -832,6 +825,11 @@ footer {
 
 .logo-dark {
 	display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+	.logo-light { display: none; }
+	.logo-dark  { display: inline; }
 }
 
 .back-home a {
