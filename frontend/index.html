@@ -285,7 +285,7 @@
       font-weight: 500;
       font-size: 0.9rem;
       padding: 0.65rem 1.4rem;
-      border-radius: 2px;
+      border-radius: var(--radius-pill);
       text-decoration: none;
       border: none;
       cursor: pointer;
@@ -304,7 +304,7 @@
       font-weight: 500;
       font-size: 0.9rem;
       padding: 0.65rem 1.4rem;
-      border-radius: 2px;
+      border-radius: var(--radius-pill);
       border: 1.5px solid var(--ink);
       text-decoration: none;
       cursor: pointer;
@@ -429,7 +429,7 @@
     .card {
       background: var(--card-bg);
       border: 1px solid var(--rule);
-      border-radius: 3px;
+      border-radius: var(--radius-card);
       padding: 1.5rem;
       transition: box-shadow 0.2s, transform 0.2s;
     }
@@ -538,8 +538,21 @@
     .contrib-card {
       background: var(--card-bg);
       border: 1px solid var(--rule);
-      border-radius: 3px;
+      border-radius: var(--radius-card);
+      overflow: hidden;
       padding: 1.6rem;
+    }
+
+    /* Top accent line — gray for all cards, gradient for the first in each grid */
+    .contrib-card::before {
+      content: '';
+      display: block;
+      height: 2.5px;
+      background: var(--rule);
+      margin: -1.6rem -1.6rem 1rem;
+    }
+    .contrib-grid .contrib-card:first-child::before {
+      background: linear-gradient(90deg, var(--accent), #4d9fff);
     }
 
     .contrib-icon-wrap {
@@ -767,7 +780,7 @@
       justify-content: center;
       background: var(--warm);
       border: 1.5px solid var(--rule);
-      border-radius: 5px;
+      border-radius: var(--radius-key);
       box-shadow: 0 2px 0 var(--rule);
       font-family: var(--font-mono);
       font-size: 0.7rem;
