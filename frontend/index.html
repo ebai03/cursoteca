@@ -161,6 +161,33 @@
       display: block;
     }
 
+    /* ── Section pill badge ── */
+    .section-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: rgba(0,102,204,0.08);
+      border: 1px solid rgba(0,102,204,0.18);
+      border-radius: var(--radius-pill);
+      padding: 0.22rem 0.7rem;
+      margin-bottom: 0.75rem;
+    }
+    .section-pill-dot {
+      width: 5px;
+      height: 5px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .section-pill span:last-child {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
     /* ── Decorative divider line ── */
     .deco-line {
       display: flex;
@@ -901,7 +928,10 @@
   <!-- ── HERO ── -->
   <div class="container">
     <section class="hero stagger">
-      <p class="hero-label">UCR · Escuela de Ciencias de la Computación</p>
+      <div class="section-pill">
+        <span class="section-pill-dot"></span>
+        <span>UCR · ECCI</span>
+      </div>
       <h1>AECCI</h1>
       <h2>Asociación de Estudiantes de<br />Computación e Informática</h2>
       <p class="hero-desc">
@@ -975,7 +1005,7 @@
   <div class="container">
     <section id="proyectos" class="reveal">
       <div class="deco-line">
-        <span class="section-label">Proyectos Destacados</span>
+        <div class="section-pill"><span class="section-pill-dot"></span><span>Proyectos Destacados</span></div>
       </div>
       <h3 class="section-heading">
         Nuestras iniciativas<br />
@@ -1023,7 +1053,7 @@
   <div class="container">
     <section id="org" class="reveal">
       <div class="deco-line">
-        <span class="section-label">Organización de Cursoteca</span>
+        <div class="section-pill"><span class="section-pill-dot"></span><span>Organización de Cursoteca</span></div>
       </div>
       <h3 class="section-heading">
         Estructura del repositorio<br />
@@ -1092,7 +1122,7 @@
   <div class="container">
     <section id="contribuir-cursoteca" class="reveal">
       <div class="deco-line">
-        <span class="section-label">Contribuir a Cursoteca</span>
+        <div class="section-pill"><span class="section-pill-dot"></span><span>Contribuir a Cursoteca</span></div>
       </div>
       <h3 class="section-heading">
         ¿Tenés material que<br />
@@ -1129,7 +1159,7 @@
         </div>
       </div>
       <div class="flow-bar reveal">
-        <span class="section-label">Flujo de contribución</span>
+        <div class="section-pill"><span class="section-pill-dot"></span><span>Flujo de contribución</span></div>
         <div class="flow-steps">
           <span class="flow-step flow-step--dark">1 · Fork del repo</span>
           <span class="flow-arrow">→</span>
@@ -1149,7 +1179,7 @@
   <div class="container">
     <section id="contacto" class="reveal">
       <div class="deco-line" style="margin-bottom:0.5rem;">
-        <span class="section-label">Contacto e Información</span>
+        <div class="section-pill"><span class="section-pill-dot"></span><span>Contacto e Información</span></div>
       </div>
       <h3 class="section-heading">
         ¿Dudas o consultas?<br />
