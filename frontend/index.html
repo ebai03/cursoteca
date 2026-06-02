@@ -1705,8 +1705,90 @@
     }
   }
 
+    function avatarGradient(login) {
+      let hash = 0;
+      for (let i = 0; i < login.length; i++) {
+        hash = login.charCodeAt(i) + ((hash << 5) - hash);
+      }
+      const h1 = Math.abs(hash) % 360;
+      const h2 = (h1 + 40) % 360;
+      return `linear-gradient(135deg, hsl(${h1},68%,56%), hsl(${h2},74%,44%))`;
+    }
+
+    async function loadContributors() {
+      const CACHE_KEY = 'aecci-contributors-v1';
+      const MAX_SHOWN = 24;
+      const grid = document.getElementById('avatar-grid');
+      const countEl = document.getElementById('contrib-count');
+      if (!grid) return;
+
+      let contributors;
+
+      const cached = sessionStorage.getItem(CACHE_KEY);
+      if (cached) {
+        try { contributors = JSON.parse(cached); } catch (e) { /* ignore */ }
+      }
+
+      if (!contributors) {
+        try {
+          const res = await fetch(
+            'https://api.github.com/repos/aecci/banco_examenes/contributors?per_page=100',
+            { headers: { Accept: 'application/vnd.github+json' } }
+          );
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          contributors = await res.json();
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify(contributors));
+        } catch (err) {
+          grid.innerHTML = '<p class="contrib-loading"><a href="https://github.com/aecci/banco_examenes/graphs/contributors" target="_blank" rel="noopener">Ver contribuidores en GitHub →</a></p>';
+          return;
+        }
+      }
+
+      const shown = contributors.slice(0, MAX_SHOWN);
+      const overflow = contributors.length - MAX_SHOWN;
+
+      grid.innerHTML = '';
+
+      shown.forEach(({ login, avatar_url }) => {
+        const a = document.createElement('a');
+        a.href = `https://github.com/${login}`;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.className = 'avatar-link';
+        a.title = login;
+
+        const img = document.createElement('img');
+        img.src = `${avatar_url}&s=96`;
+        img.alt = login;
+        img.className = 'avatar';
+        img.width = 48;
+        img.height = 48;
+        img.loading = 'lazy';
+        img.onerror = function () {
+          const div = document.createElement('div');
+          div.className = 'avatar avatar--initials';
+          div.style.background = avatarGradient(login);
+          div.textContent = login.slice(0, 2).toUpperCase();
+          a.replaceChild(div, this);
+        };
+
+        a.appendChild(img);
+        grid.appendChild(a);
+      });
+
+      if (overflow > 0) {
+        const badge = document.createElement('div');
+        badge.className = 'avatar avatar--initials avatar--overflow';
+        badge.textContent = `+${overflow}`;
+        grid.appendChild(badge);
+      }
+
+      if (countEl) countEl.textContent = contributors.length;
+    }
+
   // Load stats on page load
   loadStats();
+  loadContributors();
 
   // Update stats every 5 minutes
   setInterval(loadStats, 5 * 60 * 1000);
