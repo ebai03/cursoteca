@@ -363,6 +363,61 @@
     .btn-ghost:hover { background: var(--ink); color: var(--paper); transform: translateY(-1px); }
 
     /* ────────────────────────────────
+       CONTRIBUTOR GALLERY
+    ──────────────────────────────── */
+    .avatar-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+    .avatar-link { display: inline-block; text-decoration: none; }
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2.5px solid white;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.14);
+      transition: transform 0.15s;
+      cursor: pointer;
+      display: block;
+      object-fit: cover;
+    }
+    .avatar:hover { transform: translateY(-3px); }
+    .avatar--initials {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: white;
+      user-select: none;
+    }
+    .avatar--overflow {
+      background: var(--warm);
+      border-color: var(--rule);
+      color: var(--muted);
+    }
+    .contrib-count {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .contrib-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .contrib-loading {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
+    }
+    .contrib-loading a { color: var(--accent); text-decoration: none; }
+    .contrib-loading a:hover { text-decoration: underline; }
+
+    /* ────────────────────────────────
        HERO
     ──────────────────────────────── */
     .hero-wrapper {
@@ -1146,6 +1201,77 @@
       <div class="key">ESC</div><div class="key">TAB</div><div class="key">↵</div>
     </div>
   </div>
+
+  <!-- ── CONTRIBUIDORES ── -->
+  <div class="section-bg section-bg--tint">
+    <svg xmlns="http://www.w3.org/2000/svg" class="section-illus-left" viewBox="0 0 90 380" preserveAspectRatio="xMidYMid meet" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+      <!-- Git graph main branch -->
+      <line x1="42" y1="20" x2="42" y2="360"/>
+      <!-- Main branch commit nodes -->
+      <circle cx="42" cy="60"  r="6" fill="currentColor" stroke="none"/>
+      <circle cx="42" cy="150" r="6" fill="currentColor" stroke="none"/>
+      <circle cx="42" cy="240" r="6" fill="currentColor" stroke="none"/>
+      <circle cx="42" cy="320" r="6" fill="currentColor" stroke="none"/>
+      <!-- Feature branch 1 -->
+      <path d="M42,60 Q64,78 64,98 L64,130 Q64,148 42,150" fill="none"/>
+      <circle cx="64" cy="98"  r="4" fill="currentColor" stroke="none"/>
+      <circle cx="64" cy="115" r="4" fill="currentColor" stroke="none"/>
+      <!-- Feature branch 2 -->
+      <path d="M42,240 Q66,258 66,278 L66,304 Q66,318 42,320" fill="none"/>
+      <circle cx="66" cy="278" r="4" fill="currentColor" stroke="none"/>
+      <circle cx="66" cy="292" r="4" fill="currentColor" stroke="none"/>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" class="section-illus-right" viewBox="0 0 90 380" preserveAspectRatio="xMidYMid meet" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+      <!-- Network graph nodes -->
+      <circle cx="45" cy="50"  r="14"/>
+      <circle cx="18" cy="130" r="9"/>
+      <circle cx="72" cy="112" r="8"/>
+      <circle cx="28" cy="210" r="11"/>
+      <circle cx="66" cy="192" r="8"/>
+      <circle cx="45" cy="290" r="10"/>
+      <circle cx="18" cy="330" r="7"/>
+      <circle cx="72" cy="322" r="7"/>
+      <!-- Network graph edges -->
+      <line x1="45" y1="50"  x2="18" y2="130"/>
+      <line x1="45" y1="50"  x2="72" y2="112"/>
+      <line x1="18" y1="130" x2="28" y2="210"/>
+      <line x1="72" y1="112" x2="66" y2="192"/>
+      <line x1="28" y1="210" x2="66" y2="192"/>
+      <line x1="28" y1="210" x2="45" y2="290"/>
+      <line x1="66" y1="192" x2="45" y2="290"/>
+      <line x1="45" y1="290" x2="18" y2="330"/>
+      <line x1="45" y1="290" x2="72" y2="322"/>
+      <!-- Sparkle accents -->
+      <line x1="80" y1="52" x2="80" y2="60"/>
+      <line x1="76" y1="56" x2="84" y2="56"/>
+      <line x1="8"  y1="178" x2="8"  y2="186"/>
+      <line x1="4"  y1="182" x2="12" y2="182"/>
+    </svg>
+    <div class="container">
+      <section id="contribuidores" class="reveal">
+        <div class="deco-line">
+          <div class="section-pill"><span class="section-pill-dot"></span><span>Comunidad</span></div>
+        </div>
+        <h3 class="section-heading">
+          Hecho por estudiantes,<br />
+          <span class="section-subtitle">para estudiantes</span>
+        </h3>
+        <p class="section-sub">
+          Personas que han contribuido con material académico al repositorio de Cursoteca.
+        </p>
+        <div class="avatar-grid" id="avatar-grid" aria-label="Contribuidores del repositorio">
+          <p class="contrib-loading">Cargando contribuidores…</p>
+        </div>
+        <p class="contrib-count"><strong id="contrib-count">…</strong> estudiantes han contribuido con material académico</p>
+        <div class="contrib-cta">
+          <a href="https://github.com/aecci/banco_examenes/blob/master/CONTRIBUTING.md" target="_blank" rel="noopener" class="btn-primary">Contribuir en GitHub</a>
+          <a href="https://github.com/aecci/banco_examenes" target="_blank" rel="noopener" class="btn-ghost">Ver repositorio →</a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="container"><div class="deco-divider"><span>&lt;/&gt;</span></div></div>
 
   <!-- ── PROYECTOS ── -->
   <div class="container">
