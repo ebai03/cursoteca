@@ -399,6 +399,37 @@
     html.dark-theme .hero-illus-left,
     html.dark-theme .hero-illus-right { color: #abc8e3; opacity: 0.15; }
 
+    /* ── Section background wrappers ── */
+    .section-bg {
+      position: relative;
+      overflow: hidden;
+    }
+    .section-bg--tint { background: var(--section-tint); }
+
+    .section-illus-left,
+    .section-illus-right {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      height: 100%;
+      width: 90px;
+      pointer-events: none;
+      color: #0057cc;
+      opacity: 0.18;
+    }
+    .section-illus-left  { left: 0; }
+    .section-illus-right { right: 0; }
+
+    @media (max-width: 800px) {
+      .section-illus-left, .section-illus-right { display: none; }
+    }
+    @media (prefers-color-scheme: dark) {
+      .section-illus-left,
+      .section-illus-right { color: #abc8e3; opacity: 0.12; }
+    }
+    html.dark-theme .section-illus-left,
+    html.dark-theme .section-illus-right { color: #abc8e3; opacity: 0.12; }
+
     /* Staggered entrance */
     .stagger > * {
       opacity: 0;
@@ -1165,8 +1196,9 @@
   <div class="container"><div class="deco-divider"><span>&lt;/&gt;</span></div></div>
 
   <!-- ── ORGANIZACIÓN DE CURSOTECA ── -->
-  <div class="container">
-    <section id="org" class="reveal">
+  <div class="section-bg section-bg--tint">
+    <div class="container">
+      <section id="org" class="reveal">
       <div class="deco-line">
         <div class="section-pill"><span class="section-pill-dot"></span><span>Organización de Cursoteca</span></div>
       </div>
@@ -1286,13 +1318,15 @@
         </div>
       </div>
     </section>
+    </div>
   </div>
 
   <div class="container"><div class="deco-divider"><span>&lt;/&gt;</span></div></div>
 
   <!-- ── CONTACTO Y CRÉDITOS ── -->
-  <div class="container">
-    <section id="contacto" class="reveal">
+  <div class="section-bg section-bg--tint">
+    <div class="container">
+      <section id="contacto" class="reveal">
       <div class="deco-line" style="margin-bottom:0.5rem;">
         <div class="section-pill"><span class="section-pill-dot"></span><span>Contacto e Información</span></div>
       </div>
@@ -1333,6 +1367,7 @@
         </div>
       </div>
     </section>
+    </div>
   </div>
 
   <!-- ── FOOTER ── -->
