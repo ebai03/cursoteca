@@ -810,8 +810,8 @@
        WIP NOTICE BANNER
     ──────────────────────────────── */
     .wip-banner {
-      background: var(--warm);
-      border-bottom: 1px solid var(--rule);
+      background: var(--wip-bg);
+      border-bottom: 1px solid var(--wip-border);
       padding: 0.55rem 0;
       position: relative;
       z-index: 1;
@@ -830,7 +830,7 @@
     }
 
     .wip-badge {
-      background: var(--accent);
+      background: var(--wip-badge-bg);
       color: var(--paper);
       font-family: var(--font-mono);
       font-size: 0.65rem;
@@ -838,7 +838,7 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       padding: 0.15rem 0.5rem;
-      border-radius: 2px;
+      border-radius: var(--radius-pill);
       flex-shrink: 0;
     }
   </style>
