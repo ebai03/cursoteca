@@ -365,10 +365,39 @@
     /* ────────────────────────────────
        HERO
     ──────────────────────────────── */
+    .hero-wrapper {
+      background: var(--hero-bg);
+      position: relative;
+      overflow: hidden;
+    }
     .hero {
       padding-top: 5rem;
       padding-bottom: 5.5rem;
     }
+
+    .hero-illus-left,
+    .hero-illus-right {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      height: 100%;
+      width: 110px;
+      pointer-events: none;
+      color: #0057cc;
+      opacity: 0.22;
+    }
+    .hero-illus-left  { left: 0; }
+    .hero-illus-right { right: 0; }
+
+    @media (max-width: 800px) {
+      .hero-illus-left, .hero-illus-right { display: none; }
+    }
+    @media (prefers-color-scheme: dark) {
+      .hero-illus-left,
+      .hero-illus-right { color: #abc8e3; opacity: 0.15; }
+    }
+    html.dark-theme .hero-illus-left,
+    html.dark-theme .hero-illus-right { color: #abc8e3; opacity: 0.15; }
 
     /* Staggered entrance */
     .stagger > * {
@@ -433,13 +462,14 @@
       flex-wrap: wrap;
       gap: 2.5rem;
       padding-top: 2rem;
-      border-top: 1px solid var(--rule);
+      border-top: 1px solid rgba(0,102,204,0.15);
     }
 
     .hero-stat-num {
       font-family: var(--font-serif);
-      font-size: 1rem;
-      color: var(--ink);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent);
       display: block;
     }
 
@@ -948,8 +978,9 @@
   </div>
 
   <!-- ── HERO ── -->
-  <div class="container">
-    <section class="hero stagger">
+  <div class="hero-wrapper">
+    <div class="container">
+      <section class="hero stagger">
       <div class="section-pill">
         <span class="section-pill-dot"></span>
         <span>UCR · ECCI</span>
@@ -989,7 +1020,8 @@
       <p id="update" class="update" style="padding-top: 1rem;">
             <small></small>
       </p>
-    </section>
+      </section>
+    </div>
   </div>
 
   <!-- ── KEYBOARD STRIP DECORATION ── -->
