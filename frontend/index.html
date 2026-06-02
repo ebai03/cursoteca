@@ -202,6 +202,28 @@
       background: var(--rule);
     }
 
+    /* ── Decorative </> divider ── */
+    .deco-divider {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-block: 0.5rem;
+    }
+    .deco-divider::before,
+    .deco-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+    .deco-divider span {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      opacity: 0.65;
+    }
+
     /* ────────────────────────────────
        NAV — solid background, no transparency
     ──────────────────────────────── */
@@ -1047,7 +1069,7 @@
     </section>
   </div>
 
-  <div class="container"><hr class="rule" /></div>
+  <div class="container"><div class="deco-divider"><span>&lt;/&gt;</span></div></div>
 
   <!-- ── ORGANIZACIÓN DE CURSOTECA ── -->
   <div class="container">
@@ -1116,7 +1138,7 @@
   </div>
 
 
-  <div class="container"><hr class="rule" /></div>
+  <div class="container"><div class="deco-divider"><span>&lt;/&gt;</span></div></div>
 
   <!-- ── CONTRIBUIR A CURSOTECA ── -->
   <div class="container">
@@ -1173,7 +1195,7 @@
     </section>
   </div>
 
-  <div class="container"><hr class="rule" /></div>
+  <div class="container"><div class="deco-divider"><span>&lt;/&gt;</span></div></div>
 
   <!-- ── CONTACTO Y CRÉDITOS ── -->
   <div class="container">
