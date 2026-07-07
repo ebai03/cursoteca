@@ -702,6 +702,16 @@
       margin-bottom: 1rem;
     }
 
+    .structure-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.75rem;
+    }
+    .structure-grid > div { min-width: 0; }
+    @media (max-width: 720px) {
+      .structure-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
     .code-container {
       background: var(--card-bg);
       border: 1px solid var(--rule);
@@ -825,21 +835,6 @@
     .footer-social a:hover { color: var(--accent); }
     .footer-social svg { width: 20px; height: 20px; }
 
-    /* ── Announcement bar (temporary campaign) ── */
-    .announce { background: var(--warm); border-bottom: var(--card-bd, 1px solid var(--rule)); }
-    .announce-inner {
-      max-width: 1100px; margin: 0 auto;
-      display: flex; align-items: center; gap: 0.75rem;
-      padding: 0.5rem 1.25rem; font-size: 0.85rem;
-    }
-    .announce-text { flex: 1; min-width: 0; }
-    .announce-cta { font-weight: 700; color: var(--accent); text-decoration: none; white-space: nowrap; }
-    .announce-dismiss {
-      background: none; border: none; cursor: pointer;
-      font-size: 1.2rem; line-height: 1; color: var(--muted); padding: 0 0.25rem;
-    }
-    @media (max-width: 560px) { .announce-text { font-size: 0.78rem; } }
-
     /* ── Collapsible Cursoteca detail ── */
     .cursoteca-detail {
       background: var(--card-bg);
@@ -856,7 +851,8 @@
     }
     .cursoteca-detail > summary::-webkit-details-marker { display: none; }
     .cursoteca-detail > summary::after {
-      content: "▸"; color: var(--muted); transition: transform 0.2s;
+      content: "▸"; color: var(--accent); font-size: 1.5rem; line-height: 1;
+      transition: transform 0.2s; flex-shrink: 0;
     }
     .cursoteca-detail[open] > summary::after { transform: rotate(90deg); }
     .cursoteca-detail > summary:hover { color: var(--accent); }
@@ -917,35 +913,6 @@
       text-decoration: none;
     }
     .contrib-card a:hover { text-decoration: underline; }
-
-    /* Flow bar */
-    .flow-bar {
-      background: var(--card-bg);
-      border: 1px solid var(--rule);
-      border-radius: 3px;
-      padding: 1.4rem 1.6rem;
-    }
-
-    .flow-bar .section-label { margin-bottom: 1rem; }
-
-    .flow-steps {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .flow-step {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      padding: 0.4rem 0.85rem;
-      border-radius: 2px;
-    }
-
-    .flow-step--dark   { background: var(--ink);    color: var(--paper); }
-    .flow-step--light  { background: var(--warm);   color: var(--ink); border: 1px solid var(--rule); }
-    .flow-step--accent { background: var(--accent); color: var(--paper); }
-    .flow-arrow { color: var(--muted); font-size: 0.85rem; }
 
     /* ────────────────────────────────
        CONTACT & CREDITS
@@ -1185,7 +1152,6 @@
       </span>
       <ul class="nav-links">
         <li class="nav-text-link"><a href="#comunidad">Comunidad</a></li>
-        <li class="nav-text-link"><a href="#proyectos">Proyectos</a></li>
         <li class="nav-text-link"><a href="#contacto">Contacto</a></li>
         <li>
           <a href="/cursos/" class="btn-primary">Cursoteca →</a>
@@ -1211,15 +1177,6 @@
       </ul>
     </div>
   </nav>
-
-  <!-- ── ANNOUNCEMENT BAR (temporary; edit data-announce-id + text, or delete this block when the campaign ends) ── -->
-  <div class="announce" id="announce" data-announce-id="semana-u-2026" hidden>
-    <div class="announce-inner">
-      <span class="announce-text">📢 ¡Hacé tu primer pedido de camisa / tote bag para la Semana U!</span>
-      <a class="announce-cta" href="https://linktr.ee/aecci_ucr" target="_blank" rel="noopener">Hacer pedido →</a>
-      <button class="announce-dismiss" id="announce-dismiss" type="button" aria-label="Cerrar anuncio">×</button>
-    </div>
-  </div>
 
   <!-- ── WIP NOTICE ── -->
   <div class="wip-banner" role="status">
@@ -1357,7 +1314,7 @@
           </span>
         </a>
         <a class="hub-tile" href="https://discord.com/invite/gfm5HUt7wy" target="_blank" rel="noopener">
-          <span class="hub-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 16l-2 4 5-2M19 16l2 4-5-2M4 6l4-1M20 6l-4-1M6 5c-1.5 3-2 6-1.5 11M18 5c1.5 3 2 6 1.5 11"/><circle cx="9" cy="12" r="1.2"/><circle cx="15" cy="12" r="1.2"/></svg></span>
+          <span class="hub-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.369a19.79 19.79 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.6 12.6 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.74 19.74 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.2 14.2 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.1 13.1 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.3 12.3 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.84 19.84 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.331c-1.183 0-2.157-1.086-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.332-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.086-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.332-.946 2.418-2.157 2.418z"/></svg></span>
           <span class="hub-tile-body">
             <span class="hub-tile-title">Discord</span>
             <span class="hub-tile-sub">Chat de la comunidad</span>
@@ -1494,51 +1451,6 @@
 
   <div class="container"><div class="deco-divider"><span>&lt;/&gt;</span></div></div>
 
-  <!-- ── PROYECTOS ── -->
-  <div class="container">
-    <section id="proyectos" class="reveal">
-      <h3 class="section-heading">
-        Nuestras iniciativas<br />
-        <span class="section-subtitle">herramientas para la comunidad</span>
-      </h3>
-      <p class="section-sub">
-        Desde Cursoteca hasta otras herramientas educativas, nuestros proyectos están diseñados 
-        para mejorar la experiencia de aprendizaje en la Escuela de Computación.
-      </p>
-      <div class="contrib-grid">
-        <div class="contrib-card reveal">
-          <div class="contrib-icon-wrap">
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-          </div>
-          <span class="contrib-badge">PROYECTO · 01</span>
-          <h4>Cursoteca</h4>
-          <p>Archivo histórico colaborativo de material académico: diapositivas, exámenes, quices y recursos de cursos anteriores.</p>
-          <a href="/cursos/">Ver Cursoteca →</a>
-        </div>
-        <div class="contrib-card reveal">
-          <div class="contrib-icon-wrap">
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7z"/></svg>
-          </div>
-          <span class="contrib-badge">PROYECTO · 02</span>
-          <h4>Comunidad</h4>
-          <p>Espacios de conexión, eventos, talleres y actividades para fortalecer la comunidad estudiantil.</p>
-          <a href="#contacto">Saber más →</a>
-        </div>
-        <div class="contrib-card reveal">
-          <div class="contrib-icon-wrap">
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L15.09 8.26H22L17.82 12.74H19.91L12 19.26L4.09 12.74H6.18L2 8.26H8.91L12 2Z"/></svg>
-          </div>
-          <span class="contrib-badge">PROYECTO · 03</span>
-          <h4>Recursos Abiertos</h4>
-          <p>Herramientas, guías y tutoriales desarrollados por y para estudiantes de Computación.</p>
-          <a href="#contacto">Explorar →</a>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <div class="container"><div class="deco-divider"><span>&lt;/&gt;</span></div></div>
-
   <!-- ── ORGANIZACIÓN DE CURSOTECA ── -->
   <div class="section-bg section-bg--tint">
     <svg xmlns="http://www.w3.org/2000/svg" class="section-illus-left" viewBox="0 0 90 380" preserveAspectRatio="xMidYMid meet" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
@@ -1575,22 +1487,25 @@
     <div class="container">
       <section id="org" class="reveal">
       <h3 class="section-heading">
-        Estructura del repositorio<br />
-        <span class="section-subtitle">por año académico y ciclo</span>
+        Cursoteca: el banco de exámenes de la ECCI<br />
+        <span class="section-subtitle">y todo el material de cada curso</span>
       </h3>
       <p class="section-sub">
-        Los archivos están organizados en 5 niveles jerárquicos, desde lo general (año de carrera)
-        hasta lo específico (material de un semestre concreto).
+        Cursoteca es, en esencia, un banco de exámenes colaborativo — ampliado para incluir también
+        cartas al estudiante, diapositivas, quices y demás material de cursos anteriores. Todo está
+        organizado por año académico y ciclo, desde lo general hasta el material de un semestre concreto.
       </p>
 
       <details class="cursoteca-detail" open>
-        <summary>Estructura del repositorio</summary>
+        <summary>Ver la estructura del repositorio</summary>
         <div class="cursoteca-detail-body">
-      <!-- Structure overview visualization -->
+      <!-- Structure overview: general tree + per-course content in one square -->
       <div class="structure-example reveal">
-        <p class="structure-title">Estructura general del repositorio:</p>
         <div class="code-container">
-          <pre class="code-block"><code>data/
+          <div class="structure-grid">
+            <div>
+              <p class="structure-title">Estructura general del repositorio:</p>
+              <pre class="code-block"><code>data/
 ├── Año_1
 │   ├── Ciclo_1
 │   │   ├── X_introduccion_a_la_computacion_CI0110
@@ -1607,18 +1522,13 @@
 │       └── ... (cursos)
 └── Año_3, Año_4, Optativas
     └── ... (estructura similar)</code></pre>
-          <p class="structure-note"><strong>Nota:</strong> Las carpetas prefijadas con <code class="tag">X_</code> son <strong>placeholders temporales</strong> sin contenido. Aparecen aquí para mostrar la estructura completa del plan de estudios.</p>
-        </div>
-      </div>
-
-      <!-- Material inside a semester -->
-      <div class="structure-example reveal">
-        <p class="structure-title">Contenido dentro de una instancia de curso:</p>
-        <div class="code-container">
-          <p class="code-path">
-            <strong>Ruta ejemplo:</strong> <code>data/Año_1/Ciclo_2/Programacion_I_CI0112/2025_Semestre_I/</code>
-          </p>
-          <pre class="code-block"><code>2025_Semestre_I/
+            </div>
+            <div>
+              <p class="structure-title">Contenido dentro de una instancia de curso:</p>
+              <p class="code-path">
+                <strong>Ruta ejemplo:</strong> <code>data/Año_1/Ciclo_2/Programacion_I_CI0112/2025_Semestre_I/</code>
+              </p>
+              <pre class="code-block"><code>2025_Semestre_I/
 ├── Carta_al_Estudiante_CI0112_I_2025.pdf
 ├── 01_Material/
 │   ├── Tema_01_Punteros.pdf
@@ -1632,6 +1542,9 @@
     ├── Parcial_1_Enunciado.pdf
     ├── Parcial_2_Enunciado.pdf
     └── Final_Enunciado.pdf</code></pre>
+            </div>
+          </div>
+          <p class="structure-note"><strong>Nota:</strong> Las carpetas prefijadas con <code class="tag">X_</code> son <strong>placeholders temporales</strong> sin contenido. Aparecen aquí para mostrar la estructura completa del plan de estudios.</p>
         </div>
       </div>
         </div>
@@ -1670,18 +1583,7 @@
           <p>Si un archivo es demasiado grande para añadirse a Git, contactá a un administrador directamente por correo electrónico: <a href="mailto:cursoteca@aecci-ucr.com">cursoteca@aecci-ucr.com</a></p>
         </div>
       </div>
-      <div class="flow-bar reveal">
-        <div class="flow-steps">
-          <span class="flow-step flow-step--dark">1 · Fork del repo</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-step flow-step--light">2 · Agregás el material</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-step flow-step--light">3 · Abrís un Pull Request</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-step flow-step--accent">4 · Se publica</span>
-        </div>
-      </div>
-          <p style="margin-top:1rem;"><a href="https://github.com/aecci/banco_examenes/blob/master/CONTRIBUTING.md" target="_blank" rel="noopener">Guía completa de contribución en GitHub →</a></p>
+          <p style="margin-top:1rem;"><a style="color: var(--ink); text-decoration: underline;" href="https://github.com/aecci/banco_examenes/blob/master/CONTRIBUTING.md" target="_blank" rel="noopener">Guía completa de contribución en GitHub (link)</a></p>
         </div>
       </details>
     </section>
@@ -1788,12 +1690,11 @@
           <p class="footer-tagline">Asociación de Estudiantes de Computación e Informática</p>
           <div class="footer-social">
             <a href="https://www.instagram.com/aecci_ucr" target="_blank" rel="noopener" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
-            <a href="https://discord.com/invite/gfm5HUt7wy" target="_blank" rel="noopener" aria-label="Discord"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 16l-2 4 5-2M19 16l2 4-5-2M6 5c-1.5 3-2 6-1.5 11M18 5c1.5 3 2 6 1.5 11"/><circle cx="9" cy="12" r="1.2"/><circle cx="15" cy="12" r="1.2"/></svg></a>
+            <a href="https://discord.com/invite/gfm5HUt7wy" target="_blank" rel="noopener" aria-label="Discord"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.369a19.79 19.79 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.6 12.6 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.74 19.74 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.2 14.2 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.1 13.1 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.3 12.3 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.84 19.84 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.331c-1.183 0-2.157-1.086-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.332-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.086-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.332-.946 2.418-2.157 2.418z"/></svg></a>
             <a href="https://github.com/aecci/banco_examenes" target="_blank" rel="noopener" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 8l-4 4 4 4M15 8l4 4-4 4"/></svg></a>
           </div>
         </div>
         <ul class="footer-nav">
-          <li><a href="#proyectos">Proyectos</a></li>
           <li><a href="/cursos/">Cursoteca</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
@@ -1869,20 +1770,6 @@
 
     // Initialize on page load
     initializeTheme();
-
-    // Announcement bar: show unless dismissed for this id.
-    (function initAnnounce() {
-      const el = document.getElementById('announce');
-      if (!el) return;
-      const id = el.getAttribute('data-announce-id');
-      if (localStorage.getItem('announce-dismissed:' + id)) return;
-      el.hidden = false;
-      const btn = document.getElementById('announce-dismiss');
-      if (btn) btn.addEventListener('click', () => {
-        el.hidden = true;
-        localStorage.setItem('announce-dismissed:' + id, '1');
-      });
-    })();
 
     async function loadStats() {
     try {
