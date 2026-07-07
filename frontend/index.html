@@ -867,6 +867,28 @@
     }
     @media (max-width: 560px) { .announce-text { font-size: 0.78rem; } }
 
+    /* ── Collapsible Cursoteca detail ── */
+    .cursoteca-detail {
+      background: var(--card-bg);
+      border: var(--card-bd, 1px solid var(--rule));
+      border-radius: var(--radius-card);
+      box-shadow: var(--card-depth, none);
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+    .cursoteca-detail > summary {
+      cursor: pointer; list-style: none;
+      display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
+      padding: 0.9rem 1.1rem; font-weight: 700; color: var(--ink);
+    }
+    .cursoteca-detail > summary::-webkit-details-marker { display: none; }
+    .cursoteca-detail > summary::after {
+      content: "▸"; color: var(--muted); transition: transform 0.2s;
+    }
+    .cursoteca-detail[open] > summary::after { transform: rotate(90deg); }
+    .cursoteca-detail > summary:hover { color: var(--accent); }
+    .cursoteca-detail-body { padding: 0 1.1rem 1.1rem; }
+
     /* Top accent line — gray for all cards, gradient for the first in each grid */
     .contrib-card::before {
       content: '';
@@ -1601,6 +1623,9 @@
         hasta lo específico (material de un semestre concreto).
       </p>
 
+      <details class="cursoteca-detail" open>
+        <summary>Estructura del repositorio</summary>
+        <div class="cursoteca-detail-body">
       <!-- Structure overview visualization -->
       <div class="structure-example reveal">
         <p class="structure-title">Estructura general del repositorio:</p>
@@ -1649,26 +1674,16 @@
     └── Final_Enunciado.pdf</code></pre>
         </div>
       </div>
-    </section>
-  </div>
+        </div>
+      </details>
 
-
-  <div class="container"><div class="deco-divider"><span>&lt;/&gt;</span></div></div>
-
-  <!-- ── CONTRIBUIR A CURSOTECA ── -->
-  <div class="container">
-    <section id="contribuir-cursoteca" class="reveal">
-      <div class="deco-line">
-        <div class="section-pill"><span class="section-pill-dot"></span><span>Contribuir a Cursoteca</span></div>
-      </div>
-      <h3 class="section-heading">
-        ¿Tenés material que<br />
-        <span class="section-subtitle">podría ayudar a otros?</span>
-      </h3>
-      <p class="section-sub">
-        Si tenés material académico que querés compartir — o si encontraste información
-        que debe modificarse o censurarse — podés contribuir directamente al repositorio.
-      </p>
+      <details class="cursoteca-detail">
+        <summary>¿Cómo contribuir?</summary>
+        <div class="cursoteca-detail-body">
+          <p class="section-sub">
+            Si tenés material académico que querés compartir — o si encontraste información
+            que debe modificarse o censurarse — podés contribuir directamente al repositorio.
+          </p>
       <div class="contrib-grid">
         <div class="contrib-card reveal">
           <div class="contrib-icon-wrap">
@@ -1696,7 +1711,6 @@
         </div>
       </div>
       <div class="flow-bar reveal">
-        <div class="section-pill"><span class="section-pill-dot"></span><span>Flujo de contribución</span></div>
         <div class="flow-steps">
           <span class="flow-step flow-step--dark">1 · Fork del repo</span>
           <span class="flow-arrow">→</span>
@@ -1707,8 +1721,11 @@
           <span class="flow-step flow-step--accent">4 · Se publica</span>
         </div>
       </div>
+          <p style="margin-top:1rem;"><a href="https://github.com/aecci/banco_examenes/blob/master/CONTRIBUTING.md" target="_blank" rel="noopener">Guía completa de contribución en GitHub →</a></p>
+        </div>
+      </details>
     </section>
-    </div>
+  </div>
   </div>
 
   <div class="container"><div class="deco-divider"><span>&lt;/&gt;</span></div></div>
