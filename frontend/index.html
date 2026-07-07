@@ -231,33 +231,6 @@
       display: block;
     }
 
-    /* ── Section pill badge ── */
-    .section-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      background: color-mix(in srgb, var(--accent) 8%, transparent);
-      border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
-      border-radius: var(--radius-pill);
-      padding: 0.22rem 0.7rem;
-      margin-bottom: 0.75rem;
-    }
-    .section-pill-dot {
-      width: 5px;
-      height: 5px;
-      background: var(--accent);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .section-pill span:last-child {
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      font-weight: 600;
-      color: var(--accent);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
     /* ── Decorative divider line ── */
     .deco-line {
       display: flex;
@@ -385,7 +358,7 @@
       justify-content: center;
       width: 40px;
       height: 40px;
-      border-radius: 2px;
+      border-radius: 50%;
       color: var(--muted);
       transition: color 0.15s, background-color 0.15s;
     }
@@ -533,7 +506,7 @@
     .hero-illus-left  { left: 0; }
     .hero-illus-right { right: 0; }
 
-    @media (max-width: 800px) {
+    @media (max-width: 1100px) {
       .hero-illus-left, .hero-illus-right { display: none; }
     }
     @media (prefers-color-scheme: dark) {
@@ -564,7 +537,7 @@
     .section-illus-left  { left: 0; }
     .section-illus-right { right: 0; }
 
-    @media (max-width: 800px) {
+    @media (max-width: 1100px) {
       .section-illus-left, .section-illus-right { display: none; }
     }
     @media (prefers-color-scheme: dark) {
@@ -1321,10 +1294,6 @@
     </svg>
     <div class="container">
       <section class="hero stagger">
-      <div class="section-pill">
-        <span class="section-pill-dot"></span>
-        <span>UCR · ECCI</span>
-      </div>
       <h1>AECCI</h1>
       <h2>Asociación de Estudiantes de<br />Computación e Informática</h2>
       <p class="hero-desc">
@@ -1504,9 +1473,6 @@
     </svg>
     <div class="container">
       <section id="contribuidores" class="reveal">
-        <div class="deco-line">
-          <div class="section-pill"><span class="section-pill-dot"></span><span>Comunidad</span></div>
-        </div>
         <h3 class="section-heading">
           Hecho por estudiantes,<br />
           <span class="section-subtitle">para estudiantes</span>
@@ -1531,9 +1497,6 @@
   <!-- ── PROYECTOS ── -->
   <div class="container">
     <section id="proyectos" class="reveal">
-      <div class="deco-line">
-        <div class="section-pill"><span class="section-pill-dot"></span><span>Proyectos Destacados</span></div>
-      </div>
       <h3 class="section-heading">
         Nuestras iniciativas<br />
         <span class="section-subtitle">herramientas para la comunidad</span>
@@ -1611,9 +1574,6 @@
     </svg>
     <div class="container">
       <section id="org" class="reveal">
-      <div class="deco-line">
-        <div class="section-pill"><span class="section-pill-dot"></span><span>Organización de Cursoteca</span></div>
-      </div>
       <h3 class="section-heading">
         Estructura del repositorio<br />
         <span class="section-subtitle">por año académico y ciclo</span>
@@ -1779,9 +1739,6 @@
     </svg>
     <div class="container">
       <section id="contacto" class="reveal">
-      <div class="deco-line" style="margin-bottom:0.5rem;">
-        <div class="section-pill"><span class="section-pill-dot"></span><span>Contacto e Información</span></div>
-      </div>
       <h3 class="section-heading">
         ¿Dudas o consultas?<br />
         <span style="font-family:var(--font-serif);font-style:italic;color:var(--muted);">Estamos disponibles</span>
