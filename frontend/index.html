@@ -579,6 +579,19 @@
       line-height: 1.06;
       color: var(--ink);
       margin-bottom: 0.75rem;
+      /* shrink to the text width so the accent bar underlines the whole word, not the column */
+      display: inline-block;
+    }
+    /* Accent keycap bar: the letters stay clean dark ink — a brand-colored rule underlines the
+       title. Orange keycap highlight in light, baby-blue accent in dark; both pop off the canvas. */
+    .hero h1::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 0.28rem;
+      margin-top: 0.7rem;
+      border-radius: 3px;
+      background: var(--highlight, var(--accent));
     }
 
     .hero h2 {
@@ -586,7 +599,7 @@
       font-style: italic;
       font-size: clamp(1.7rem, 4.5vw, 2.8rem);
       line-height: 1.2;
-      color: var(--muted);
+      color: var(--ink);
       margin-bottom: 1.75rem;
     }
 
@@ -639,6 +652,18 @@
       line-height: 1.15;
       margin-top: 1.25rem;
       margin-bottom: 0.75rem;
+      /* shrink to the text width so the accent bar spans the heading, matching the hero title */
+      display: inline-block;
+    }
+    /* Accent keycap bar under each section heading — matches the hero title rule. */
+    .section-heading::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 0.28rem;
+      margin-top: 0.7rem;
+      border-radius: 3px;
+      background: var(--highlight, var(--accent));
     }
 
     .section-sub {
@@ -753,12 +778,6 @@
 
     .structure-note strong {
       color: var(--ink);
-    }
-
-    .section-subtitle {
-      font-family: var(--font-serif);
-      font-style: italic;
-      color: var(--muted);
     }
 
     /* ────────────────────────────────
@@ -1297,10 +1316,7 @@
   -->
   <div class="container">
     <section id="comunidad" class="reveal">
-      <h3 class="section-heading">
-        Sumate a la comunidad<br />
-        <span class="section-subtitle">donde ya estamos</span>
-      </h3>
+      <h3 class="section-heading">Sumate a la comunidad</h3>
       <p class="section-sub">
         AECCI vive en varios espacios. Seguinos, conversá y participá — elegí el canal que prefieras.
       </p>
@@ -1430,10 +1446,7 @@
     </svg>
     <div class="container">
       <section id="contribuidores" class="reveal">
-        <h3 class="section-heading">
-          Hecho por estudiantes,<br />
-          <span class="section-subtitle">para estudiantes</span>
-        </h3>
+        <h3 class="section-heading">Hecho por estudiantes</h3>
         <p class="section-sub">
           Personas que han contribuido con material académico al repositorio de Cursoteca.
         </p>
@@ -1486,10 +1499,7 @@
     </svg>
     <div class="container">
       <section id="org" class="reveal">
-      <h3 class="section-heading">
-        Cursoteca: el banco de exámenes de la ECCI<br />
-        <span class="section-subtitle">y todo el material de cada curso</span>
-      </h3>
+      <h3 class="section-heading">Banco de exámenes</h3>
       <p class="section-sub">
         Cursoteca es, en esencia, un banco de exámenes colaborativo — ampliado para incluir también
         cartas al estudiante, diapositivas, quices y demás material de cursos anteriores. Todo está
@@ -1641,10 +1651,7 @@
     </svg>
     <div class="container">
       <section id="contacto" class="reveal">
-      <h3 class="section-heading">
-        ¿Dudas o consultas?<br />
-        <span style="font-family:var(--font-serif);font-style:italic;color:var(--muted);">Estamos disponibles</span>
-      </h3>
+      <h3 class="section-heading">¿Dudas o consultas?</h3>
       <div class="contact-grid">
         <div class="reveal">
           <h4>Contacto</h4>
