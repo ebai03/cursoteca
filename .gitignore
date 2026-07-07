@@ -7,4 +7,5 @@ config/filebrowser.db
 config/filebrowse_config/
 config/.env
 frontend/stats.json
+frontend/community.json
 data/

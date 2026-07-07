@@ -19,34 +19,84 @@
     html { scroll-behavior: smooth; font-size: 16px; }
 
     :root {
-      /* Light theme (default) */
-      --ink:          #2c2c2c;
-      --paper:        #f8f9fa;
-      --warm:         #f0f3f5;
-      --accent:       #0066cc;
-      --accent-dark:  #004fa3;
-      --accent-light: #3d8fe6;
-      --muted:        #666666;
-      --rule:         #dfe5e9;
-      --card-bg:      #ffffff;
+      /* Light theme (default) — logo palette: baby-blue canvas, off-white keycaps, dark ink */
+      --ink:          #1E252C;
+      --paper:        #8AB9F1;
+      --warm:         #E5E4E2;
+      --accent:       #1E252C;
+      --accent-dark:  #050505;
+      --accent-light: #E5E4E2;
+      --muted:        #37424D;
+      --rule:         #CBD4DE;
+      --card-bg:      #F6F6F5;
+      /* keycap interactive surfaces — light only; dark theme has no such tokens and
+         falls back to the var() defaults in the component rules, staying unchanged.
+         Primary keycap = orange highlight face; secondary keycap = off-white face. */
+      --btn-face:        #e29950;
+      --btn-face-hover:  #CE9A5E;
+      --btn2-face:       #E5E4E2;
+      --btn2-face-hover: #F6F6F5;
+      --btn-ink:         #1E252C;
+      --btn-depth:       inset 0 0 0 1.5px #1E252C, 0 3px 0 #1E252C;
+      --ghost-bd:        none;
+      --highlight:       #e29950;
+      --highlight-dark:  #693d11;
+      --highlight-ink:   #1E252C;
+      /* keycap depth for cards — light only; dark resets to initial so cards stay flat/soft */
+      --card-bd:          1.5px solid #1E252C;
+      --card-depth:       0 4px 0 #1E252C;
+      --card-depth-hover: 0 4px 0 #1E252C;
+      --card-lift:        translateY(-2px);
+      --card-accent-line: var(--rule);
+      --link-decoration: underline;
       --nav-height:   68px;
       --font-serif:   'Poppins', system-ui, sans-serif;
       --font-sans:    'Inter', system-ui, sans-serif;
       --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+      --hero-bg:      #9CC3F3;
+      --section-tint: rgba(255, 255, 255, 0.35);
+      --wip-bg:       #EAD6BC;
+      --wip-border:   #D4B183;
+      --wip-badge-bg: #e29950;
+      --radius-pill:  20px;
+      --radius-card:  10px;
+      --radius-key:   7px;
     }
 
     /* Dark theme */
     @media (prefers-color-scheme: dark) {
       :root {
-        --ink:          #ccc;
-        --paper:        #0f1419;
-        --warm:         #1a2332;
-        --accent:       #abc8e3;
-        --accent-dark:  #8fb3d9;
-        --accent-light: #d4e4f7;
-        --muted:        #999999;
-        --rule:         #2a3544;
-        --card-bg:      #151d27;
+        --ink:          #E5E4E2;
+        --paper:        #1E252C;
+        --warm:         #29323B;
+        --accent:       #8AB9F1;
+        --accent-dark:  #6FA3E4;
+        --accent-light: #ADCCF6;
+        --muted:        #909294;
+        --rule:         #333C45;
+        --card-bg:      #242C34;
+        --hero-bg:      #1A2431;
+        --section-tint: #232C36;
+        --wip-bg:       #2a1f00;
+        --wip-border:   #5a3a00;
+        --wip-badge-bg: #c87a10;
+        /* undo the light-only keycap/link/highlight tokens so components fall back to the dark accent style */
+        --btn-face: initial;
+        --btn-face-hover: initial;
+        --btn2-face: initial;
+        --btn2-face-hover: initial;
+        --btn-ink: initial;
+        --btn-depth: initial;
+        --ghost-bd: initial;
+        --highlight: initial;
+        --highlight-dark: initial;
+        --highlight-ink: initial;
+        --card-bd:          1.5px solid #12171C;
+        --card-depth:       0 4px 0 #12171C;
+        --card-depth-hover: 0 4px 0 #12171C;
+        --card-lift:        translateY(-2px);
+        --card-accent-line: initial;
+        --link-decoration: initial;
       }
 
       body::before {
@@ -56,15 +106,37 @@
 
     /* Dark theme class (manual toggle) */
     html.dark-theme {
-      --ink:          #ccc;
-      --paper:        #0f1419;
-      --warm:         #1a2332;
-      --accent:       #abc8e3;
-      --accent-dark:  #8fb3d9;
-      --accent-light: #d4e4f7;
-      --muted:        #999999;
-      --rule:         #2a3544;
-      --card-bg:      #151d27;
+      --ink:          #E5E4E2;
+      --paper:        #1E252C;
+      --warm:         #29323B;
+      --accent:       #8AB9F1;
+      --accent-dark:  #6FA3E4;
+      --accent-light: #ADCCF6;
+      --muted:        #909294;
+      --rule:         #333C45;
+      --card-bg:      #242C34;
+      --hero-bg:      #1A2431;
+      --section-tint: #232C36;
+      --wip-bg:       #2a1f00;
+      --wip-border:   #5a3a00;
+      --wip-badge-bg: #c87a10;
+      /* undo the light-only keycap/link/highlight tokens so components fall back to the dark accent style */
+      --btn-face: initial;
+      --btn-face-hover: initial;
+      --btn2-face: initial;
+      --btn2-face-hover: initial;
+      --btn-ink: initial;
+      --btn-depth: initial;
+      --ghost-bd: initial;
+      --highlight: initial;
+      --highlight-dark: initial;
+      --highlight-ink: initial;
+      --card-bd:          1.5px solid #12171C;
+      --card-depth:       0 4px 0 #12171C;
+      --card-depth-hover: 0 4px 0 #12171C;
+      --card-lift:        translateY(-2px);
+      --card-accent-line: initial;
+      --link-decoration: initial;
     }
 
     html.dark-theme body::before {
@@ -73,15 +145,39 @@
 
     /* Light theme class — overrides system dark preference when user manually selects light */
     html.light-theme {
-      --ink:          #2c2c2c;
-      --paper:        #f8f9fa;
-      --warm:         #f0f3f5;
-      --accent:       #0066cc;
-      --accent-dark:  #004fa3;
-      --accent-light: #3d8fe6;
-      --muted:        #666666;
-      --rule:         #dfe5e9;
-      --card-bg:      #ffffff;
+      --ink:          #1E252C;
+      --paper:        #8AB9F1;
+      --warm:         #E5E4E2;
+      --accent:       #1E252C;
+      --accent-dark:  #050505;
+      --accent-light: #E5E4E2;
+      --muted:        #37424D;
+      --rule:         #CBD4DE;
+      --card-bg:      #F6F6F5;
+      --btn-face:        #e29950;
+      --btn-face-hover:  #CE9A5E;
+      --btn2-face:       #E5E4E2;
+      --btn2-face-hover: #F6F6F5;
+      --btn-ink:         #1E252C;
+      --btn-depth:       inset 0 0 0 1.5px #1E252C, 0 3px 0 #1E252C;
+      --ghost-bd:        none;
+      --highlight:       #e29950;
+      --highlight-dark:  #693d11;
+      --highlight-ink:   #1E252C;
+      --card-bd:          1.5px solid #1E252C;
+      --card-depth:       0 4px 0 #1E252C;
+      --card-depth-hover: 0 4px 0 #1E252C;
+      --card-lift:        translateY(-2px);
+      --card-accent-line: var(--rule);
+      --link-decoration: underline;
+      --hero-bg:      #9CC3F3;
+      --section-tint: rgba(255, 255, 255, 0.35);
+      --wip-bg:       #EAD6BC;
+      --wip-border:   #D4B183;
+      --wip-badge-bg: #e29950;
+      --radius-pill:  20px;
+      --radius-card:  10px;
+      --radius-key:   7px;
     }
 
     html.light-theme body::before {
@@ -149,6 +245,28 @@
       background: var(--rule);
     }
 
+    /* ── Decorative </> divider ── */
+    .deco-divider {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-block: 0.5rem;
+    }
+    .deco-divider::before,
+    .deco-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+    .deco-divider span {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      opacity: 0.65;
+    }
+
     /* ────────────────────────────────
        NAV — solid background, no transparency
     ──────────────────────────────── */
@@ -180,13 +298,26 @@
       height: 50px;
     }
 
-    .nav-logo svg {
-      height: 42.5px;
-      width: auto;
-      max-width: 153px;
+    .nav-logo svg,
+    .nav-logo img {
+      display: block;
+      width: 168px;
+      height: auto;
       outline: none;
       text-decoration: none;
     }
+
+    /* Header logo: colored keycap logo on light, off-white wordmark on dark */
+    .nav-logo-color { display: block; }
+    .nav-logo-mono  { display: none; }
+    @media (prefers-color-scheme: dark) {
+      .nav-logo-color { display: none; }
+      .nav-logo-mono  { display: block; }
+    }
+    html.dark-theme  .nav-logo-color { display: none; }
+    html.dark-theme  .nav-logo-mono  { display: block; }
+    html.light-theme .nav-logo-color { display: block; }
+    html.light-theme .nav-logo-mono  { display: none; }
 
     .nav-links {
       display: flex;
@@ -205,12 +336,12 @@
     .nav-links a:hover { color: var(--accent); }
 
     .nav-links .btn-primary {
-      color: var(--paper);
+      color: var(--btn-ink, var(--paper));
     }
 
     .nav-links .btn-primary:hover {
-      color: var(--paper);
-      background: var(--accent-dark); transform: translateY(-1px); 
+      color: var(--btn-ink, var(--paper));
+      background: var(--btn-face-hover, var(--accent-dark)); transform: translateY(-1px);
     }
 
     @media (max-width: 640px) {
@@ -227,7 +358,7 @@
       justify-content: center;
       width: 40px;
       height: 40px;
-      border-radius: 2px;
+      border-radius: 50%;
       color: var(--muted);
       transition: color 0.15s, background-color 0.15s;
     }
@@ -253,47 +384,168 @@
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
-      background: var(--accent);
-      color: var(--paper);
+      background: var(--btn-face, var(--accent));
+      color: var(--btn-ink, var(--paper));
       font-family: var(--font-sans);
       font-weight: 500;
       font-size: 0.9rem;
       padding: 0.65rem 1.4rem;
-      border-radius: 2px;
+      border-radius: var(--radius-pill);
       text-decoration: none;
       border: none;
+      box-shadow: var(--btn-depth, none);
       cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.15s;
       white-space: nowrap;
     }
-    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .btn-primary:hover { background: var(--btn-face-hover, var(--accent-dark)); transform: translateY(-1px); }
 
     .btn-ghost {
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
-      background: transparent;
+      /* light: solid off-white keycap face (secondary). dark: transparent (outline button). */
+      background: var(--btn2-face, transparent);
       color: var(--ink);
       font-family: var(--font-sans);
       font-weight: 500;
       font-size: 0.9rem;
       padding: 0.65rem 1.4rem;
-      border-radius: 2px;
-      border: 1.5px solid var(--ink);
+      border-radius: var(--radius-pill);
+      /* light: no border — the keycap frame is drawn by --btn-depth (off-white face).
+         dark: falls back to the original 1.5px outline. */
+      border: var(--ghost-bd, 1.5px solid var(--ink));
+      box-shadow: var(--btn-depth, none);
       text-decoration: none;
       cursor: pointer;
-      transition: background 0.2s, color 0.2s, transform 0.15s;
+      transition: background 0.2s, color 0.2s, transform 0.15s, box-shadow 0.15s;
       white-space: nowrap;
     }
-    .btn-ghost:hover { background: var(--ink); color: var(--paper); transform: translateY(-1px); }
+    /* light: face fills off-white + lift (matches primary keycap). dark: falls back to the outline invert. */
+    .btn-ghost:hover { background: var(--btn2-face-hover, var(--ink)); color: var(--btn-ink, var(--paper)); transform: translateY(-1px); }
+
+    /* ────────────────────────────────
+       CONTRIBUTOR GALLERY
+    ──────────────────────────────── */
+    .avatar-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+    .avatar-link { display: inline-block; text-decoration: none; }
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2.5px solid white;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.14);
+      transition: transform 0.15s;
+      cursor: pointer;
+      display: block;
+      object-fit: cover;
+    }
+    .avatar:hover { transform: translateY(-3px); }
+    .avatar--initials {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: white;
+      user-select: none;
+    }
+    .avatar--overflow {
+      background: var(--warm);
+      border-color: var(--rule);
+      color: var(--muted);
+    }
+    .contrib-count {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .contrib-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .contrib-loading {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
+    }
+    .contrib-loading a { color: var(--accent); text-decoration: none; }
+    .contrib-loading a:hover { text-decoration: underline; }
 
     /* ────────────────────────────────
        HERO
     ──────────────────────────────── */
+    .hero-wrapper {
+      background: var(--hero-bg);
+      position: relative;
+      overflow: hidden;
+    }
     .hero {
       padding-top: 5rem;
       padding-bottom: 5.5rem;
     }
+
+    .hero-illus-left,
+    .hero-illus-right {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      height: 100%;
+      width: 110px;
+      pointer-events: none;
+      color: var(--accent);
+      opacity: 0.22;
+    }
+    .hero-illus-left  { left: 0; }
+    .hero-illus-right { right: 0; }
+
+    @media (max-width: 1100px) {
+      .hero-illus-left, .hero-illus-right { display: none; }
+    }
+    @media (prefers-color-scheme: dark) {
+      .hero-illus-left,
+      .hero-illus-right { opacity: 0.15; }
+    }
+    html.dark-theme .hero-illus-left,
+    html.dark-theme .hero-illus-right { opacity: 0.15; }
+
+    /* ── Section background wrappers ── */
+    .section-bg {
+      position: relative;
+      overflow: hidden;
+    }
+    .section-bg--tint { background: var(--section-tint); }
+
+    .section-illus-left,
+    .section-illus-right {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      height: 100%;
+      width: 90px;
+      pointer-events: none;
+      color: var(--accent);
+      opacity: 0.18;
+    }
+    .section-illus-left  { left: 0; }
+    .section-illus-right { right: 0; }
+
+    @media (max-width: 1100px) {
+      .section-illus-left, .section-illus-right { display: none; }
+    }
+    @media (prefers-color-scheme: dark) {
+      .section-illus-left,
+      .section-illus-right { opacity: 0.12; }
+    }
+    html.dark-theme .section-illus-left,
+    html.dark-theme .section-illus-right { opacity: 0.12; }
 
     /* Staggered entrance */
     .stagger > * {
@@ -327,6 +579,19 @@
       line-height: 1.06;
       color: var(--ink);
       margin-bottom: 0.75rem;
+      /* shrink to the text width so the accent bar underlines the whole word, not the column */
+      display: inline-block;
+    }
+    /* Accent keycap bar: the letters stay clean dark ink — a brand-colored rule underlines the
+       title. Orange keycap highlight in light, baby-blue accent in dark; both pop off the canvas. */
+    .hero h1::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 0.28rem;
+      margin-top: 0.7rem;
+      border-radius: 3px;
+      background: var(--highlight, var(--accent));
     }
 
     .hero h2 {
@@ -334,7 +599,7 @@
       font-style: italic;
       font-size: clamp(1.7rem, 4.5vw, 2.8rem);
       line-height: 1.2;
-      color: var(--muted);
+      color: var(--ink);
       margin-bottom: 1.75rem;
     }
 
@@ -358,13 +623,14 @@
       flex-wrap: wrap;
       gap: 2.5rem;
       padding-top: 2rem;
-      border-top: 1px solid var(--rule);
+      border-top: 1px solid color-mix(in srgb, var(--accent) 15%, transparent);
     }
 
     .hero-stat-num {
       font-family: var(--font-serif);
-      font-size: 1rem;
-      color: var(--ink);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent);
       display: block;
     }
 
@@ -386,6 +652,18 @@
       line-height: 1.15;
       margin-top: 1.25rem;
       margin-bottom: 0.75rem;
+      /* shrink to the text width so the accent bar spans the heading, matching the hero title */
+      display: inline-block;
+    }
+    /* Accent keycap bar under each section heading — matches the hero title rule. */
+    .section-heading::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 0.28rem;
+      margin-top: 0.7rem;
+      border-radius: 3px;
+      background: var(--highlight, var(--accent));
     }
 
     .section-sub {
@@ -402,18 +680,17 @@
 
     .card {
       background: var(--card-bg);
-      border: 1px solid var(--rule);
-      border-radius: 3px;
+      /* light: dark keycap frame + solid bottom base (matches buttons). dark: soft grey border, flat. */
+      border: var(--card-bd, 1px solid var(--rule));
+      border-radius: var(--radius-card);
       padding: 1.5rem;
+      box-shadow: var(--card-depth, none);
       transition: box-shadow 0.2s, transform 0.2s;
     }
     .card:hover {
-      box-shadow: 0 8px 28px rgba(0,102,204,0.1);
+      /* light: base grows as the keycap lifts. dark: original soft accent glow. */
+      box-shadow: var(--card-depth-hover, 0 8px 28px color-mix(in srgb, var(--accent) 12%, transparent));
       transform: translateY(-2px);
-    }
-
-    html.dark-theme .card:hover {
-      box-shadow: 0 8px 28px rgba(171,200,227,0.15);
     }
 
     .card h4 {
@@ -448,6 +725,16 @@
       color: var(--ink);
       font-weight: 600;
       margin-bottom: 1rem;
+    }
+
+    .structure-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.75rem;
+    }
+    .structure-grid > div { min-width: 0; }
+    @media (max-width: 720px) {
+      .structure-grid { grid-template-columns: 1fr; gap: 2rem; }
     }
 
     .code-container {
@@ -493,12 +780,6 @@
       color: var(--ink);
     }
 
-    .section-subtitle {
-      font-family: var(--font-serif);
-      font-style: italic;
-      color: var(--muted);
-    }
-
     /* ────────────────────────────────
        CONTRIBUTE
     ──────────────────────────────── */
@@ -511,15 +792,108 @@
 
     .contrib-card {
       background: var(--card-bg);
-      border: 1px solid var(--rule);
-      border-radius: 3px;
+      /* light: dark keycap frame + solid bottom base (matches buttons). dark: soft grey border, flat. */
+      border: var(--card-bd, 1px solid var(--rule));
+      border-radius: var(--radius-card);
+      overflow: hidden;
       padding: 1.6rem;
+      box-shadow: var(--card-depth, none);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    /* light: keycap lift on hover. dark: falls back to none (no hover, unchanged). */
+    .contrib-card:hover {
+      box-shadow: var(--card-depth-hover, none);
+      transform: var(--card-lift, none);
+    }
+
+    /* ── Community hub ── */
+    .hub-grid { display: grid; gap: 1rem; }
+    .hub-flagship { grid-template-columns: repeat(2, 1fr); }
+    .hub-secondary {
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      margin-top: 1rem;
+    }
+    .hub-tile {
+      display: flex; align-items: center; gap: 0.85rem;
+      background: var(--card-bg);
+      border: var(--card-bd, 1px solid var(--rule));
+      border-radius: var(--radius-card);
+      box-shadow: var(--card-depth, none);
+      padding: 1rem 1.1rem;
+      color: var(--ink);
+      text-decoration: none;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .hub-tile:hover {
+      box-shadow: var(--card-depth-hover, 0 8px 28px color-mix(in srgb, var(--accent) 12%, transparent));
+      transform: var(--card-lift, translateY(-2px));
+    }
+    .hub-flagship .hub-tile { padding: 1.35rem 1.25rem; }
+    .hub-icon {
+      flex-shrink: 0; width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+    }
+    .hub-icon svg { width: 22px; height: 22px; }
+    .hub-tile-body { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+    .hub-tile-title { font-weight: 700; font-size: 0.95rem; }
+    .hub-tile-sub { font-size: 0.75rem; color: var(--muted); }
+    .hub-live {
+      font-family: var(--font-mono); font-size: 0.72rem;
+      font-weight: 600; color: var(--accent);
+    }
+    .hub-catchall {
+      margin-top: 1rem; display: flex; justify-content: center;
+    }
+    @media (max-width: 560px) {
+      .hub-flagship { grid-template-columns: 1fr; }
+    }
+    /* Footer social row */
+    .footer-social { display: flex; gap: 0.75rem; margin-top: 0.75rem; }
+    .footer-social a { color: var(--muted); display: inline-flex; transition: color 0.15s; }
+    .footer-social a:hover { color: var(--accent); }
+    .footer-social svg { width: 20px; height: 20px; }
+
+    /* ── Collapsible Cursoteca detail ── */
+    .cursoteca-detail {
+      background: var(--card-bg);
+      border: var(--card-bd, 1px solid var(--rule));
+      border-radius: var(--radius-card);
+      box-shadow: var(--card-depth, none);
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+    .cursoteca-detail > summary {
+      cursor: pointer; list-style: none;
+      display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
+      padding: 0.9rem 1.1rem; font-weight: 700; color: var(--ink);
+    }
+    .cursoteca-detail > summary::-webkit-details-marker { display: none; }
+    .cursoteca-detail > summary::after {
+      content: "▸"; color: var(--accent); font-size: 1.5rem; line-height: 1;
+      transition: transform 0.2s; flex-shrink: 0;
+    }
+    .cursoteca-detail[open] > summary::after { transform: rotate(90deg); }
+    .cursoteca-detail > summary:hover { color: var(--accent); }
+    .cursoteca-detail-body { padding: 0 1.1rem 1.1rem; }
+
+    /* Top accent line — gray for all cards, gradient for the first in each grid */
+    .contrib-card::before {
+      content: '';
+      display: block;
+      height: 2.5px;
+      background: var(--rule);
+      margin: -1.6rem -1.6rem 1rem;
+    }
+    .contrib-grid .contrib-card:first-child::before {
+      /* light: unify with the other cards (plain rule line). dark: keep the blue gradient. */
+      background: var(--card-accent-line, linear-gradient(90deg, var(--accent), var(--accent-light)));
     }
 
     .contrib-icon-wrap {
       width: 2.25rem;
       height: 2.25rem;
-      background: rgba(0,102,204,0.1);
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
       border-radius: 3px;
       display: flex;
       align-items: center;
@@ -558,35 +932,6 @@
       text-decoration: none;
     }
     .contrib-card a:hover { text-decoration: underline; }
-
-    /* Flow bar */
-    .flow-bar {
-      background: var(--card-bg);
-      border: 1px solid var(--rule);
-      border-radius: 3px;
-      padding: 1.4rem 1.6rem;
-    }
-
-    .flow-bar .section-label { margin-bottom: 1rem; }
-
-    .flow-steps {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .flow-step {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      padding: 0.4rem 0.85rem;
-      border-radius: 2px;
-    }
-
-    .flow-step--dark   { background: var(--ink);    color: var(--paper); }
-    .flow-step--light  { background: var(--warm);   color: var(--ink); border: 1px solid var(--rule); }
-    .flow-step--accent { background: var(--accent); color: var(--paper); }
-    .flow-arrow { color: var(--muted); font-size: 0.85rem; }
 
     /* ────────────────────────────────
        CONTACT & CREDITS
@@ -644,7 +989,7 @@
     }
 
     .credits-list p { color: var(--muted); line-height: 1.6; }
-    .credits-list p a { color: var(--accent); text-decoration: none; }
+    .credits-list p a { color: var(--accent); text-decoration: var(--link-decoration, none); }
     .credits-list p a:hover { text-decoration: underline; }
     .cred-version { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
 
@@ -653,7 +998,7 @@
     ──────────────────────────────── */
     footer {
       background: var(--warm);
-      color: #555555;
+      color: var(--muted);
       padding-block: 2.5rem;
       margin-top: 2rem;
       position: relative;
@@ -683,7 +1028,7 @@
       text-decoration: none;
     }
 
-    .footer-tagline { font-size: 0.8rem; color: #888888; margin-top: 0.3rem; }
+    .footer-tagline { font-size: 0.8rem; color: var(--muted); margin-top: 0.3rem; }
 
     .footer-nav {
       display: flex;
@@ -694,14 +1039,14 @@
 
     .footer-nav a {
       font-size: 0.85rem;
-      color: #666666;
+      color: var(--muted);
       text-decoration: none;
       transition: color 0.15s;
     }
     .footer-nav a:hover { color: var(--ink); }
 
-    .footer-bottom { padding-top: 1.25rem; font-size: 0.78rem; color: #888888; }
-    .footer-bottom a { color: var(--accent); text-decoration: none; }
+    .footer-bottom { padding-top: 1.25rem; font-size: 0.78rem; color: var(--muted); }
+    .footer-bottom a { color: var(--accent); text-decoration: var(--link-decoration, none); }
     .footer-bottom a:hover { color: var(--accent-dark); }
 
     /* ────────────────────────────────
@@ -741,7 +1086,7 @@
       justify-content: center;
       background: var(--warm);
       border: 1.5px solid var(--rule);
-      border-radius: 5px;
+      border-radius: var(--radius-key);
       box-shadow: 0 2px 0 var(--rule);
       font-family: var(--font-mono);
       font-size: 0.7rem;
@@ -754,10 +1099,10 @@
     }
 
     .key-strip .key.highlight {
-      background: var(--accent);
-      border-color: var(--accent);
-      box-shadow: 0 2px 0 var(--accent-dark);
-      color: var(--paper);
+      background: var(--highlight, var(--accent));
+      border-color: var(--highlight, var(--accent));
+      box-shadow: 0 2px 0 var(--highlight-dark, var(--accent-dark));
+      color: var(--highlight-ink, var(--paper));
       font-size: 0.75rem;
       font-weight: 600;
     }
@@ -771,8 +1116,8 @@
        WIP NOTICE BANNER
     ──────────────────────────────── */
     .wip-banner {
-      background: var(--warm);
-      border-bottom: 1px solid var(--rule);
+      background: var(--wip-bg);
+      border-bottom: 1px solid var(--wip-border);
       padding: 0.55rem 0;
       position: relative;
       z-index: 1;
@@ -791,15 +1136,15 @@
     }
 
     .wip-badge {
-      background: var(--accent);
-      color: var(--paper);
+      background: var(--wip-badge-bg);
+      color: #1E252C;
       font-family: var(--font-mono);
       font-size: 0.65rem;
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       padding: 0.15rem 0.5rem;
-      border-radius: 2px;
+      border-radius: var(--radius-pill);
       flex-shrink: 0;
     }
   </style>
@@ -810,7 +1155,8 @@
   <nav>
     <div class="nav-inner">
       <span class="nav-logo">
-        <svg width="350" height="60" viewBox="0 0 581 99" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <img class="nav-logo-color" src="/media/logo-neutral.svg" alt="AECCI" width="916" height="156" />
+        <svg class="nav-logo-mono" width="350" height="60" viewBox="0 0 581 99" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M17.0381 0C7.62823 0 0 7.61577 0 17.0103V81.9897C0 91.3842 7.62822 99 17.0381 99H89.6205C99.0304 99 106.659 91.3842 106.659 81.9897V17.0103C106.659 7.61578 99.0304 0 89.6205 0H17.0381ZM23.8534 5.4433C16.3255 5.4433 10.2229 11.5359 10.2229 19.0515V72.1237C10.2229 79.6393 16.3255 85.732 23.8534 85.732H82.1238C89.6517 85.732 95.7542 79.6393 95.7542 72.1237V19.0515C95.7542 11.5359 89.6517 5.4433 82.1238 5.4433H23.8534Z" fill="currentColor"/>
           <path d="M55.6385 62.0982L50.2475 47.646H31.1795L25.855 62.0982H18.7669L37.3358 13.3264H44.3241L62.7932 62.0982H55.6385ZM48.3507 41.7323L43.2259 27.4131C43.0706 26.9258 42.8266 26.1949 42.4938 25.2203C42.1832 24.2458 41.8616 23.238 41.5288 22.197C41.2182 21.156 40.9631 20.2922 40.7634 19.6056C40.5415 20.5137 40.2864 21.4772 39.998 22.496C39.7096 23.4927 39.4212 24.4341 39.1328 25.32C38.8666 26.1838 38.6447 26.8815 38.4672 27.4131L33.2759 41.7323H48.3507Z" fill="currentColor"/>
           <path fill-rule="evenodd" clip-rule="evenodd" d="M135.623 0C126.214 0 118.585 7.61577 118.585 17.0103V81.9897C118.585 91.3842 126.214 99 135.623 99H208.206C217.616 99 225.244 91.3842 225.244 81.9897V17.0103C225.244 7.61578 217.616 0 208.206 0H135.623ZM142.439 5.4433C134.911 5.4433 128.808 11.5359 128.808 19.0515V72.1237C128.808 79.6393 134.911 85.732 142.439 85.732H200.709C208.237 85.732 214.34 79.6393 214.34 72.1237V19.0515C214.34 11.5359 208.237 5.4433 200.709 5.4433H142.439Z" fill="currentColor"/>
@@ -824,7 +1170,7 @@
         </svg>
       </span>
       <ul class="nav-links">
-        <li class="nav-text-link"><a href="#proyectos">Proyectos</a></li>
+        <li class="nav-text-link"><a href="#comunidad">Comunidad</a></li>
         <li class="nav-text-link"><a href="#contacto">Contacto</a></li>
         <li>
           <a href="/cursos/" class="btn-primary">Cursoteca →</a>
@@ -860,9 +1206,70 @@
   </div>
 
   <!-- ── HERO ── -->
-  <div class="container">
-    <section class="hero stagger">
-      <p class="hero-label">UCR · Escuela de Ciencias de la Computación</p>
+  <div class="hero-wrapper">
+    <svg xmlns="http://www.w3.org/2000/svg" class="hero-illus-left" viewBox="0 0 110 520" preserveAspectRatio="xMidYMid meet" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+      <!-- Laptop -->
+      <rect x="8" y="48" width="94" height="62" rx="5"/>
+      <rect x="2" y="112" width="106" height="9" rx="3"/>
+      <rect x="22" y="58" width="66" height="44" rx="2"/>
+      <!-- Curly braces {} -->
+      <path d="M42,190 Q30,190 30,202 Q30,214 20,214 Q30,214 30,226 Q30,238 42,238"/>
+      <path d="M68,190 Q80,190 80,202 Q80,214 90,214 Q80,214 80,226 Q80,238 68,238"/>
+      <!-- Terminal window -->
+      <rect x="8" y="298" width="94" height="76" rx="6"/>
+      <line x1="8"  y1="316" x2="102" y2="316"/>
+      <circle cx="22" cy="307" r="4"/>
+      <circle cx="35" cy="307" r="4"/>
+      <circle cx="48" cy="307" r="4"/>
+      <line x1="18" y1="336" x2="44" y2="336"/>
+      <line x1="18" y1="350" x2="60" y2="350"/>
+      <line x1="18" y1="362" x2="50" y2="362"/>
+      <!-- </> closing tag -->
+      <path d="M24,428 L10,448 L24,468"/>
+      <line x1="46" y1="422" x2="58" y2="474"/>
+      <path d="M68,428 L82,448 L68,468"/>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" class="hero-illus-right" viewBox="0 0 110 520" preserveAspectRatio="xMidYMid meet" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+      <!-- Keyboard -->
+      <rect x="5" y="48" width="100" height="74" rx="6"/>
+      <rect x="12" y="58" width="14" height="12" rx="2"/>
+      <rect x="30" y="58" width="14" height="12" rx="2"/>
+      <rect x="48" y="58" width="14" height="12" rx="2"/>
+      <rect x="66" y="58" width="14" height="12" rx="2"/>
+      <rect x="84" y="58" width="14" height="12" rx="2"/>
+      <rect x="12" y="74" width="22" height="12" rx="2"/>
+      <rect x="38" y="74" width="14" height="12" rx="2"/>
+      <rect x="56" y="74" width="14" height="12" rx="2"/>
+      <rect x="74" y="74" width="22" height="12" rx="2"/>
+      <rect x="12" y="90" width="14" height="14" rx="2"/>
+      <rect x="30" y="90" width="50" height="14" rx="2"/>
+      <rect x="84" y="90" width="14" height="14" rx="2"/>
+      <!-- Mouse -->
+      <path d="M33,190 Q33,167 55,167 Q77,167 77,190 L77,238 Q77,256 55,256 Q33,256 33,238 Z"/>
+      <line x1="55" y1="167" x2="55" y2="210"/>
+      <line x1="33" y1="186" x2="55" y2="183"/>
+      <!-- Circuit traces -->
+      <line x1="10" y1="308" x2="42" y2="308"/>
+      <line x1="42" y1="308" x2="42" y2="330"/>
+      <line x1="42" y1="330" x2="95" y2="330"/>
+      <line x1="95" y1="330" x2="95" y2="356"/>
+      <line x1="95" y1="356" x2="58" y2="356"/>
+      <line x1="58" y1="356" x2="58" y2="378"/>
+      <line x1="58" y1="378" x2="10" y2="378"/>
+      <circle cx="42" cy="308" r="3" fill="currentColor" stroke="none"/>
+      <circle cx="42" cy="330" r="3" fill="currentColor" stroke="none"/>
+      <circle cx="95" cy="330" r="3" fill="currentColor" stroke="none"/>
+      <circle cx="95" cy="356" r="3" fill="currentColor" stroke="none"/>
+      <circle cx="58" cy="356" r="3" fill="currentColor" stroke="none"/>
+      <circle cx="58" cy="378" r="3" fill="currentColor" stroke="none"/>
+      <!-- Hash # symbol -->
+      <line x1="34" y1="438" x2="34" y2="480"/>
+      <line x1="50" y1="434" x2="50" y2="476"/>
+      <line x1="24" y1="450" x2="60" y2="450"/>
+      <line x1="22" y1="464" x2="58" y2="464"/>
+    </svg>
+    <div class="container">
+      <section class="hero stagger">
       <h1>AECCI</h1>
       <h2>Asociación de Estudiantes de<br />Computación e Informática</h2>
       <p class="hero-desc">
@@ -871,33 +1278,93 @@
         computación — con apertura, colaboración y sin barreras.
       </p>
       <div class="hero-cta">
-        <a href="/cursos/" class="btn-primary">
-          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-          Explorar Cursoteca
+        <a href="#comunidad" class="btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Unite a la comunidad
         </a>
-        <a href="#proyectos" class="btn-ghost">Nuestros Proyectos</a>
+        <a href="/cursos/" class="btn-ghost">Explorar Cursoteca</a>
       </div>
       <div class="hero-stats">
+        <div id="stat-discord-cell" hidden>
+          <span class="hero-stat-num" id="stat-discord">-</span>
+          <p class="hero-stat-label">Miembros en Discord</p>
+        </div>
+        <div>
+          <span class="hero-stat-num" id="stat-contributors">-</span>
+          <p class="hero-stat-label">Estudiantes contribuidores</p>
+        </div>
         <div>
           <span class="hero-stat-num" id="stat-courses">-</span>
-          <p class="hero-stat-label">Cursos Disponibles</p>
-        </div>
-        <div>
-          <span class="hero-stat-num" id="stat-files">-</span>
-          <p class="hero-stat-label">Archivos Subidos</p>
-        </div>
-        <div>
-          <span class="hero-stat-num" id="stat-storage">-</span>
-          <p class="hero-stat-label">Almacenamiento Usado</p>
-        </div>
-        <div>
-          <span class="hero-stat-timestamp" id="stat-time">-</span>
-          <p class="hero-stat-label">Última Actualización</p>
+          <p class="hero-stat-label">Cursos disponibles</p>
         </div>
       </div>
       <p id="update" class="update" style="padding-top: 1rem;">
             <small></small>
       </p>
+      </section>
+    </div>
+  </div>
+
+  <!-- ── COMUNIDAD (community/social hub) ──
+       Channel URLs (single source of truth for this section):
+         Instagram : https://www.instagram.com/aecci_ucr
+         Discord   : https://discord.com/invite/gfm5HUt7wy
+         GitHub    : https://github.com/aecci/banco_examenes
+         Escuela   : https://www.ecci.ucr.ac.cr
+         Linktree  : https://linktr.ee/aecci_ucr   (also the fallback for the 3 chat groups below)
+         WhatsApp / Telegram / BoardGame: replace the Linktree href with the direct invite when AECCI provides it.
+  -->
+  <div class="container">
+    <section id="comunidad" class="reveal">
+      <h3 class="section-heading">Sumate a la comunidad</h3>
+      <p class="section-sub">
+        AECCI vive en varios espacios. Seguinos, conversá y participá — elegí el canal que prefieras.
+      </p>
+
+      <div class="hub-grid hub-flagship">
+        <a class="hub-tile" href="https://www.instagram.com/aecci_ucr" target="_blank" rel="noopener">
+          <span class="hub-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1"/></svg></span>
+          <span class="hub-tile-body">
+            <span class="hub-tile-title">Instagram</span>
+            <span class="hub-tile-sub">@aecci_ucr · noticias y eventos</span>
+          </span>
+        </a>
+        <a class="hub-tile" href="https://discord.com/invite/gfm5HUt7wy" target="_blank" rel="noopener">
+          <span class="hub-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.369a19.79 19.79 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.6 12.6 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.74 19.74 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.2 14.2 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.1 13.1 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.3 12.3 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.84 19.84 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.331c-1.183 0-2.157-1.086-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.332-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.086-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.332-.946 2.418-2.157 2.418z"/></svg></span>
+          <span class="hub-tile-body">
+            <span class="hub-tile-title">Discord</span>
+            <span class="hub-tile-sub">Chat de la comunidad</span>
+            <span class="hub-live" id="hub-discord-live" hidden></span>
+          </span>
+        </a>
+      </div>
+
+      <div class="hub-grid hub-secondary">
+        <a class="hub-tile" href="https://linktr.ee/aecci_ucr" target="_blank" rel="noopener">
+          <span class="hub-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19l2-4a8 8 0 1 1 3 3z"/><path d="M9 11a3 3 0 0 0 4 3"/></svg></span>
+          <span class="hub-tile-body"><span class="hub-tile-title">WhatsApp</span><span class="hub-tile-sub">Comunidad general</span></span>
+        </a>
+        <a class="hub-tile" href="https://linktr.ee/aecci_ucr" target="_blank" rel="noopener">
+          <span class="hub-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 3L2 11l6 2 2 6 3-4 5 4z"/></svg></span>
+          <span class="hub-tile-body"><span class="hub-tile-title">Mujeres ECCI</span><span class="hub-tile-sub">Telegram</span></span>
+        </a>
+        <a class="hub-tile" href="https://linktr.ee/aecci_ucr" target="_blank" rel="noopener">
+          <span class="hub-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 20h8M12 18v2M8 9l2 2-2 2M14 13h2"/></svg></span>
+          <span class="hub-tile-body"><span class="hub-tile-title">BoardGame Club</span><span class="hub-tile-sub">WhatsApp</span></span>
+        </a>
+        <a class="hub-tile" href="https://github.com/aecci/banco_examenes" target="_blank" rel="noopener">
+          <span class="hub-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 8l-4 4 4 4M15 8l4 4-4 4"/></svg></span>
+          <span class="hub-tile-body"><span class="hub-tile-title">GitHub</span><span class="hub-tile-sub">Banco de exámenes</span></span>
+        </a>
+        <a class="hub-tile" href="https://www.ecci.ucr.ac.cr" target="_blank" rel="noopener">
+          <span class="hub-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V9l7-4 7 4v12M9 21v-4h6v4"/></svg></span>
+          <span class="hub-tile-body"><span class="hub-tile-title">Escuela</span><span class="hub-tile-sub">ecci.ucr.ac.cr</span></span>
+        </a>
+      </div>
+
+      <div class="hub-catchall">
+        <a class="btn-ghost" href="https://linktr.ee/aecci_ucr" target="_blank" rel="noopener">Todos nuestros enlaces →</a>
+      </div>
     </section>
   </div>
 
@@ -932,74 +1399,123 @@
     </div>
   </div>
 
-  <!-- ── PROYECTOS ── -->
-  <div class="container">
-    <section id="proyectos" class="reveal">
-      <div class="deco-line">
-        <span class="section-label">Proyectos Destacados</span>
-      </div>
-      <h3 class="section-heading">
-        Nuestras iniciativas<br />
-        <span class="section-subtitle">herramientas para la comunidad</span>
-      </h3>
-      <p class="section-sub">
-        Desde Cursoteca hasta otras herramientas educativas, nuestros proyectos están diseñados 
-        para mejorar la experiencia de aprendizaje en la Escuela de Computación.
-      </p>
-      <div class="contrib-grid">
-        <div class="contrib-card reveal">
-          <div class="contrib-icon-wrap">
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-          </div>
-          <span class="contrib-badge">PROYECTO · 01</span>
-          <h4>Cursoteca</h4>
-          <p>Archivo histórico colaborativo de material académico: diapositivas, exámenes, quices y recursos de cursos anteriores.</p>
-          <a href="/cursos/">Ver Cursoteca →</a>
+  <!-- ── CONTRIBUIDORES ── -->
+  <div class="section-bg section-bg--tint">
+    <svg xmlns="http://www.w3.org/2000/svg" class="section-illus-left" viewBox="0 0 90 380" preserveAspectRatio="xMidYMid meet" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+      <!-- Git graph main branch -->
+      <line x1="42" y1="20" x2="42" y2="360"/>
+      <!-- Main branch commit nodes -->
+      <circle cx="42" cy="60"  r="6" fill="currentColor" stroke="none"/>
+      <circle cx="42" cy="150" r="6" fill="currentColor" stroke="none"/>
+      <circle cx="42" cy="240" r="6" fill="currentColor" stroke="none"/>
+      <circle cx="42" cy="320" r="6" fill="currentColor" stroke="none"/>
+      <!-- Feature branch 1 -->
+      <path d="M42,60 Q64,78 64,98 L64,130 Q64,148 42,150" fill="none"/>
+      <circle cx="64" cy="98"  r="4" fill="currentColor" stroke="none"/>
+      <circle cx="64" cy="115" r="4" fill="currentColor" stroke="none"/>
+      <!-- Feature branch 2 -->
+      <path d="M42,240 Q66,258 66,278 L66,304 Q66,318 42,320" fill="none"/>
+      <circle cx="66" cy="278" r="4" fill="currentColor" stroke="none"/>
+      <circle cx="66" cy="292" r="4" fill="currentColor" stroke="none"/>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" class="section-illus-right" viewBox="0 0 90 380" preserveAspectRatio="xMidYMid meet" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+      <!-- Network graph nodes -->
+      <circle cx="45" cy="50"  r="14"/>
+      <circle cx="18" cy="130" r="9"/>
+      <circle cx="72" cy="112" r="8"/>
+      <circle cx="28" cy="210" r="11"/>
+      <circle cx="66" cy="192" r="8"/>
+      <circle cx="45" cy="290" r="10"/>
+      <circle cx="18" cy="330" r="7"/>
+      <circle cx="72" cy="322" r="7"/>
+      <!-- Network graph edges -->
+      <line x1="45" y1="50"  x2="18" y2="130"/>
+      <line x1="45" y1="50"  x2="72" y2="112"/>
+      <line x1="18" y1="130" x2="28" y2="210"/>
+      <line x1="72" y1="112" x2="66" y2="192"/>
+      <line x1="28" y1="210" x2="66" y2="192"/>
+      <line x1="28" y1="210" x2="45" y2="290"/>
+      <line x1="66" y1="192" x2="45" y2="290"/>
+      <line x1="45" y1="290" x2="18" y2="330"/>
+      <line x1="45" y1="290" x2="72" y2="322"/>
+      <!-- Sparkle accents -->
+      <line x1="80" y1="52" x2="80" y2="60"/>
+      <line x1="76" y1="56" x2="84" y2="56"/>
+      <line x1="8"  y1="178" x2="8"  y2="186"/>
+      <line x1="4"  y1="182" x2="12" y2="182"/>
+    </svg>
+    <div class="container">
+      <section id="contribuidores" class="reveal">
+        <h3 class="section-heading">Hecho por estudiantes</h3>
+        <p class="section-sub">
+          Personas que han contribuido con material académico al repositorio de Cursoteca.
+        </p>
+        <div class="avatar-grid" id="avatar-grid" aria-label="Contribuidores del repositorio">
+          <p class="contrib-loading">Cargando contribuidores…</p>
         </div>
-        <div class="contrib-card reveal">
-          <div class="contrib-icon-wrap">
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7z"/></svg>
-          </div>
-          <span class="contrib-badge">PROYECTO · 02</span>
-          <h4>Comunidad</h4>
-          <p>Espacios de conexión, eventos, talleres y actividades para fortalecer la comunidad estudiantil.</p>
-          <a href="#contacto">Saber más →</a>
+        <p class="contrib-count"><strong id="contrib-count">…</strong> estudiantes han contribuido con material académico</p>
+        <div class="contrib-cta">
+          <a href="https://github.com/aecci/banco_examenes/blob/master/CONTRIBUTING.md" target="_blank" rel="noopener" class="btn-primary">Contribuir en GitHub</a>
+          <a href="https://github.com/aecci/banco_examenes" target="_blank" rel="noopener" class="btn-ghost">Ver repositorio →</a>
         </div>
-        <div class="contrib-card reveal">
-          <div class="contrib-icon-wrap">
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L15.09 8.26H22L17.82 12.74H19.91L12 19.26L4.09 12.74H6.18L2 8.26H8.91L12 2Z"/></svg>
-          </div>
-          <span class="contrib-badge">PROYECTO · 03</span>
-          <h4>Recursos Abiertos</h4>
-          <p>Herramientas, guías y tutoriales desarrollados por y para estudiantes de Computación.</p>
-          <a href="#contacto">Explorar →</a>
-        </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
 
-  <div class="container"><hr class="rule" /></div>
+  <div class="container"><div class="deco-divider"><span>&lt;/&gt;</span></div></div>
 
   <!-- ── ORGANIZACIÓN DE CURSOTECA ── -->
-  <div class="container">
-    <section id="org" class="reveal">
-      <div class="deco-line">
-        <span class="section-label">Organización de Cursoteca</span>
-      </div>
-      <h3 class="section-heading">
-        Estructura del repositorio<br />
-        <span class="section-subtitle">por año académico y ciclo</span>
-      </h3>
+  <div class="section-bg section-bg--tint">
+    <svg xmlns="http://www.w3.org/2000/svg" class="section-illus-left" viewBox="0 0 90 380" preserveAspectRatio="xMidYMid meet" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+      <!-- Folder icon -->
+      <path d="M10,55 L10,48 Q10,42 16,42 L38,42 L44,48 L76,48 Q82,48 82,55 L82,88 Q82,94 76,94 L16,94 Q10,94 10,88 Z"/>
+      <!-- Tree trunk -->
+      <line x1="26" y1="94" x2="26" y2="300"/>
+      <!-- Branch 1 with file -->
+      <line x1="26" y1="120" x2="44" y2="120"/>
+      <rect x="44" y="111" width="32" height="18" rx="2"/>
+      <!-- Branch 2 with sub-folder -->
+      <line x1="26" y1="168" x2="44" y2="168"/>
+      <rect x="44" y="159" width="32" height="18" rx="2"/>
+      <!-- Sub-branch trunk -->
+      <line x1="56" y1="177" x2="56" y2="240"/>
+      <line x1="56" y1="208" x2="68" y2="208"/>
+      <rect x="68" y="200" width="18" height="14" rx="2"/>
+      <line x1="56" y1="232" x2="68" y2="232"/>
+      <rect x="68" y="224" width="18" height="14" rx="2"/>
+      <!-- Branch 3 with file -->
+      <line x1="26" y1="274" x2="44" y2="274"/>
+      <rect x="44" y="265" width="32" height="18" rx="2"/>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" class="section-illus-right" viewBox="0 0 90 380" preserveAspectRatio="xMidYMid meet" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Large < -->
+      <path d="M76,72 L18,120 L76,168" stroke-width="4"/>
+      <!-- Large > -->
+      <path d="M18,210 L76,258 L18,306" stroke-width="4"/>
+      <!-- Small nested < -->
+      <path d="M62,92 L40,120 L62,148" stroke-width="2"/>
+      <!-- Small nested > -->
+      <path d="M28,230 L50,258 L28,286" stroke-width="2"/>
+    </svg>
+    <div class="container">
+      <section id="org" class="reveal">
+      <h3 class="section-heading">Banco de exámenes</h3>
       <p class="section-sub">
-        Los archivos están organizados en 5 niveles jerárquicos, desde lo general (año de carrera)
-        hasta lo específico (material de un semestre concreto).
+        Cursoteca es, en esencia, un banco de exámenes colaborativo — ampliado para incluir también
+        cartas al estudiante, diapositivas, quices y demás material de cursos anteriores. Todo está
+        organizado por año académico y ciclo, desde lo general hasta el material de un semestre concreto.
       </p>
 
-      <!-- Structure overview visualization -->
+      <details class="cursoteca-detail" open>
+        <summary>Ver la estructura del repositorio</summary>
+        <div class="cursoteca-detail-body">
+      <!-- Structure overview: general tree + per-course content in one square -->
       <div class="structure-example reveal">
-        <p class="structure-title">Estructura general del repositorio:</p>
         <div class="code-container">
-          <pre class="code-block"><code>data/
+          <div class="structure-grid">
+            <div>
+              <p class="structure-title">Estructura general del repositorio:</p>
+              <pre class="code-block"><code>data/
 ├── Año_1
 │   ├── Ciclo_1
 │   │   ├── X_introduccion_a_la_computacion_CI0110
@@ -1016,18 +1532,13 @@
 │       └── ... (cursos)
 └── Año_3, Año_4, Optativas
     └── ... (estructura similar)</code></pre>
-          <p class="structure-note"><strong>Nota:</strong> Las carpetas prefijadas con <code class="tag">X_</code> son <strong>placeholders temporales</strong> sin contenido. Aparecen aquí para mostrar la estructura completa del plan de estudios.</p>
-        </div>
-      </div>
-
-      <!-- Material inside a semester -->
-      <div class="structure-example reveal">
-        <p class="structure-title">Contenido dentro de una instancia de curso:</p>
-        <div class="code-container">
-          <p class="code-path">
-            <strong>Ruta ejemplo:</strong> <code>data/Año_1/Ciclo_2/Programacion_I_CI0112/2025_Semestre_I/</code>
-          </p>
-          <pre class="code-block"><code>2025_Semestre_I/
+            </div>
+            <div>
+              <p class="structure-title">Contenido dentro de una instancia de curso:</p>
+              <p class="code-path">
+                <strong>Ruta ejemplo:</strong> <code>data/Año_1/Ciclo_2/Programacion_I_CI0112/2025_Semestre_I/</code>
+              </p>
+              <pre class="code-block"><code>2025_Semestre_I/
 ├── Carta_al_Estudiante_CI0112_I_2025.pdf
 ├── 01_Material/
 │   ├── Tema_01_Punteros.pdf
@@ -1041,28 +1552,21 @@
     ├── Parcial_1_Enunciado.pdf
     ├── Parcial_2_Enunciado.pdf
     └── Final_Enunciado.pdf</code></pre>
+            </div>
+          </div>
+          <p class="structure-note"><strong>Nota:</strong> Las carpetas prefijadas con <code class="tag">X_</code> son <strong>placeholders temporales</strong> sin contenido. Aparecen aquí para mostrar la estructura completa del plan de estudios.</p>
         </div>
       </div>
-    </section>
-  </div>
+        </div>
+      </details>
 
-
-  <div class="container"><hr class="rule" /></div>
-
-  <!-- ── CONTRIBUIR A CURSOTECA ── -->
-  <div class="container">
-    <section id="contribuir-cursoteca" class="reveal">
-      <div class="deco-line">
-        <span class="section-label">Contribuir a Cursoteca</span>
-      </div>
-      <h3 class="section-heading">
-        ¿Tenés material que<br />
-        <span class="section-subtitle">podría ayudar a otros?</span>
-      </h3>
-      <p class="section-sub">
-        Si tenés material académico que querés compartir — o si encontraste información
-        que debe modificarse o censurarse — podés contribuir directamente al repositorio.
-      </p>
+      <details class="cursoteca-detail">
+        <summary>¿Cómo contribuir?</summary>
+        <div class="cursoteca-detail-body">
+          <p class="section-sub">
+            Si tenés material académico que querés compartir — o si encontraste información
+            que debe modificarse o censurarse — podés contribuir directamente al repositorio.
+          </p>
       <div class="contrib-grid">
         <div class="contrib-card reveal">
           <div class="contrib-icon-wrap">
@@ -1089,33 +1593,65 @@
           <p>Si un archivo es demasiado grande para añadirse a Git, contactá a un administrador directamente por correo electrónico: <a href="mailto:cursoteca@aecci-ucr.com">cursoteca@aecci-ucr.com</a></p>
         </div>
       </div>
-      <div class="flow-bar reveal">
-        <span class="section-label">Flujo de contribución</span>
-        <div class="flow-steps">
-          <span class="flow-step flow-step--dark">1 · Fork del repo</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-step flow-step--light">2 · Agregás el material</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-step flow-step--light">3 · Abrís un Pull Request</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-step flow-step--accent">4 · Se publica</span>
+          <p style="margin-top:1rem;"><a style="color: var(--ink); text-decoration: underline;" href="https://github.com/aecci/banco_examenes/blob/master/CONTRIBUTING.md" target="_blank" rel="noopener">Guía completa de contribución en GitHub (link)</a></p>
         </div>
-      </div>
+      </details>
     </section>
   </div>
+  </div>
 
-  <div class="container"><hr class="rule" /></div>
+  <div class="container"><div class="deco-divider"><span>&lt;/&gt;</span></div></div>
 
   <!-- ── CONTACTO Y CRÉDITOS ── -->
-  <div class="container">
-    <section id="contacto" class="reveal">
-      <div class="deco-line" style="margin-bottom:0.5rem;">
-        <span class="section-label">Contacto e Información</span>
-      </div>
-      <h3 class="section-heading">
-        ¿Dudas o consultas?<br />
-        <span style="font-family:var(--font-serif);font-style:italic;color:var(--muted);">Estamos disponibles</span>
-      </h3>
+  <div class="section-bg section-bg--tint">
+    <svg xmlns="http://www.w3.org/2000/svg" class="section-illus-left" viewBox="0 0 90 380" preserveAspectRatio="xMidYMid meet" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+      <!-- Circuit board traces -->
+      <line x1="10" y1="60" x2="50" y2="60"/>
+      <line x1="50" y1="60" x2="50" y2="100"/>
+      <line x1="50" y1="100" x2="80" y2="100"/>
+      <line x1="80" y1="100" x2="80" y2="140"/>
+      <line x1="80" y1="140" x2="35" y2="140"/>
+      <line x1="35" y1="140" x2="35" y2="180"/>
+      <line x1="35" y1="180" x2="70" y2="180"/>
+      <line x1="70" y1="180" x2="70" y2="220"/>
+      <line x1="10" y1="220" x2="70" y2="220"/>
+      <!-- Junction nodes -->
+      <circle cx="50" cy="60"  r="4" fill="currentColor" stroke="none"/>
+      <circle cx="50" cy="100" r="4" fill="currentColor" stroke="none"/>
+      <circle cx="80" cy="100" r="4" fill="currentColor" stroke="none"/>
+      <circle cx="80" cy="140" r="4" fill="currentColor" stroke="none"/>
+      <circle cx="35" cy="140" r="4" fill="currentColor" stroke="none"/>
+      <circle cx="35" cy="180" r="4" fill="currentColor" stroke="none"/>
+      <circle cx="70" cy="180" r="4" fill="currentColor" stroke="none"/>
+      <circle cx="70" cy="220" r="4" fill="currentColor" stroke="none"/>
+      <!-- IC chip component -->
+      <rect x="28" y="268" width="34" height="44" rx="3"/>
+      <line x1="28" y1="278" x2="16" y2="278"/>
+      <line x1="28" y1="290" x2="16" y2="290"/>
+      <line x1="28" y1="302" x2="16" y2="302"/>
+      <line x1="62" y1="278" x2="74" y2="278"/>
+      <line x1="62" y1="290" x2="74" y2="290"/>
+      <line x1="62" y1="302" x2="74" y2="302"/>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" class="section-illus-right" viewBox="0 0 90 380" preserveAspectRatio="xMidYMid meet" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <!-- WiFi dot -->
+      <circle cx="45" cy="258" r="7" fill="currentColor" stroke="none"/>
+      <!-- WiFi arcs -->
+      <path d="M24,236 Q45,218 66,236" fill="none" stroke-width="2.5"/>
+      <path d="M10,216 Q45,190 80,216" fill="none" stroke-width="2"/>
+      <path d="M2,196 Q45,164 88,196" fill="none" stroke-width="1.5"/>
+      <!-- Antenna -->
+      <line x1="45" y1="252" x2="45" y2="226" stroke-width="2"/>
+      <!-- Signal strength bars -->
+      <rect x="20" y="60" width="8" height="20" rx="1" fill="currentColor" stroke="none"/>
+      <rect x="32" y="50" width="8" height="30" rx="1" fill="currentColor" stroke="none"/>
+      <rect x="44" y="38" width="8" height="42" rx="1" fill="currentColor" stroke="none"/>
+      <rect x="56" y="28" width="8" height="52" rx="1" fill="currentColor" stroke="none"/>
+      <rect x="68" y="18" width="8" height="62" rx="1" fill="currentColor" stroke="none"/>
+    </svg>
+    <div class="container">
+      <section id="contacto" class="reveal">
+      <h3 class="section-heading">¿Dudas o consultas?</h3>
       <div class="contact-grid">
         <div class="reveal">
           <h4>Contacto</h4>
@@ -1149,6 +1685,7 @@
         </div>
       </div>
     </section>
+    </div>
   </div>
 
   <!-- ── FOOTER ── -->
@@ -1158,9 +1695,13 @@
         <div>
           <a href="#" class="footer-logo">AECCI</a>
           <p class="footer-tagline">Asociación de Estudiantes de Computación e Informática</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/aecci_ucr" target="_blank" rel="noopener" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+            <a href="https://discord.com/invite/gfm5HUt7wy" target="_blank" rel="noopener" aria-label="Discord"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.369a19.79 19.79 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.6 12.6 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.74 19.74 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.2 14.2 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.1 13.1 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.3 12.3 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.84 19.84 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.331c-1.183 0-2.157-1.086-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.332-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.086-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.332-.946 2.418-2.157 2.418z"/></svg></a>
+            <a href="https://github.com/aecci/banco_examenes" target="_blank" rel="noopener" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 8l-4 4 4 4M15 8l4 4-4 4"/></svg></a>
+          </div>
         </div>
         <ul class="footer-nav">
-          <li><a href="#proyectos">Proyectos</a></li>
           <li><a href="/cursos/">Cursoteca</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
@@ -1248,32 +1789,10 @@
       const stats = await response.json();
       
       const formatNumber = (num) => num.toLocaleString('es-ES');
-      
-      // Select appropriate unit for storage
-      const formatStorage = (gb) => {
-        if (gb >= 1024) {
-          return (gb / 1024).toFixed(2) + ' TB';
-        }
-        return gb.toFixed(2) + ' GB';
-      };
-      
-      // Localize timestamp
-      const updateTime = new Date(stats.timestamp_iso);
-      const timeStr = updateTime.toLocaleString('es-ES', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-      });
 
-      // Update DOM with stats
+      // Update DOM with surviving hero stat
       document.getElementById('stat-courses').textContent = formatNumber(stats.total_courses);
-      document.getElementById('stat-storage').textContent = formatStorage(stats.storage_gb);
-      document.getElementById('stat-files').textContent = formatNumber(stats.total_files);
-      document.getElementById('stat-time').textContent = `${timeStr}`;
-        
+
     } catch (error) {
       console.error('Error cargando estadísticas:', error);
       document.getElementById('update').textContent = 
@@ -1284,16 +1803,139 @@
     }
   }
 
-  // Load stats on page load
-  loadStats();
+    async function loadCommunity() {
+      try {
+        const res = await fetch('/community.json', { cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        const members = data && data.discord ? data.discord.members : null;
+        const online  = data && data.discord ? data.discord.online  : null;
+        if (typeof members !== 'number' || members <= 0) { hideDiscord(); return; }
 
-  // Update stats every 5 minutes
+        const fmt = (n) => n.toLocaleString('es-ES');
+
+        const num = document.getElementById('stat-discord');
+        const cell = document.getElementById('stat-discord-cell');
+        if (num) num.textContent = fmt(members);
+        if (cell) cell.hidden = false;
+
+        const live = document.getElementById('hub-discord-live');
+        if (live) {
+          const onlineTxt = (typeof online === 'number') ? `${fmt(online)} en línea · ` : '';
+          live.textContent = `${onlineTxt}${fmt(members)} miembros`;
+          live.hidden = false;
+        }
+      } catch (err) {
+        console.warn('Datos de comunidad no disponibles:', err);
+        hideDiscord();
+      }
+    }
+
+    function hideDiscord() {
+      const cell = document.getElementById('stat-discord-cell');
+      if (cell) cell.hidden = true;
+      const live = document.getElementById('hub-discord-live');
+      if (live) live.hidden = true;
+    }
+
+    function avatarGradient(login) {
+      let hash = 0;
+      for (let i = 0; i < login.length; i++) {
+        hash = login.charCodeAt(i) + ((hash << 5) - hash);
+      }
+      const h1 = Math.abs(hash) % 360;
+      const h2 = (h1 + 40) % 360;
+      return `linear-gradient(135deg, hsl(${h1},68%,56%), hsl(${h2},74%,44%))`;
+    }
+
+    async function loadContributors() {
+      const CACHE_KEY = 'aecci-contributors-v1';
+      const MAX_SHOWN = 24;
+      const grid = document.getElementById('avatar-grid');
+      const countEl = document.getElementById('contrib-count');
+      if (!grid) return;
+
+      let contributors;
+
+      const cached = sessionStorage.getItem(CACHE_KEY);
+      if (cached) {
+        try { contributors = JSON.parse(cached); } catch (e) { /* ignore */ }
+      }
+
+      if (!contributors) {
+        try {
+          const res = await fetch(
+            'https://api.github.com/repos/aecci/banco_examenes/contributors?per_page=100',
+            { headers: { Accept: 'application/vnd.github+json' } }
+          );
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          contributors = await res.json();
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify(contributors));
+        } catch (err) {
+          grid.innerHTML = '<p class="contrib-loading"><a href="https://github.com/aecci/banco_examenes/graphs/contributors" target="_blank" rel="noopener">Ver contribuidores en GitHub →</a></p>';
+          return;
+        }
+      }
+
+      const shown = contributors.slice(0, MAX_SHOWN);
+      const overflow = contributors.length - MAX_SHOWN;
+
+      grid.innerHTML = '';
+
+      shown.forEach(({ login, avatar_url }) => {
+        const a = document.createElement('a');
+        a.href = `https://github.com/${login}`;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.className = 'avatar-link';
+        a.title = login;
+
+        const img = document.createElement('img');
+        img.src = `${avatar_url}&s=96`;
+        img.alt = login;
+        img.className = 'avatar';
+        img.width = 48;
+        img.height = 48;
+        img.loading = 'lazy';
+        img.onerror = function () {
+          const div = document.createElement('div');
+          div.className = 'avatar avatar--initials';
+          div.style.background = avatarGradient(login);
+          div.textContent = login.slice(0, 2).toUpperCase();
+          a.replaceChild(div, this);
+        };
+
+        a.appendChild(img);
+        grid.appendChild(a);
+      });
+
+      if (overflow > 0) {
+        const badge = document.createElement('div');
+        badge.className = 'avatar avatar--initials avatar--overflow';
+        badge.textContent = `+${overflow}`;
+        grid.appendChild(badge);
+      }
+
+      if (countEl) countEl.textContent = contributors.length;
+
+      const heroContrib = document.getElementById('stat-contributors');
+      if (heroContrib) heroContrib.textContent = contributors.length.toLocaleString('es-ES');
+    }
+
+  // Load dynamic data on page load
+  loadStats();
+  loadContributors();
+  loadCommunity();
+
+  // Refresh dynamic data every 5 minutes
   setInterval(loadStats, 5 * 60 * 1000);
+  setInterval(loadCommunity, 5 * 60 * 1000);
 
   // Update stats when page becomes visible
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden) {
       loadStats();
+      loadCommunity();
     }
   });
   </script>

@@ -30,7 +30,15 @@ http://aecci-ucr.com {
         Cache-Control "public, max-age=120"
         Content-Type "application/json"
     }
-    
+
+    @community {
+        path /community.json
+    }
+    header @community {
+        Cache-Control "public, max-age=120"
+        Content-Type "application/json"
+    }
+
     file_server
 
     # 2. Intercept requests to /cursos and show the file browser
