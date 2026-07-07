@@ -852,6 +852,21 @@
     .footer-social a:hover { color: var(--accent); }
     .footer-social svg { width: 20px; height: 20px; }
 
+    /* ── Announcement bar (temporary campaign) ── */
+    .announce { background: var(--warm); border-bottom: var(--card-bd, 1px solid var(--rule)); }
+    .announce-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.5rem 1.25rem; font-size: 0.85rem;
+    }
+    .announce-text { flex: 1; min-width: 0; }
+    .announce-cta { font-weight: 700; color: var(--accent); text-decoration: none; white-space: nowrap; }
+    .announce-dismiss {
+      background: none; border: none; cursor: pointer;
+      font-size: 1.2rem; line-height: 1; color: var(--muted); padding: 0 0.25rem;
+    }
+    @media (max-width: 560px) { .announce-text { font-size: 0.78rem; } }
+
     /* Top accent line — gray for all cards, gradient for the first in each grid */
     .contrib-card::before {
       content: '';
@@ -1201,6 +1216,15 @@
       </ul>
     </div>
   </nav>
+
+  <!-- ── ANNOUNCEMENT BAR (temporary; edit data-announce-id + text, or delete this block when the campaign ends) ── -->
+  <div class="announce" id="announce" data-announce-id="semana-u-2026" hidden>
+    <div class="announce-inner">
+      <span class="announce-text">📢 ¡Hacé tu primer pedido de camisa / tote bag para la Semana U!</span>
+      <a class="announce-cta" href="https://linktr.ee/aecci_ucr" target="_blank" rel="noopener">Hacer pedido →</a>
+      <button class="announce-dismiss" id="announce-dismiss" type="button" aria-label="Cerrar anuncio">×</button>
+    </div>
+  </div>
 
   <!-- ── WIP NOTICE ── -->
   <div class="wip-banner" role="status">
@@ -1871,6 +1895,20 @@
 
     // Initialize on page load
     initializeTheme();
+
+    // Announcement bar: show unless dismissed for this id.
+    (function initAnnounce() {
+      const el = document.getElementById('announce');
+      if (!el) return;
+      const id = el.getAttribute('data-announce-id');
+      if (localStorage.getItem('announce-dismissed:' + id)) return;
+      el.hidden = false;
+      const btn = document.getElementById('announce-dismiss');
+      if (btn) btn.addEventListener('click', () => {
+        el.hidden = true;
+        localStorage.setItem('announce-dismissed:' + id, '1');
+      });
+    })();
 
     async function loadStats() {
     try {
