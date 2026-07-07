@@ -19,22 +19,29 @@
     html { scroll-behavior: smooth; font-size: 16px; }
 
     :root {
-      /* Light theme (default) */
-      --ink:          #2c2c2c;
-      --paper:        #f8f9fa;
-      --warm:         #f0f3f5;
-      --accent:       #0066cc;
-      --accent-dark:  #004fa3;
-      --accent-light: #3d8fe6;
-      --muted:        #666666;
-      --rule:         #dfe5e9;
-      --card-bg:      #ffffff;
+      /* Light theme (default) — logo palette: baby-blue canvas, off-white keycaps, dark ink */
+      --ink:          #1E252C;
+      --paper:        #8AB9F1;
+      --warm:         #E5E4E2;
+      --accent:       #1E252C;
+      --accent-dark:  #050505;
+      --accent-light: #E5E4E2;
+      --muted:        #37424D;
+      --rule:         #CBD4DE;
+      --card-bg:      #F6F6F5;
+      /* keycap interactive surfaces — light only; dark theme has no such tokens and
+         falls back to the var() defaults in the component rules, staying unchanged */
+      --btn-face:        #E5E4E2;
+      --btn-ink:         #1E252C;
+      --btn-face-hover:  #F6F6F5;
+      --btn-depth:       inset 0 0 0 1.5px #1E252C, 0 3px 0 #1E252C;
+      --link-decoration: underline;
       --nav-height:   68px;
       --font-serif:   'Poppins', system-ui, sans-serif;
       --font-sans:    'Inter', system-ui, sans-serif;
       --font-mono:    'JetBrains Mono', 'Courier New', monospace;
-      --hero-bg:      #eef3ff;
-      --section-tint: #f5f8ff;
+      --hero-bg:      #9CC3F3;
+      --section-tint: #F4F5F3;
       --wip-bg:       #fff8e6;
       --wip-border:   #ffe4a0;
       --wip-badge-bg: #f5a623;
@@ -46,20 +53,26 @@
     /* Dark theme */
     @media (prefers-color-scheme: dark) {
       :root {
-        --ink:          #ccc;
-        --paper:        #0f1419;
-        --warm:         #1a2332;
-        --accent:       #abc8e3;
-        --accent-dark:  #8fb3d9;
-        --accent-light: #d4e4f7;
-        --muted:        #999999;
-        --rule:         #2a3544;
-        --card-bg:      #151d27;
-        --hero-bg:      #0d1a2e;
-        --section-tint: #101e30;
+        --ink:          #E5E4E2;
+        --paper:        #1E252C;
+        --warm:         #29323B;
+        --accent:       #8AB9F1;
+        --accent-dark:  #6FA3E4;
+        --accent-light: #ADCCF6;
+        --muted:        #909294;
+        --rule:         #333C45;
+        --card-bg:      #242C34;
+        --hero-bg:      #1A2431;
+        --section-tint: #232C36;
         --wip-bg:       #2a1f00;
         --wip-border:   #5a3a00;
         --wip-badge-bg: #c87a10;
+        /* undo the light-only keycap/link tokens so components fall back to the dark accent style */
+        --btn-face: initial;
+        --btn-ink: initial;
+        --btn-face-hover: initial;
+        --btn-depth: initial;
+        --link-decoration: initial;
       }
 
       body::before {
@@ -69,20 +82,26 @@
 
     /* Dark theme class (manual toggle) */
     html.dark-theme {
-      --ink:          #ccc;
-      --paper:        #0f1419;
-      --warm:         #1a2332;
-      --accent:       #abc8e3;
-      --accent-dark:  #8fb3d9;
-      --accent-light: #d4e4f7;
-      --muted:        #999999;
-      --rule:         #2a3544;
-      --card-bg:      #151d27;
-      --hero-bg:      #0d1a2e;
-      --section-tint: #101e30;
+      --ink:          #E5E4E2;
+      --paper:        #1E252C;
+      --warm:         #29323B;
+      --accent:       #8AB9F1;
+      --accent-dark:  #6FA3E4;
+      --accent-light: #ADCCF6;
+      --muted:        #909294;
+      --rule:         #333C45;
+      --card-bg:      #242C34;
+      --hero-bg:      #1A2431;
+      --section-tint: #232C36;
       --wip-bg:       #2a1f00;
       --wip-border:   #5a3a00;
       --wip-badge-bg: #c87a10;
+      /* undo the light-only keycap/link tokens so components fall back to the dark accent style */
+      --btn-face: initial;
+      --btn-ink: initial;
+      --btn-face-hover: initial;
+      --btn-depth: initial;
+      --link-decoration: initial;
     }
 
     html.dark-theme body::before {
@@ -91,17 +110,22 @@
 
     /* Light theme class — overrides system dark preference when user manually selects light */
     html.light-theme {
-      --ink:          #2c2c2c;
-      --paper:        #f8f9fa;
-      --warm:         #f0f3f5;
-      --accent:       #0066cc;
-      --accent-dark:  #004fa3;
-      --accent-light: #3d8fe6;
-      --muted:        #666666;
-      --rule:         #dfe5e9;
-      --card-bg:      #ffffff;
-      --hero-bg:      #eef3ff;
-      --section-tint: #f5f8ff;
+      --ink:          #1E252C;
+      --paper:        #8AB9F1;
+      --warm:         #E5E4E2;
+      --accent:       #1E252C;
+      --accent-dark:  #050505;
+      --accent-light: #E5E4E2;
+      --muted:        #37424D;
+      --rule:         #CBD4DE;
+      --card-bg:      #F6F6F5;
+      --btn-face:        #E5E4E2;
+      --btn-ink:         #1E252C;
+      --btn-face-hover:  #F6F6F5;
+      --btn-depth:       inset 0 0 0 1.5px #1E252C, 0 3px 0 #1E252C;
+      --link-decoration: underline;
+      --hero-bg:      #9CC3F3;
+      --section-tint: #F4F5F3;
       --wip-bg:       #fff8e6;
       --wip-border:   #ffe4a0;
       --wip-badge-bg: #f5a623;
@@ -166,8 +190,8 @@
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
-      background: rgba(0,102,204,0.08);
-      border: 1px solid rgba(0,102,204,0.18);
+      background: color-mix(in srgb, var(--accent) 8%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
       border-radius: var(--radius-pill);
       padding: 0.22rem 0.7rem;
       margin-bottom: 0.75rem;
@@ -280,12 +304,12 @@
     .nav-links a:hover { color: var(--accent); }
 
     .nav-links .btn-primary {
-      color: var(--paper);
+      color: var(--btn-ink, var(--paper));
     }
 
     .nav-links .btn-primary:hover {
-      color: var(--paper);
-      background: var(--accent-dark); transform: translateY(-1px); 
+      color: var(--btn-ink, var(--paper));
+      background: var(--btn-face-hover, var(--accent-dark)); transform: translateY(-1px);
     }
 
     @media (max-width: 640px) {
@@ -328,8 +352,8 @@
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
-      background: var(--accent);
-      color: var(--paper);
+      background: var(--btn-face, var(--accent));
+      color: var(--btn-ink, var(--paper));
       font-family: var(--font-sans);
       font-weight: 500;
       font-size: 0.9rem;
@@ -337,11 +361,12 @@
       border-radius: var(--radius-pill);
       text-decoration: none;
       border: none;
+      box-shadow: var(--btn-depth, none);
       cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.15s;
       white-space: nowrap;
     }
-    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .btn-primary:hover { background: var(--btn-face-hover, var(--accent-dark)); transform: translateY(-1px); }
 
     .btn-ghost {
       display: inline-flex;
@@ -438,7 +463,7 @@
       height: 100%;
       width: 110px;
       pointer-events: none;
-      color: #0057cc;
+      color: var(--accent);
       opacity: 0.22;
     }
     .hero-illus-left  { left: 0; }
@@ -449,10 +474,10 @@
     }
     @media (prefers-color-scheme: dark) {
       .hero-illus-left,
-      .hero-illus-right { color: #abc8e3; opacity: 0.15; }
+      .hero-illus-right { opacity: 0.15; }
     }
     html.dark-theme .hero-illus-left,
-    html.dark-theme .hero-illus-right { color: #abc8e3; opacity: 0.15; }
+    html.dark-theme .hero-illus-right { opacity: 0.15; }
 
     /* ── Section background wrappers ── */
     .section-bg {
@@ -469,7 +494,7 @@
       height: 100%;
       width: 90px;
       pointer-events: none;
-      color: #0057cc;
+      color: var(--accent);
       opacity: 0.18;
     }
     .section-illus-left  { left: 0; }
@@ -480,10 +505,10 @@
     }
     @media (prefers-color-scheme: dark) {
       .section-illus-left,
-      .section-illus-right { color: #abc8e3; opacity: 0.12; }
+      .section-illus-right { opacity: 0.12; }
     }
     html.dark-theme .section-illus-left,
-    html.dark-theme .section-illus-right { color: #abc8e3; opacity: 0.12; }
+    html.dark-theme .section-illus-right { opacity: 0.12; }
 
     /* Staggered entrance */
     .stagger > * {
@@ -548,7 +573,7 @@
       flex-wrap: wrap;
       gap: 2.5rem;
       padding-top: 2rem;
-      border-top: 1px solid rgba(0,102,204,0.15);
+      border-top: 1px solid color-mix(in srgb, var(--accent) 15%, transparent);
     }
 
     .hero-stat-num {
@@ -599,12 +624,8 @@
       transition: box-shadow 0.2s, transform 0.2s;
     }
     .card:hover {
-      box-shadow: 0 8px 28px rgba(0,102,204,0.1);
+      box-shadow: 0 8px 28px color-mix(in srgb, var(--accent) 12%, transparent);
       transform: translateY(-2px);
-    }
-
-    html.dark-theme .card:hover {
-      box-shadow: 0 8px 28px rgba(171,200,227,0.15);
     }
 
     .card h4 {
@@ -717,13 +738,13 @@
       margin: -1.6rem -1.6rem 1rem;
     }
     .contrib-grid .contrib-card:first-child::before {
-      background: linear-gradient(90deg, var(--accent), #4d9fff);
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
     }
 
     .contrib-icon-wrap {
       width: 2.25rem;
       height: 2.25rem;
-      background: rgba(0,102,204,0.1);
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
       border-radius: 3px;
       display: flex;
       align-items: center;
@@ -848,7 +869,7 @@
     }
 
     .credits-list p { color: var(--muted); line-height: 1.6; }
-    .credits-list p a { color: var(--accent); text-decoration: none; }
+    .credits-list p a { color: var(--accent); text-decoration: var(--link-decoration, none); }
     .credits-list p a:hover { text-decoration: underline; }
     .cred-version { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
 
@@ -857,7 +878,7 @@
     ──────────────────────────────── */
     footer {
       background: var(--warm);
-      color: #555555;
+      color: var(--muted);
       padding-block: 2.5rem;
       margin-top: 2rem;
       position: relative;
@@ -887,7 +908,7 @@
       text-decoration: none;
     }
 
-    .footer-tagline { font-size: 0.8rem; color: #888888; margin-top: 0.3rem; }
+    .footer-tagline { font-size: 0.8rem; color: var(--muted); margin-top: 0.3rem; }
 
     .footer-nav {
       display: flex;
@@ -898,14 +919,14 @@
 
     .footer-nav a {
       font-size: 0.85rem;
-      color: #666666;
+      color: var(--muted);
       text-decoration: none;
       transition: color 0.15s;
     }
     .footer-nav a:hover { color: var(--ink); }
 
-    .footer-bottom { padding-top: 1.25rem; font-size: 0.78rem; color: #888888; }
-    .footer-bottom a { color: var(--accent); text-decoration: none; }
+    .footer-bottom { padding-top: 1.25rem; font-size: 0.78rem; color: var(--muted); }
+    .footer-bottom a { color: var(--accent); text-decoration: var(--link-decoration, none); }
     .footer-bottom a:hover { color: var(--accent-dark); }
 
     /* ────────────────────────────────
