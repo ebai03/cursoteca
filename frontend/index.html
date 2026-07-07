@@ -1238,28 +1238,24 @@
         computación — con apertura, colaboración y sin barreras.
       </p>
       <div class="hero-cta">
-        <a href="/cursos/" class="btn-primary">
-          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-          Explorar Cursoteca
+        <a href="#comunidad" class="btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Unite a la comunidad
         </a>
-        <a href="#proyectos" class="btn-ghost">Nuestros Proyectos</a>
+        <a href="/cursos/" class="btn-ghost">Explorar Cursoteca</a>
       </div>
       <div class="hero-stats">
+        <div id="stat-discord-cell" hidden>
+          <span class="hero-stat-num" id="stat-discord">-</span>
+          <p class="hero-stat-label">Miembros en Discord</p>
+        </div>
+        <div>
+          <span class="hero-stat-num" id="stat-contributors">-</span>
+          <p class="hero-stat-label">Estudiantes contribuidores</p>
+        </div>
         <div>
           <span class="hero-stat-num" id="stat-courses">-</span>
-          <p class="hero-stat-label">Cursos Disponibles</p>
-        </div>
-        <div>
-          <span class="hero-stat-num" id="stat-files">-</span>
-          <p class="hero-stat-label">Archivos Subidos</p>
-        </div>
-        <div>
-          <span class="hero-stat-num" id="stat-storage">-</span>
-          <p class="hero-stat-label">Almacenamiento Usado</p>
-        </div>
-        <div>
-          <span class="hero-stat-timestamp" id="stat-time">-</span>
-          <p class="hero-stat-label">Última Actualización</p>
+          <p class="hero-stat-label">Cursos disponibles</p>
         </div>
       </div>
       <p id="update" class="update" style="padding-top: 1rem;">
@@ -1767,32 +1763,10 @@
       const stats = await response.json();
       
       const formatNumber = (num) => num.toLocaleString('es-ES');
-      
-      // Select appropriate unit for storage
-      const formatStorage = (gb) => {
-        if (gb >= 1024) {
-          return (gb / 1024).toFixed(2) + ' TB';
-        }
-        return gb.toFixed(2) + ' GB';
-      };
-      
-      // Localize timestamp
-      const updateTime = new Date(stats.timestamp_iso);
-      const timeStr = updateTime.toLocaleString('es-ES', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-      });
 
-      // Update DOM with stats
+      // Update DOM with surviving hero stat
       document.getElementById('stat-courses').textContent = formatNumber(stats.total_courses);
-      document.getElementById('stat-storage').textContent = formatStorage(stats.storage_gb);
-      document.getElementById('stat-files').textContent = formatNumber(stats.total_files);
-      document.getElementById('stat-time').textContent = `${timeStr}`;
-        
+
     } catch (error) {
       console.error('Error cargando estadísticas:', error);
       document.getElementById('update').textContent = 
@@ -1802,6 +1776,41 @@
       setTimeout(loadStats, 10000);
     }
   }
+
+    async function loadCommunity() {
+      try {
+        const res = await fetch('/community.json', { cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        const members = data && data.discord ? data.discord.members : null;
+        const online  = data && data.discord ? data.discord.online  : null;
+        if (typeof members !== 'number' || members <= 0) { hideDiscord(); return; }
+
+        const fmt = (n) => n.toLocaleString('es-ES');
+
+        const num = document.getElementById('stat-discord');
+        const cell = document.getElementById('stat-discord-cell');
+        if (num) num.textContent = fmt(members);
+        if (cell) cell.hidden = false;
+
+        const live = document.getElementById('hub-discord-live');
+        if (live) {
+          const onlineTxt = (typeof online === 'number') ? `${fmt(online)} en línea · ` : '';
+          live.textContent = `${onlineTxt}${fmt(members)} miembros`;
+          live.hidden = false;
+        }
+      } catch (err) {
+        console.warn('Datos de comunidad no disponibles:', err);
+        hideDiscord();
+      }
+    }
+
+    function hideDiscord() {
+      const cell = document.getElementById('stat-discord-cell');
+      if (cell) cell.hidden = true;
+      const live = document.getElementById('hub-discord-live');
+      if (live) live.hidden = true;
+    }
 
     function avatarGradient(login) {
       let hash = 0;
@@ -1882,19 +1891,25 @@
       }
 
       if (countEl) countEl.textContent = contributors.length;
+
+      const heroContrib = document.getElementById('stat-contributors');
+      if (heroContrib) heroContrib.textContent = contributors.length.toLocaleString('es-ES');
     }
 
-  // Load stats on page load
+  // Load dynamic data on page load
   loadStats();
   loadContributors();
+  loadCommunity();
 
-  // Update stats every 5 minutes
+  // Refresh dynamic data every 5 minutes
   setInterval(loadStats, 5 * 60 * 1000);
+  setInterval(loadCommunity, 5 * 60 * 1000);
 
   // Update stats when page becomes visible
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden) {
       loadStats();
+      loadCommunity();
     }
   });
   </script>
