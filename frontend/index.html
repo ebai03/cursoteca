@@ -30,21 +30,34 @@
       --rule:         #CBD4DE;
       --card-bg:      #F6F6F5;
       /* keycap interactive surfaces — light only; dark theme has no such tokens and
-         falls back to the var() defaults in the component rules, staying unchanged */
-      --btn-face:        #E5E4E2;
+         falls back to the var() defaults in the component rules, staying unchanged.
+         Primary keycap = orange highlight face; secondary keycap = off-white face. */
+      --btn-face:        #e29950;
+      --btn-face-hover:  #CE9A5E;
+      --btn2-face:       #E5E4E2;
+      --btn2-face-hover: #F6F6F5;
       --btn-ink:         #1E252C;
-      --btn-face-hover:  #F6F6F5;
       --btn-depth:       inset 0 0 0 1.5px #1E252C, 0 3px 0 #1E252C;
+      --ghost-bd:        none;
+      --highlight:       #e29950;
+      --highlight-dark:  #693d11;
+      --highlight-ink:   #1E252C;
+      /* keycap depth for cards — light only; dark resets to initial so cards stay flat/soft */
+      --card-bd:          1.5px solid #1E252C;
+      --card-depth:       0 4px 0 #1E252C;
+      --card-depth-hover: 0 4px 0 #1E252C;
+      --card-lift:        translateY(-2px);
+      --card-accent-line: var(--rule);
       --link-decoration: underline;
       --nav-height:   68px;
       --font-serif:   'Poppins', system-ui, sans-serif;
       --font-sans:    'Inter', system-ui, sans-serif;
       --font-mono:    'JetBrains Mono', 'Courier New', monospace;
       --hero-bg:      #9CC3F3;
-      --section-tint: #F4F5F3;
-      --wip-bg:       #fff8e6;
-      --wip-border:   #ffe4a0;
-      --wip-badge-bg: #f5a623;
+      --section-tint: rgba(255, 255, 255, 0.35);
+      --wip-bg:       #EAD6BC;
+      --wip-border:   #D4B183;
+      --wip-badge-bg: #e29950;
       --radius-pill:  20px;
       --radius-card:  10px;
       --radius-key:   7px;
@@ -67,11 +80,22 @@
         --wip-bg:       #2a1f00;
         --wip-border:   #5a3a00;
         --wip-badge-bg: #c87a10;
-        /* undo the light-only keycap/link tokens so components fall back to the dark accent style */
+        /* undo the light-only keycap/link/highlight tokens so components fall back to the dark accent style */
         --btn-face: initial;
-        --btn-ink: initial;
         --btn-face-hover: initial;
+        --btn2-face: initial;
+        --btn2-face-hover: initial;
+        --btn-ink: initial;
         --btn-depth: initial;
+        --ghost-bd: initial;
+        --highlight: initial;
+        --highlight-dark: initial;
+        --highlight-ink: initial;
+        --card-bd: initial;
+        --card-depth: initial;
+        --card-depth-hover: initial;
+        --card-lift: initial;
+        --card-accent-line: initial;
         --link-decoration: initial;
       }
 
@@ -96,11 +120,22 @@
       --wip-bg:       #2a1f00;
       --wip-border:   #5a3a00;
       --wip-badge-bg: #c87a10;
-      /* undo the light-only keycap/link tokens so components fall back to the dark accent style */
+      /* undo the light-only keycap/link/highlight tokens so components fall back to the dark accent style */
       --btn-face: initial;
-      --btn-ink: initial;
       --btn-face-hover: initial;
+      --btn2-face: initial;
+      --btn2-face-hover: initial;
+      --btn-ink: initial;
       --btn-depth: initial;
+      --ghost-bd: initial;
+      --highlight: initial;
+      --highlight-dark: initial;
+      --highlight-ink: initial;
+      --card-bd: initial;
+      --card-depth: initial;
+      --card-depth-hover: initial;
+      --card-lift: initial;
+      --card-accent-line: initial;
       --link-decoration: initial;
     }
 
@@ -119,16 +154,27 @@
       --muted:        #37424D;
       --rule:         #CBD4DE;
       --card-bg:      #F6F6F5;
-      --btn-face:        #E5E4E2;
+      --btn-face:        #e29950;
+      --btn-face-hover:  #CE9A5E;
+      --btn2-face:       #E5E4E2;
+      --btn2-face-hover: #F6F6F5;
       --btn-ink:         #1E252C;
-      --btn-face-hover:  #F6F6F5;
       --btn-depth:       inset 0 0 0 1.5px #1E252C, 0 3px 0 #1E252C;
+      --ghost-bd:        none;
+      --highlight:       #e29950;
+      --highlight-dark:  #693d11;
+      --highlight-ink:   #1E252C;
+      --card-bd:          1.5px solid #1E252C;
+      --card-depth:       0 4px 0 #1E252C;
+      --card-depth-hover: 0 4px 0 #1E252C;
+      --card-lift:        translateY(-2px);
+      --card-accent-line: var(--rule);
       --link-decoration: underline;
       --hero-bg:      #9CC3F3;
-      --section-tint: #F4F5F3;
-      --wip-bg:       #fff8e6;
-      --wip-border:   #ffe4a0;
-      --wip-badge-bg: #f5a623;
+      --section-tint: rgba(255, 255, 255, 0.35);
+      --wip-bg:       #EAD6BC;
+      --wip-border:   #D4B183;
+      --wip-badge-bg: #e29950;
       --radius-pill:  20px;
       --radius-card:  10px;
       --radius-key:   7px;
@@ -279,13 +325,26 @@
       height: 50px;
     }
 
-    .nav-logo svg {
-      height: 42.5px;
-      width: auto;
-      max-width: 153px;
+    .nav-logo svg,
+    .nav-logo img {
+      display: block;
+      width: 168px;
+      height: auto;
       outline: none;
       text-decoration: none;
     }
+
+    /* Header logo: colored keycap logo on light, off-white wordmark on dark */
+    .nav-logo-color { display: block; }
+    .nav-logo-mono  { display: none; }
+    @media (prefers-color-scheme: dark) {
+      .nav-logo-color { display: none; }
+      .nav-logo-mono  { display: block; }
+    }
+    html.dark-theme  .nav-logo-color { display: none; }
+    html.dark-theme  .nav-logo-mono  { display: block; }
+    html.light-theme .nav-logo-color { display: block; }
+    html.light-theme .nav-logo-mono  { display: none; }
 
     .nav-links {
       display: flex;
@@ -372,20 +431,25 @@
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
-      background: transparent;
+      /* light: solid off-white keycap face (secondary). dark: transparent (outline button). */
+      background: var(--btn2-face, transparent);
       color: var(--ink);
       font-family: var(--font-sans);
       font-weight: 500;
       font-size: 0.9rem;
       padding: 0.65rem 1.4rem;
       border-radius: var(--radius-pill);
-      border: 1.5px solid var(--ink);
+      /* light: no border — the keycap frame is drawn by --btn-depth (off-white face).
+         dark: falls back to the original 1.5px outline. */
+      border: var(--ghost-bd, 1.5px solid var(--ink));
+      box-shadow: var(--btn-depth, none);
       text-decoration: none;
       cursor: pointer;
-      transition: background 0.2s, color 0.2s, transform 0.15s;
+      transition: background 0.2s, color 0.2s, transform 0.15s, box-shadow 0.15s;
       white-space: nowrap;
     }
-    .btn-ghost:hover { background: var(--ink); color: var(--paper); transform: translateY(-1px); }
+    /* light: face fills off-white + lift (matches primary keycap). dark: falls back to the outline invert. */
+    .btn-ghost:hover { background: var(--btn2-face-hover, var(--ink)); color: var(--btn-ink, var(--paper)); transform: translateY(-1px); }
 
     /* ────────────────────────────────
        CONTRIBUTOR GALLERY
@@ -618,13 +682,16 @@
 
     .card {
       background: var(--card-bg);
-      border: 1px solid var(--rule);
+      /* light: dark keycap frame + solid bottom base (matches buttons). dark: soft grey border, flat. */
+      border: var(--card-bd, 1px solid var(--rule));
       border-radius: var(--radius-card);
       padding: 1.5rem;
+      box-shadow: var(--card-depth, none);
       transition: box-shadow 0.2s, transform 0.2s;
     }
     .card:hover {
-      box-shadow: 0 8px 28px color-mix(in srgb, var(--accent) 12%, transparent);
+      /* light: base grows as the keycap lifts. dark: original soft accent glow. */
+      box-shadow: var(--card-depth-hover, 0 8px 28px color-mix(in srgb, var(--accent) 12%, transparent));
       transform: translateY(-2px);
     }
 
@@ -723,10 +790,18 @@
 
     .contrib-card {
       background: var(--card-bg);
-      border: 1px solid var(--rule);
+      /* light: dark keycap frame + solid bottom base (matches buttons). dark: soft grey border, flat. */
+      border: var(--card-bd, 1px solid var(--rule));
       border-radius: var(--radius-card);
       overflow: hidden;
       padding: 1.6rem;
+      box-shadow: var(--card-depth, none);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    /* light: keycap lift on hover. dark: falls back to none (no hover, unchanged). */
+    .contrib-card:hover {
+      box-shadow: var(--card-depth-hover, none);
+      transform: var(--card-lift, none);
     }
 
     /* Top accent line — gray for all cards, gradient for the first in each grid */
@@ -738,7 +813,8 @@
       margin: -1.6rem -1.6rem 1rem;
     }
     .contrib-grid .contrib-card:first-child::before {
-      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      /* light: unify with the other cards (plain rule line). dark: keep the blue gradient. */
+      background: var(--card-accent-line, linear-gradient(90deg, var(--accent), var(--accent-light)));
     }
 
     .contrib-icon-wrap {
@@ -979,10 +1055,10 @@
     }
 
     .key-strip .key.highlight {
-      background: var(--accent);
-      border-color: var(--accent);
-      box-shadow: 0 2px 0 var(--accent-dark);
-      color: var(--paper);
+      background: var(--highlight, var(--accent));
+      border-color: var(--highlight, var(--accent));
+      box-shadow: 0 2px 0 var(--highlight-dark, var(--accent-dark));
+      color: var(--highlight-ink, var(--paper));
       font-size: 0.75rem;
       font-weight: 600;
     }
@@ -1017,7 +1093,7 @@
 
     .wip-badge {
       background: var(--wip-badge-bg);
-      color: var(--paper);
+      color: #1E252C;
       font-family: var(--font-mono);
       font-size: 0.65rem;
       font-weight: 600;
@@ -1035,7 +1111,8 @@
   <nav>
     <div class="nav-inner">
       <span class="nav-logo">
-        <svg width="350" height="60" viewBox="0 0 581 99" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <img class="nav-logo-color" src="/media/logo-neutral.svg" alt="AECCI" width="916" height="156" />
+        <svg class="nav-logo-mono" width="350" height="60" viewBox="0 0 581 99" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M17.0381 0C7.62823 0 0 7.61577 0 17.0103V81.9897C0 91.3842 7.62822 99 17.0381 99H89.6205C99.0304 99 106.659 91.3842 106.659 81.9897V17.0103C106.659 7.61578 99.0304 0 89.6205 0H17.0381ZM23.8534 5.4433C16.3255 5.4433 10.2229 11.5359 10.2229 19.0515V72.1237C10.2229 79.6393 16.3255 85.732 23.8534 85.732H82.1238C89.6517 85.732 95.7542 79.6393 95.7542 72.1237V19.0515C95.7542 11.5359 89.6517 5.4433 82.1238 5.4433H23.8534Z" fill="currentColor"/>
           <path d="M55.6385 62.0982L50.2475 47.646H31.1795L25.855 62.0982H18.7669L37.3358 13.3264H44.3241L62.7932 62.0982H55.6385ZM48.3507 41.7323L43.2259 27.4131C43.0706 26.9258 42.8266 26.1949 42.4938 25.2203C42.1832 24.2458 41.8616 23.238 41.5288 22.197C41.2182 21.156 40.9631 20.2922 40.7634 19.6056C40.5415 20.5137 40.2864 21.4772 39.998 22.496C39.7096 23.4927 39.4212 24.4341 39.1328 25.32C38.8666 26.1838 38.6447 26.8815 38.4672 27.4131L33.2759 41.7323H48.3507Z" fill="currentColor"/>
           <path fill-rule="evenodd" clip-rule="evenodd" d="M135.623 0C126.214 0 118.585 7.61577 118.585 17.0103V81.9897C118.585 91.3842 126.214 99 135.623 99H208.206C217.616 99 225.244 91.3842 225.244 81.9897V17.0103C225.244 7.61578 217.616 0 208.206 0H135.623ZM142.439 5.4433C134.911 5.4433 128.808 11.5359 128.808 19.0515V72.1237C128.808 79.6393 134.911 85.732 142.439 85.732H200.709C208.237 85.732 214.34 79.6393 214.34 72.1237V19.0515C214.34 11.5359 208.237 5.4433 200.709 5.4433H142.439Z" fill="currentColor"/>
