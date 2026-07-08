@@ -191,6 +191,7 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     /* ── Noise texture ── */
@@ -346,6 +347,15 @@
 
     @media (max-width: 640px) {
       .nav-text-link { display: none; }
+    }
+
+    /* For narrow phones (e.g. 360px) */
+    @media (max-width: 430px) {
+      .nav-inner { gap: 0.6rem; }
+      .nav-logo svg,
+      .nav-logo img { width: 128px; }
+      .nav-links { gap: 0.6rem; }
+      .nav-links .btn-primary { padding: 0.55rem 0.9rem; font-size: 0.82rem; }
     }
 
     /* Theme toggle button */
