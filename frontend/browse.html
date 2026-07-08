@@ -794,14 +794,6 @@ footer {
 	#R circle {
 		stroke: #ccc !important;
 	}
-	.back-home a {
-		color: #abc8e3;
-		text-decoration: none;
-	}
-	.back-home a:hover {
-		color: #d4e4f7;
-		text-decoration: underline;
-	}
 }
 
 .header-top {
@@ -832,18 +824,6 @@ footer {
 	.logo-dark  { display: inline; }
 }
 
-.back-home a {
-	font-size: 15px;
-	font-weight: 500;
-	color: #0066cc;
-	text-decoration: none;
-	transition: color 0.15s;
-}
-.back-home a:hover {
-	color: #3d8fe6;
-	text-decoration: underline;
-}
-
 </style>
 {{- if eq .Layout "grid"}}
 <style {{ $nonceAttribute }}>.wrapper { max-width: none; } main { margin-top: 1px; }</style>
@@ -857,7 +837,6 @@ footer {
 					<img src="/media/logo-dark.svg" alt="AECCI" class="logo-light" />
 					<img src="/media/logo-white.svg" alt="AECCI" class="logo-dark" />
 				</a>
-				<div class="back-home"><a href="/">← Inicio</a></div>
 			</div>
 			<div class="breadcrumbs">Folder Path</div>
 				<h1>

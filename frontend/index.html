@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AECCI — Asociación de Estudiantes de Computación e Informática</title>
+  <title>AECCI · Asociación de Estudiantes de Computación e Informática</title>
   <link rel="icon" type="image/svg+xml" href="/media/cursoteca_favicon.svg" />
   <link rel="icon" type="image/png" sizes="32x32" href="/media/favicon_io/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/media/favicon_io/favicon-16x16.png" />
@@ -191,6 +191,7 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     /* ── Noise texture ── */
@@ -346,6 +347,15 @@
 
     @media (max-width: 640px) {
       .nav-text-link { display: none; }
+    }
+
+    /* For narrow phones (e.g. 360px) */
+    @media (max-width: 430px) {
+      .nav-inner { gap: 0.6rem; }
+      .nav-logo svg,
+      .nav-logo img { width: 128px; }
+      .nav-links { gap: 0.6rem; }
+      .nav-links .btn-primary { padding: 0.55rem 0.9rem; font-size: 0.82rem; }
     }
 
     /* Theme toggle button */
@@ -1201,7 +1211,7 @@
   <div class="wip-banner" role="status">
     <div class="wip-banner-inner">
       <span class="wip-badge">En desarrollo</span>
-      Esta página está en construcción — algunos contenidos y funcionalidades pueden estar incompletos.
+      Esta página está en construcción. Algunos contenidos pueden estar incompletos.
     </div>
   </div>
 
@@ -1273,9 +1283,7 @@
       <h1>AECCI</h1>
       <h2>Asociación de Estudiantes de<br />Computación e Informática</h2>
       <p class="hero-desc">
-        Somos la voz estudiantil de la Escuela de Ciencias de la Computación e Informática de la UCR.
-        Construimos herramientas, recursos y comunidad para quienes estudian
-        computación — con apertura, colaboración y sin barreras.
+        Recursos, herramientas y comunidad para estudiantes de Computación e Informática de la UCR.
       </p>
       <div class="hero-cta">
         <a href="#comunidad" class="btn-primary">
@@ -1318,7 +1326,7 @@
     <section id="comunidad" class="reveal">
       <h3 class="section-heading">Sumate a la comunidad</h3>
       <p class="section-sub">
-        AECCI vive en varios espacios. Seguinos, conversá y participá — elegí el canal que prefieras.
+        Estamos en varias plataformas. Elegí la que más usés y sumate.
       </p>
 
       <div class="hub-grid hub-flagship">
@@ -1353,7 +1361,7 @@
           <span class="hub-tile-body"><span class="hub-tile-title">BoardGame Club</span><span class="hub-tile-sub">WhatsApp</span></span>
         </a>
         <a class="hub-tile" href="https://github.com/aecci/banco_examenes" target="_blank" rel="noopener">
-          <span class="hub-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 8l-4 4 4 4M15 8l4 4-4 4"/></svg></span>
+          <span class="hub-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span>
           <span class="hub-tile-body"><span class="hub-tile-title">GitHub</span><span class="hub-tile-sub">Banco de exámenes</span></span>
         </a>
         <a class="hub-tile" href="https://www.ecci.ucr.ac.cr" target="_blank" rel="noopener">
@@ -1448,7 +1456,7 @@
       <section id="contribuidores" class="reveal">
         <h3 class="section-heading">Hecho por estudiantes</h3>
         <p class="section-sub">
-          Personas que han contribuido con material académico al repositorio de Cursoteca.
+          Estudiantes que han aportado material al repositorio.
         </p>
         <div class="avatar-grid" id="avatar-grid" aria-label="Contribuidores del repositorio">
           <p class="contrib-loading">Cargando contribuidores…</p>
@@ -1501,9 +1509,8 @@
       <section id="org" class="reveal">
       <h3 class="section-heading">Banco de exámenes</h3>
       <p class="section-sub">
-        Cursoteca es, en esencia, un banco de exámenes colaborativo — ampliado para incluir también
-        cartas al estudiante, diapositivas, quices y demás material de cursos anteriores. Todo está
-        organizado por año académico y ciclo, desde lo general hasta el material de un semestre concreto.
+        Un banco de exámenes colaborativo que también guarda cartas al estudiante, diapositivas,
+        quices y otro material de cursos anteriores, ordenado por año y ciclo.
       </p>
 
       <details class="cursoteca-detail" open>
@@ -1564,8 +1571,8 @@
         <summary>¿Cómo contribuir?</summary>
         <div class="cursoteca-detail-body">
           <p class="section-sub">
-            Si tenés material académico que querés compartir — o si encontraste información
-            que debe modificarse o censurarse — podés contribuir directamente al repositorio.
+            ¿Tenés material para compartir, o encontraste algo que hay que corregir o censurar?
+            Podés contribuir directo al repositorio.
           </p>
       <div class="contrib-grid">
         <div class="contrib-card reveal">
@@ -1698,7 +1705,7 @@
           <div class="footer-social">
             <a href="https://www.instagram.com/aecci_ucr" target="_blank" rel="noopener" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
             <a href="https://discord.com/invite/gfm5HUt7wy" target="_blank" rel="noopener" aria-label="Discord"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.369a19.79 19.79 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.6 12.6 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.74 19.74 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.2 14.2 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.1 13.1 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.3 12.3 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.84 19.84 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.331c-1.183 0-2.157-1.086-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.332-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.086-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.332-.946 2.418-2.157 2.418z"/></svg></a>
-            <a href="https://github.com/aecci/banco_examenes" target="_blank" rel="noopener" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 8l-4 4 4 4M15 8l4 4-4 4"/></svg></a>
+            <a href="https://github.com/aecci/banco_examenes" target="_blank" rel="noopener" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
           </div>
         </div>
         <ul class="footer-nav">
