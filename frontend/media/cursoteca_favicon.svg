@@ -1,17 +1,8 @@
 <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-  <rect width="64" height="64" rx="14" fill="#0f1419"/>
-  <rect x="17" y="17" width="30" height="30" rx="5" fill="#abc8e3"/>
-  <line x1="23" y1="17" x2="23" y2="10" stroke="#abc8e3" stroke-width="2.2" stroke-linecap="round"/>
-  <line x1="32" y1="17" x2="32" y2="10" stroke="#abc8e3" stroke-width="2.2" stroke-linecap="round"/>
-  <line x1="41" y1="17" x2="41" y2="10" stroke="#abc8e3" stroke-width="2.2" stroke-linecap="round"/>
-  <line x1="23" y1="47" x2="23" y2="54" stroke="#abc8e3" stroke-width="2.2" stroke-linecap="round"/>
-  <line x1="32" y1="47" x2="32" y2="54" stroke="#abc8e3" stroke-width="2.2" stroke-linecap="round"/>
-  <line x1="41" y1="47" x2="41" y2="54" stroke="#abc8e3" stroke-width="2.2" stroke-linecap="round"/>
-  <line x1="17" y1="23" x2="10" y2="23" stroke="#abc8e3" stroke-width="2.2" stroke-linecap="round"/>
-  <line x1="17" y1="32" x2="10" y2="32" stroke="#abc8e3" stroke-width="2.2" stroke-linecap="round"/>
-  <line x1="17" y1="41" x2="10" y2="41" stroke="#abc8e3" stroke-width="2.2" stroke-linecap="round"/>
-  <line x1="47" y1="23" x2="54" y2="23" stroke="#abc8e3" stroke-width="2.2" stroke-linecap="round"/>
-  <line x1="47" y1="32" x2="54" y2="32" stroke="#abc8e3" stroke-width="2.2" stroke-linecap="round"/>
-  <line x1="47" y1="41" x2="54" y2="41" stroke="#abc8e3" stroke-width="2.2" stroke-linecap="round"/>
-  <text x="32" y="39" text-anchor="middle" font-size="24" font-weight="700" fill="#0f1419" font-family="monospace">C</text>
+  <rect width="64" height="64" rx="14" fill="#8AB9F1"/>
+  <g transform="translate(9 10.663) scale(0.273555)">
+    <path d="M0 26.8041C0 12.0006 12.0266 0 26.8622 0H141.295C156.131 0 168.157 12.0006 168.157 26.8041V129.196C168.157 143.999 156.131 156 141.295 156H26.8622C12.0266 156 0 143.999 0 129.196V26.8041Z" fill="#050505"/>
+    <path d="M16.1173 30.0206C16.1173 18.1778 25.7386 8.57732 37.607 8.57732H129.476C141.344 8.57732 150.965 18.1778 150.965 30.0206V113.649C150.965 125.492 141.344 135.093 129.476 135.093H37.607C25.7386 135.093 16.1173 125.492 16.1173 113.649V30.0206Z" fill="#E5E4E2"/>
+    <path d="M87.7192 97.8516L79.2198 75.0786H49.1573L40.7629 97.8516H29.5878L58.8633 20.9992H69.881L98.9992 97.8516H87.7192ZM76.2293 65.76L68.1497 43.1964C67.9048 42.4285 67.5201 41.2768 66.9954 39.7411C66.5058 38.2055 65.9986 36.6175 65.474 34.9771C64.9843 33.3368 64.582 31.9756 64.2673 30.8937C63.9175 32.3246 63.5153 33.8428 63.0606 35.4483C62.6059 37.0188 62.1512 38.5021 61.6965 39.8982C61.2767 41.2593 60.927 42.3587 60.6472 43.1964L52.4626 65.76H76.2293Z" fill="#050505"/>
+  </g>
 </svg>
